@@ -506,11 +506,13 @@
 // Find and replace the .resume-page block in pages.scss
 
 .resume-page {
-  padding: 0; // Fixes header position
-  justify-content: flex-start;
+  padding: 50px; // Consistent padding
+  justify-content: center; // This will center the content vertically
   align-items: center;
-  position: relative; // For the animated background
+  position: relative;
   background-color: #0c0c1d;
+  min-height: 100vh;
+  width: 100%;
 
   // Animated gradient background effect
   &::before {
@@ -522,14 +524,17 @@
     height: 100%;
     z-index: 0;
     background: 
-      radial-gradient(circle at top left, rgba(255, 165, 0, 0.15), transparent 40%),
-      radial-gradient(circle at bottom right, rgba(255, 0, 255, 0.15), transparent 40%);
-    animation: animate-resume-bg 20s ease-in-out infinite;
+      linear-gradient(to bottom, rgba(209, 255, 84, 0.377), transparent 50%),
+      linear-gradient(to top, rgba(255, 0, 0, 0.178), transparent 50%);
+    animation: animate-resume-bg 100s ease-in-out infinite;
   }
-  
+
   .wrapper {
-    z-index: 1; // Ensure content is above the background
-    padding-top: 20px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; // Space between header and resume image
   }
 
   .resume-header {
@@ -538,14 +543,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     
     h1 { font-size: 36px; margin: 0; font-weight: 300; }
     
     .header-links {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 50px;
     }
 
     .social-links {
@@ -555,15 +560,15 @@
         transition: transform 0.3s ease;
         &:hover { transform: scale(1.1); }
         img {
-          width: 24px;
-          height: 24px;
+          width: 50px;
+          height: 50px;
         }
       }
     }
     
     .download-button {
-      padding: 10px 20px;
-      font-size: 14px;
+      padding: 15px 15px;
+      font-size: 30px;
     }
   }
 
@@ -571,8 +576,8 @@
     width: 100%;
     max-width: 900px;
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    border: 1px solid #333;
+    box-shadow: 0 10px 30px rgb(255, 255, 255);
+    border: 5px solid #000000;
     line-height: 0;
     img { width: 100%; height: auto; border-radius: 10px; }
   }
