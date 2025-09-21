@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Links from "./links/Links";
-import ToggleButton from "./toggleButton/ToggleButton";
+import Links from "./links/Links.jsx";
+// CORRECTED IMPORT: Path and filename now use PascalCase
+import ToggleButton from "./toggleButton/ToggleButton.jsx"; 
 import "./sidebar.scss";
 
 const Sidebar = () => {
@@ -9,7 +10,7 @@ const Sidebar = () => {
 
   const variants = {
     open: {
-      clipPath: "circle(1000px at 50px 50px)", // Slightly smaller circle
+      clipPath: "circle(1000px at 50px 50px)",
       transition: { type: "spring", stiffness: 20 },
     },
     closed: {
@@ -27,4 +28,5 @@ const Sidebar = () => {
     </motion.div>
   );
 };
+
 export default Sidebar;
