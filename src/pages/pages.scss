@@ -1,0 +1,619 @@
+// General Page Structure
+.page {
+  min-height: 100vh;
+  padding: 150px 50px 50px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: black;
+  color: white;
+  overflow: hidden;
+
+  .wrapper {
+    max-width: 1366px;
+    width: 100%;
+    text-align: center;
+    h1 { 
+      font-size: 64px; 
+      font-weight: 200; 
+      margin-bottom: 20px;
+      span { color: orange; }
+    }
+    .page-intro { 
+      font-size: 18px; 
+      color: #a0a0a0; 
+      max-width: 700px;
+      margin: 0 auto 80px auto;
+      line-height: 1.7;
+    }
+  }
+}
+
+// Reusable button styles
+@mixin button-style($bg, $color, $border-color, $hover-bg, $hover-color) {
+  padding: 15px 30px;
+  border: 1px solid $border-color;
+  background-color: $bg;
+  color: $color;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  
+  &:hover {
+    background-color: $hover-bg;
+    color: $hover-color;
+  }
+}
+.primary { @include button-style(orange, black, orange, #ffc966, black); }
+.secondary { @include button-style(transparent, white, white, white, black); }
+
+// -------------------- HOME PAGE --------------------
+// Find and replace the .home-page block in your pages.scss file
+
+// In src/pages/pages.scss, find and replace this entire block:
+
+.home-page .wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 200px);
+  text-align: center;
+
+  h2 {
+    font-size: 45px;
+    color: #ffebdd;
+    font-weight: 200;
+    font-family: 'Franklin Gothic Medium';
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 70px; 
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+
+    // The animation styles are correctly applied to the span tags
+    span {
+      display: block;
+      color: rgba(225, 225, 225, 0.05);
+      background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210121/pngtree-orange-yellow-abstract-fluid-background-image_537063.jpg');
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: animate-text-texture 20s linear infinite;
+    }
+  }
+
+  .buttons { 
+    display: flex; 
+    justify-content: center; 
+    gap: 30px; 
+  }
+}
+
+// -------------------- ABOUT PAGE --------------------
+// Find the existing .about-page block and replace it with this:
+.about-page {
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; // Image on left, content on right
+    gap: 80px;
+    align-items: flex-start;
+    text-align: left;
+    padding-top: 50px; // Adjust padding to allow more space
+  }
+
+  .about-image-container { // New container for image styling
+    width: 100%;
+    max-width: 400px; // Smaller image size
+    margin: 0 auto; // Center the image container if it's smaller
+    .profile-image {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      object-fit: cover;
+    }
+    // In src/pages/pages.scss...
+
+.about-image-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  .profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    object-fit: cover;
+  }
+
+  // ENSURE THIS BLOCK IS HERE AND CORRECT
+  .signature {
+    font-family: 'Great Vibes', cursive; // This applies the calligraphy font
+    font-size: 52px;
+    font-weight: 500;
+    color: #fff;
+    margin-top: 30px;
+    // This creates the red neon glow from your reference
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #ff0000,
+      0 0 20px #ff0000,
+      0 0 25px #ff0000;
+    text-align: center;
+    
+    span {
+      display: inline-block;
+    }
+  }
+}
+    // Find this block in your pages.scss file...
+.about-image-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  .profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    object-fit: cover;
+  }
+
+  // ADD THIS NEW BLOCK INSIDE .about-image-container
+  .signature {
+    font-family: 'Great Vibes', cursive;
+    font-size: 52px;
+    font-weight: 500;
+    color: #fff;
+    margin-top: 30px;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 15px #ff00ff, // Neon color
+      0 0 20px #ff00ff,
+      0 0 25px #ff00ff;
+    text-align: center;
+    
+    span {
+      display: inline-block; // Important for the animation
+    }
+  }
+}
+  }
+
+  .about-content {
+    h1 { font-size: 64px; font-weight: 200; margin-bottom: 20px; span { color: orange; } }
+    .summary-text { font-size: 18px; color: #d3d3d3; margin-bottom: 40px; line-height: 1.8; }
+    
+    .timeline-title { // Style for "Academic Background"
+      font-size: 36px;
+      color: orange;
+      margin-bottom: 20px;
+      margin-top: 40px; // Add space above this title
+    }
+  }
+  
+  // The general .timeline styles below should already exist in your file.
+  // Ensure they are present and correctly define the visual timeline.
+  .timeline {
+    position: relative;
+    max-width: 800px; // Adjust as needed for width in about-page
+    margin: 50px auto 0 auto; // Adjusted margin to align better in about-page
+    padding: 20px 0;
+    
+    &::before { /* Vertical line */ }
+    .timeline-item {
+      .timeline-dot { /* Orange dot */ }
+      .timeline-content {
+        /* Styles for text within each timeline item */
+        h3 { font-size: 22px; color: orange; margin-bottom: 5px; }
+        .institution { font-size: 18px; color: white; font-weight: 500; margin-bottom: 5px; }
+        .duration { font-size: 14px; color: #888; margin-bottom: 10px; font-style: italic; }
+        .desc { font-size: 16px; line-height: 1.7; color: #a0a0a0; }
+      }
+    }
+  }
+}
+// -------------------- SKILLS PAGE (NEW 3D ICON DESIGN) --------------------
+.skills-page {
+  .skill-categories {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+  }
+  .skill-category {
+    border: 1px solid #222;
+    background: #050505;
+    border-radius: 20px;
+    padding: 40px;
+    h2 { font-size: 32px; font-weight: 300; color: orange; margin-bottom: 30px; }
+    .icon-cluster {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 150px;
+        position: relative;
+        margin-bottom: 30px;
+
+        img {
+          height: 75px; /* Adjusted size for better spacing */
+          width: auto;
+          /* This is the key change: */
+          margin: 0 10px; /* Was -20px, now creates space */
+          transition: transform 0.3s ease;
+          box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+          border-radius: 15px;
+
+          &:hover {
+            transform: translateY(-10px) scale(1.1);
+            z-index: 2;
+          }
+        }
+      }
+    .tag-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+    .tag { background: #1a1a1a; border: 1px solid #333; padding: 8px 18px; border-radius: 8px; font-size: 14px; }
+  }
+}
+
+// -------------------- PROJECTS PAGE (CARD DESIGN) --------------------
+// Find the .projects-page block in pages.scss and replace it
+
+.projects-page {
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 40px;
+  }
+  .project-card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 15px;
+    overflow: hidden;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(255,165,0,0.2);
+      .project-image-container img { transform: scale(1.05); }
+    }
+    .project-image-container {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    }
+    .card-content {
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      h3 { font-size: 24px; color: orange; margin-bottom: 10px; }
+      h4 { font-size: 16px; color: orange; margin-top: 15px; margin-bottom: 5px; font-weight: 500;}
+      .desc { font-size: 16px; color: #a0a0a0; }
+      .impact { font-size: 15px; color: #a0a0a0; font-style: italic; flex-grow: 1; margin-bottom: 20px; }
+      .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 25px;
+        span { background: #222; padding: 5px 10px; border-radius: 5px; font-size: 12px; }
+      }
+      .project-links {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        border-top: 1px solid #222;
+        padding-top: 20px;
+        margin-top: auto;
+        
+        a {
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 15px;
+          padding: 8px 15px;
+          border-radius: 5px;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .primary-link {
+          background-color: orange;
+          color: black;
+          &:hover { background-color: #ffc966; }
+        }
+        
+        .secondary-link {
+          background-color: #222;
+          color: white;
+          &:hover { background-color: #333; }
+          img { width: 18px; height: 18px; }
+        }
+      }
+    }
+  }
+}
+
+// -------------------- CONTACT PAGE --------------------
+.contact-page .wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 100px;
+  align-items: center;
+  text-align: left;
+  .text-content {
+    h1 { margin-bottom: 20px; }
+    p { font-size: 18px; line-height: 1.7; color: #d3d3d3; margin-bottom: 20px; }
+    .contact-details {
+      margin-top: 40px;
+      p { margin-bottom: 15px; font-size: 18px; strong { color: orange; margin-right: 10px; } }
+    }
+  }
+  .contact-form 
+  
+  {// In src/pages/pages.scss
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  // ... your other input, textarea styles ...
+  
+  // ADD THESE STYLES:
+  .success-message {
+    color: #4caf50; // Green
+    font-weight: 500;
+  }
+  .error-message {
+    color: #f44336; // Red
+    font-weight: 500;
+  }
+}
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    input, textarea 
+    {
+      background: #111;
+      border: 1px solid #333;
+      padding: 18px;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      &:focus { outline: none; border-color: orange; }
+    }
+    button { align-self: flex-start; }
+  }
+}
+// ADD THIS ENTIRE BLOCK TO THE END OF pages.scss
+
+.experience-page {
+  .wrapper { text-align: left; }
+  
+  .header-section {
+    text-align: center;
+    margin-bottom: 80px;
+    h1 { font-size: 72px; margin-bottom: 15px; }
+    p { font-size: 20px; color: #a0a0a0; max-width: 800px; margin: 0 auto; }
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px 0;
+    
+    // This is the central vertical line of the timeline
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10px;
+      height: 100%;
+      width: 4px;
+      background: #222;
+      border-radius: 2px;
+    }
+    
+    .timeline-item {
+      margin-bottom: 40px;
+      position: relative;
+      padding-left: 50px; // Space for the dot and line
+
+      // This is the orange circle on the line
+      .timeline-dot {
+        position: absolute;
+        left: 0;
+        top: 5px;
+        height: 25px;
+        width: 25px;
+        border: 4px solid #222;
+        background: orange;
+        border-radius: 50%;
+      }
+
+      // Find this block in your pages.scss file...
+.timeline-content {
+  background: #111;
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid #222;
+  h3 { font-size: 22px; color: orange; margin-bottom: 5px; }
+  .company { font-size: 18px; color: white; font-weight: 500; margin-bottom: 5px; }
+  .duration { font-size: 14px; color: #888; margin-bottom: 10px; font-style: italic; }
+  .desc { font-size: 16px; line-height: 1.7; color: #a0a0a0; }
+
+  // ADD THIS NEW BLOCK INSIDE .timeline-content
+  .certificate-link {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    color: orange;
+    text-decoration: none;
+    border: 1px solid orange;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: orange;
+      color: black;
+    }
+  }
+}
+    }
+  }
+}
+@keyframes animate-text-texture {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+// ADD THIS ENTIRE BLOCK TO THE END OF pages.scss
+
+// Find the .resume-page block in pages.scss and replace it with this
+
+// Find and replace the .resume-page block in pages.scss
+
+// Find and replace the .resume-page block in pages.scss
+
+// Find and replace the .resume-page block in pages.scss
+
+// Find and replace the .resume-page block in pages.scss
+
+.resume-page {
+  padding: 0; // Fixes header position
+  justify-content: flex-start;
+  align-items: center;
+  position: relative; // For the animated background
+  background-color: #0c0c1d;
+
+  // Animated gradient background effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background: 
+      radial-gradient(circle at top left, rgba(255, 165, 0, 0.15), transparent 40%),
+      radial-gradient(circle at bottom right, rgba(255, 0, 255, 0.15), transparent 40%);
+    animation: animate-resume-bg 20s ease-in-out infinite;
+  }
+  
+  .wrapper {
+    z-index: 1; // Ensure content is above the background
+    padding-top: 20px;
+  }
+
+  .resume-header {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    
+    h1 { font-size: 36px; margin: 0; font-weight: 300; }
+    
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      a {
+        transition: transform 0.3s ease;
+        &:hover { transform: scale(1.1); }
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+    
+    .download-button {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+
+  .resume-image-container {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+    line-height: 0;
+    img { width: 100%; height: auto; border-radius: 10px; }
+  }
+}
+
+// Keyframes for the background animation
+@keyframes animate-resume-bg {
+  0% { background-position: 0% 0%, 100% 100%; }
+  50% { background-position: 100% 100%, 0% 0%; }
+  100% { background-position: 0% 0%, 100% 100%; }
+}
+// ADD THIS ENTIRE BLOCK TO THE END OF pages.scss
+
+.social-links-home {
+  position: fixed;
+  top: 50%;
+  right: 50px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  z-index: 100;
+
+  a {
+    img {
+      width: 40px;
+      height: 40px;
+      opacity: 100;
+      transition: transform 1s ease, opacity 1s ease;
+    }
+
+    &:hover img {
+      transform: scale(2);
+      opacity: 1;
+    }
+  }
+}
+
+// Hide the social bar on smaller screens to avoid clutter
+@media (max-width: 1024px) {
+  .social-links-home {
+    display: none;
+  }
+}

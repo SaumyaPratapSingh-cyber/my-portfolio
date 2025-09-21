@@ -1,0 +1,25 @@
+body {
+  cursor: none;
+}
+
+.gooey-cursor-container {
+  position: fixed;
+  top: 0;
+  left: 10;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999599;
+  filter: url(#goo); // This applies the SVG filter from index.html
+}
+
+.cursor-dot {
+  position: absolute;
+  top: 0;
+  left: 10;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color:rgb(255, 166,0);
+  transform: translate(0%, 0%);
+}

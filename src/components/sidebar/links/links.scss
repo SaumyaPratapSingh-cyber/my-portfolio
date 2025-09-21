@@ -1,0 +1,26 @@
+// src/components/sidebar/links/links.scss
+.links {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  a {
+    font-size: 40px;
+  }
+
+  .social-sidebar {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
