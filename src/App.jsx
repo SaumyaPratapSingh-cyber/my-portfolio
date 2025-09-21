@@ -1,15 +1,15 @@
 import "./app.scss";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Navbar from "./components/navbar/Navbar.jsx"; // Added .jsx
-import Home from "./pages/Home.jsx"; // Added .jsx
-import About from "./pages/About.jsx"; // Added .jsx
-import Skills from "./pages/Skills.jsx"; // Added .jsx
-import Projects from "./pages/Projects.jsx"; // Added .jsx
-import Contact from "./pages/Contact.jsx"; // Added .jsx
-import Experience from "./pages/Experience.jsx"; // Added .jsx
-import Resume from "./pages/Resume.jsx"; // Added .jsx
-import CustomCursor from "./components/CustomCursor/CustomCursor.jsx"; // Added .jsx
+import Navbar from "./components/navbar/Navbar.jsx";
+import Home from "./pages/Home.jsx";
+import About from "./pages/About.jsx";
+import Skills from "./pages/Skills.jsx";
+import Projects from "./pages/Projects.jsx";
+import Contact from "./pages/Contact.jsx";
+import Experience from "./pages/Experience.jsx";
+import Resume from "./pages/Resume.jsx";
+import CustomCursor from "./components/CustomCursor/CustomCursor.jsx";
 
 const App = () => {
   const location = useLocation();
