@@ -1,25 +1,22 @@
 import "./app.scss";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import Navbar from "./components/navbar/Navbar";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Skills from "./pages/Skills";
-import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
-import Experience from "./pages/Experience";
-import Resume from "./pages/Resume";
-import GooeyCursor from "./components/CustomCursor/CustomCursor";
+import Navbar from "./components/navbar/Navbar.jsx"; // Added .jsx
+import Home from "./pages/Home.jsx"; // Added .jsx
+import About from "./pages/About.jsx"; // Added .jsx
+import Skills from "./pages/Skills.jsx"; // Added .jsx
+import Projects from "./pages/Projects.jsx"; // Added .jsx
+import Contact from "./pages/Contact.jsx"; // Added .jsx
+import Experience from "./pages/Experience.jsx"; // Added .jsx
+import Resume from "./pages/Resume.jsx"; // Added .jsx
+import CustomCursor from "./components/CustomCursor/CustomCursor.jsx"; // Added .jsx
 
 const App = () => {
   const location = useLocation();
   return (
     <>
-      <GooeyCursor /> {/* Cursor is now always visible */}
-      
-      {/* Navbar will still be hidden on the resume page for a clean look */}
+      <CustomCursor />
       {location.pathname !== '/resume' && <Navbar />}
-
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route index element={<Home />} />
