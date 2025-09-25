@@ -1,5 +1,13 @@
+:root {
+  --background-color: #000000; // Nights
+  --accent-color: #f6ff00;     // Crimson
+  --text-primary: #EAEAEA;
+  --text-secondary: #a0a0a0;
+  --surface-color: #000000;   // A slightly lighter navy for cards
+  --border-color: #1A3651;
+}
+
 html {
-  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
 
@@ -11,8 +19,8 @@ html {
 }
 
 body {
-  background-color: black;
-  color: white;
+  background-color: var(--background-color);
+  color: var(--text-primary);
   overflow-x: hidden;
 }
 

@@ -1,9 +1,9 @@
 .navbar {
   height: 100px;
-  background: transparent;
   position: fixed;
   width: 100%;
   z-index: 1000;
+  transition: background-color 0.3s ease;
   
   .wrapper {
     max-width: 1366px;
@@ -17,7 +17,6 @@
     .logo {
       font-weight: bold;
       font-size: 22px;
-      letter-spacing: 1px;
     }
 
     .nav-links {
@@ -34,7 +33,7 @@
           left: 0;
           width: 100%;
           height: 2px;
-          background-color: orange;
+          background-color: var(--accent-color);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 0.3s ease-out;
@@ -42,6 +41,23 @@
         &:hover::after, &.active::after {
           transform: scaleX(1);
         }
+        &.active { color: var(--accent-color); }
+      }
+    }
+  }
+
+  // On mobile, hide the desktop nav links
+  @media (max-width: 768px) {
+    .wrapper {
+      padding: 0 20px;
+      justify-content: center;
+      .logo {
+        position: relative;
+        left: auto;
+        transform: none;
+      }
+      .nav-links {
+        display: none;
       }
     }
   }
