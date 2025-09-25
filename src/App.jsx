@@ -10,13 +10,17 @@ import Contact from "./pages/Contact.jsx";
 import Experience from "./pages/Experience.jsx";
 import Resume from "./pages/Resume.jsx";
 import CustomCursor from "./components/CustomCursor/CustomCursor.jsx";
+import ParticleBackground from "./components/ParticleBackground/ParticleBackground.jsx"; // 1. Import the new component
 
 const App = () => {
   const location = useLocation();
   return (
     <>
+      <ParticleBackground /> {/* 2. Render the background component here */}
       <CustomCursor />
+      
       {location.pathname !== '/resume' && <Navbar />}
+      
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route index element={<Home />} />

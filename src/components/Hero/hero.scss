@@ -1,0 +1,55 @@
+// In src/components/Hero/hero.scss
+
+.hero-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+
+  h2 {
+    font-size: 28px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 90px; 
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 40px;
+    
+    span {
+      display: block;
+      color: rgba(225, 225, 225, 0.05);
+      background-image: url('https://thumbs.dreamstime.com/b/abstract-yellow-technology-background-light-53781509.jpg');
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: animate-text-texture 20s linear infinite;
+    }
+  }
+
+  .buttons { 
+    display: flex; 
+    justify-content: center; 
+    gap: 20px; 
+  }
+
+  @media (max-width: 768px) {
+    h1 { font-size: 48px; }
+    h2 { font-size: 18px; }
+    .buttons { 
+      flex-direction: column; 
+      gap: 15px; 
+      align-items: center; 
+      a, button { width: 80%; max-width: 300px; } 
+    }
+  }
+}

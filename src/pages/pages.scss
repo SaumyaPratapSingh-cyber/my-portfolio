@@ -1,4 +1,21 @@
-// General Page Structure
+// Find and replace the .home-container block at the top of pages.scss
+
+.home-container {
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  background-color: transparent;
+
+  section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    padding: 0 50px;
+  }
+}// General Page Structure
 .page {
   min-height: 100vh;
   padding: 150px 50px 50px 50px;
@@ -6,7 +23,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background: black;
+  background:transparent;
   color: white;
   overflow: hidden;
 
@@ -57,19 +74,24 @@
 
 // In src/pages/pages.scss, find and replace this entire block:
 
+// Find and replace this entire block in src/pages/pages.scss
+
+// Find and replace this entire block in src/pages/pages.scss
+
 .home-page .wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: calc(100vh - 200px);
+  justify-content: center; // This vertically centers the content
+  align-items: center;     // This horizontally centers the content
+  height: 100vh;           // Set height to the full viewport height
   text-align: center;
+  padding: 0 50px;         // Add padding for spacing
 
   h2 {
-    font-size: 45px;
-    color: #ffebdd;
-    font-weight: 200;
-    font-family: 'Franklin Gothic Medium';
-    margin-bottom: 30px;
+    font-size: 28px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 20px;
     letter-spacing: 3px;
     text-transform: uppercase;
     white-space: nowrap;
@@ -77,17 +99,16 @@
   
   h1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 70px; 
+    font-size: 90px; 
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 40px;
-    text-transform: uppercase;
-
-    // The animation styles are correctly applied to the span tags
+    margin-top: auto;
+    
     span {
       display: block;
       color: rgba(225, 225, 225, 0.05);
-      background-image: url('https://tse3.mm.bing.net/th/id/OIP.CaKt246Bbkbm0e7Cu2BiOgHaHa?w=600&h=600&rs=1&pid=ImgDetMain&o=7&rm=3');
+      background-image: url("https://cdn4.vectorstock.com/i/1000x1000/61/13/seamless-yellow-pattern-vector-1956113.jpg");
       background-repeat: repeat;
       -webkit-background-clip: text;
       background-clip: text;
@@ -98,9 +119,25 @@
   .buttons { 
     display: flex; 
     justify-content: center; 
-    gap: 30px; 
+    gap: 20px; 
   }
 }
+  // Responsive styles for the Hero text on smaller screens
+  @media (max-width: 768px) {
+    h1 { font-size: 48px; }
+    h2 { font-size: 18px; }
+    .buttons { 
+      flex-direction: column; 
+      gap: 15px; 
+      align-items: center; 
+      
+      // Ensure buttons in a column layout don't take full width unless intended
+      a, button { 
+        width: 80%; 
+        max-width: 300px;
+      } 
+    }
+  }
 
 // -------------------- ABOUT PAGE --------------------
 // Find the existing .about-page block and replace it with this:
