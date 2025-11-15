@@ -46,7 +46,7 @@ function Particles({ count = 5000 }) {
         <bufferAttribute attach="attributes-position" count={count} array={particles} itemSize={3} />
       </bufferGeometry>
       {/* This material creates small points instead of squares */}
-      <pointsMaterial size={0.015} color="#00ff62ff" />
+      <pointsMaterial size={0.015} color="#00ff62" />
     </points>
   );
 }

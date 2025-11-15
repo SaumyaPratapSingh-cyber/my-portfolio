@@ -9,6 +9,7 @@ import Projects from "./pages/Projects.jsx";
 import Contact from "./pages/Contact.jsx";
 import Experience from "./pages/Experience.jsx";
 import Resume from "./pages/Resume.jsx";
+
 import CustomCursor from "./components/CustomCursor/CustomCursor.jsx";
 import ParticleBackground from "./components/ParticleBackground/ParticleBackground.jsx"; // 1. Import the new component
 
@@ -17,6 +18,7 @@ const App = () => {
   return (
     <>
       <ParticleBackground /> {/* 2. Render the background component here */}
+      
       <CustomCursor />
       
       {location.pathname !== '/resume' && <Navbar />}

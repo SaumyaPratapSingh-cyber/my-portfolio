@@ -48,7 +48,7 @@ const Hero = () => {
       {/* --- LAYER 1: 3D SCENE (BACKGROUND) --- */}
       <div className="spline-scene">
         <Suspense fallback={<div>Loading 3D...</div>}>
-          <Spline scene="https://prod.spline.design/CU-WYIwDRIS7inhm/scene.splinecode" />
+          <Spline scene="https://prod.spline.design/9A9d16rY7cJkg6ld/scene.splinecode" />
         </Suspense>
       </div>
       

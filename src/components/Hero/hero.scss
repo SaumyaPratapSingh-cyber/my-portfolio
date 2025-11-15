@@ -1,40 +1,41 @@
-// This is the complete, new hero.scss file
 .hero { 
   display: flex;
-  flex-direction: row; // Arrange items side-by-side
+  flex-direction: row;
   align-items: center; 
-  height: 100vh;
-  width: 100%; // It will fill the padded <section>
-  overflow: visible; // Stops 3D model from being cut off
-
+  width: 100%;
+  // We remove the 100vh height to fix the scrolling
+  // The parent <section> in Pages.scss already handles the height.
+  min-height: 100vh;
+  margin-left:150px;
+  
   .hero-content {
-    // This is the LEFT column
-    flex: 1; // Takes up 60% of the space
+    // This is the TEXT on the LEFT
+    flex: 1; // Takes up ~55% of the space
     position: relative; 
+    z-index: 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
-    margin-left: 100px;
+    padding-right: 2rem; // Adds space between text and model
     
-    // --- All your original text styles ---
+    // ... (all your h1, h2, button styles with text-align: left) ...
     h2 {
-      font-size: 40px;
-      color: blanchedalmond;
-      font-weight: 10000;
+      font-size: 28px;
+      color: var(--text-secondary);
+      font-weight: 300;
       margin-bottom: 20px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      text-align: left; // Align text left
+      text-align: left;
     }
     
     h1 {
       font-family: 'Poppins', sans-serif;
-      font-size: 60px; 
+      font-size: 80px; 
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.1;
       margin-bottom: 40px;
-      text-align: left; // Align text left
+      text-align: left;
       
       span {
         display: block;
@@ -49,53 +50,74 @@
 
     .buttons { 
       display: flex; 
-      justify-content: flex-start; // Align buttons left
-      gap: 30px; 
-      margin-left: 0px;
+      justify-content: flex-start;
+      gap: 20px; 
     }
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
   .spline-scene {
-    // This is the RIGHT colummn
-    position: fixed;
-    margin-left: 100px;// Takes up 40% of the space
-    height: 100%;
-    width: 100%;
+    // This is the 3D MODEL on the RIGHT
+    flex: 0 0 45%; 
+    height: 100vh; 
+    z-index: 1; 
+    transform: scale(0.9);
+    
+    // 1. THIS FIXES SCROLLING (and breaks hover, as you agreed)
+    pointer-events: none;
+
+    // --- 2. THIS IS THE NEW TRICK TO HIDE THE LOGO ---
+    //
+    // This "crops" the container from the bottom up.
+    // We are cropping 50px off the bottom. 
+    // You can change "50px" to "60px" or "40px"
+    // until the logo is perfectly gone.
+    clip-path: inset(0 0 60px 0); 
   }
+
+
+
+
+
+
+
+
 
   // --- MOBILE STYLES ---
   @media (max-width: 1024px) {
+    padding: 2rem;
     flex-direction: column; 
+    min-height: auto;
 
     .hero-content {
-      order: 1; // Text first
-      flex: 1;
-      height: auto;
+      order: 1;
       width: 100%;
+      height: auto;
       text-align: center;
-      padding: 2rem;
       align-items: center;
-
-      h1, h2 {
-        text-align: center;
-      }
+      padding-right: 0;
+      h1, h2 { text-align: center; }
       h1 { font-size: 48px; }
-      h2 { font-size: 18px; }
-
-      .buttons { 
-        flex-direction: column; 
-        gap: 15px; 
-        align-items: center;
-        justify-content: center;
-        a, button { width: 80%; max-width: 300px; } 
-      }
+      .buttons { justify-content: center; }
     }
 
     .spline-scene {
-      order: 2; // 3D model second
-      flex: 0 0 40vh; 
+      order: 2;
       width: 100%;
       height: 40vh;
+      transform: scale(0.8);
+      pointer-events: none; // Keep it off on mobile too
     }
   }
 }
