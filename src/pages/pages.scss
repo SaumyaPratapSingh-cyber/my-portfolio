@@ -222,62 +222,302 @@
   }
 }
 
-// -------------------- SKILLS PAGE --------------------
+// -------------------- SKILLS PAGE (CLIP-PATH GALLERY) --------------------
 .skills-page {
+  
+  // These are your original, working category styles
   .skill-categories {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 80px;
   }
+  
   .skill-category {
     border: 1px solid #222;
     background: #050505;
     border-radius: 20px;
     padding: 40px;
+    
     h2 {
       font-size: 32px;
       font-weight: 300;
       color: orange;
       margin-bottom: 30px;
+      text-align: center;
     }
-    .icon-cluster {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 150px;
-      position: relative;
-      margin-bottom: 30px;
+  }
 
-      img {
-        height: 75px; 
-        width: auto;
-        margin: 0 10px; 
-        transition: transform 0.3s ease;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        border-radius: 15px;
+  // This is the cluster of icons
+  .icon-cluster {
+    display: flex;
+    flex-wrap: wrap; // This makes the layout stable
+    justify-content: center;
+    align-items: center;
+    gap: 20px; // Space between blobs
+    position: relative;
+    margin-bottom: 30px;
 
-        &:hover {
-          transform: translateY(-10px) scale(1.1);
-          z-index: 2;
-        }
+    // This fades out the other icons on hover
+    &:hover > .skill-icon-wrapper {
+      filter: brightness(0.5) saturate(0.5);
+    }
+  }
+
+  // This is the new wrapper that gets the effect
+  .skill-icon-wrapper {
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    
+    // The "blob" shape
+    clip-path: path(
+      "M 80 20 C 100 0 100 0 120 20 C 140 40 160 60 180 80 C 200 100 200 100 180 120 C 160 140 140 160 120 180 C 100 200 100 200 80 180 C 60 160 40 140 20 120 C 0 100 0 100 20 80 Z"
+    );
+    transition: filter 500ms, clip-path 500ms, background 500ms;
+
+    // This is the logo *inside* the wrapper
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; // This will NOT cut off your logo
+      padding: 20px; // Give the logo space inside the blob
+      
+      // Fix z-index issue during animation
+      &:not(:hover) {
+        animation: zIndexFix 500ms;
       }
     }
-    .tag-group {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
+
+    // This is the hover effect
+    &:hover {
+      z-index: 100;
+      filter: brightness(1) saturate(1.5);
+      background: rgba(255, 255, 255, 0.1);
+
+      // The "square" shape on hover
+      clip-path: path(
+        "M 0 0 C 100 0 100 0 200 0 C 200 50 200 50 200 80 C 200 100 200 100 200 120 C 200 150 200 150 200 200 C 100 200 100 200 0 200 C 0 150 0 150 0 120 C 0 100 0 100 0 80 Z"
+      );
     }
-    .tag {
-      background: #1a1a1a;
-      border: 1px solid #333;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-size: 14px;
+  }
+
+  // Your original tag styles
+  .tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  .tag {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+}
+
+// Mobile responsive styles
+@media (max-width: 768px) {
+  .skills-page {
+    .skill-categories {
+      gap: 40px;
+    }
+    .skill-category {
+      padding: 30px;
+    }
+    .skill-icon-wrapper {
+      width: 90px; // Smaller icons on mobile
+      height: 90px;
+      img {
+        padding: 15px;
+      }
     }
   }
 }
+
+// --- GLOBAL KEYFRAMES ---
+// (This must be at the end of the file)
+@keyframes zIndexFix {
+  0%,
+  100% {
+    z-index: 10;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// -------------------- SKILLS PAGE (ORBITAL CAROUSEL) --------------------
+.skills-page {
+  
+  // Make the wrapper relative to position the orbiter
+  .wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // We need to give it a defined height for the orbiter
+    min-height: 800px; 
+    padding-bottom: 100px;
+  }
+
+  // This is the main container for the effect
+  .skill-orbiter-container {
+    position: relative;
+    width: 600px; // The size of the whole widget
+    height: 600px;
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // This is the container that holds all the moving icons
+  .orbiter {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  // This is the static center piece
+  .center-logo {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    box-shadow: 0 0 20px 0 var(--accent-color);
+    
+    .center-text {
+      font-size: 24px;
+      font-weight: 700;
+      color: #000;
+    }
+  }
+
+  // This is the glowing ring from the video
+  .center-glow-ring {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border: 2px solid var(--accent-color);
+    border-radius: 50%;
+    opacity: 0.3;
+    z-index: 1;
+
+    // Outer glow
+    &::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid var(--accent-color);
+      border-radius: 50%;
+      opacity: 0.5;
+      filter: blur(10px);
+    }
+  }
+
+  // This is the individual skill icon
+  .skill-icon {
+    position: absolute;
+    // We center the icon on its (x, y) coordinate
+    top: 50%; 
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px; // half of width
+    margin-top: -40px;  // half of height
+    
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+    }
+
+    // The tooltip text
+    .skill-name-tooltip {
+      position: absolute;
+      bottom: -35px; // Position below the bubble
+      background: var(--accent-color);
+      color: #000;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // -------------------- PROJECTS PAGE (3D CAROUSEL) --------------------
 .projects-page {
