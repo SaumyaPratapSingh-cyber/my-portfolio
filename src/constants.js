@@ -1,5 +1,7 @@
 // src/constants.js
 
+import { img } from "framer-motion/client";
+
 export const projects = [
   {
     id: 1,
@@ -64,6 +66,7 @@ export const experience = [
     duration: "August 2025 - September 2025",
     desc: "Spearheaded CleanSweep AI, a data-driven platform linking citizens, authorities, and recyclers for smarter cleanup.",
     certificateLink: "https://lnkd.in/p/gwd9DCqn", // Add your certificate link here
+    img:"imgbg.png",
   },
   {
     role: "Core Member",
@@ -71,6 +74,7 @@ export const experience = [
     duration: "April 2025 - September 2025",
     desc: "Actively drove diverse chapter operations encompassing development, design, and event management to foster community growth.",
     certificateLink: "https://drive.google.com/file/d/19X8nF0b9DmdozUjWztaHH0XjwG_6p8MM/view?usp=sharing", // Add your certificate link here
+    img: "imgbg.png",
   },
   {
     role: "Internship Trainee",
@@ -78,6 +82,7 @@ export const experience = [
     duration: "June 2025 - August 2025",
     desc: "Contributed to environmental projects by leveraging Tableau and other analytical tools to visualize impact and support sustainable decision-making.",
     certificateLink: "https://drive.google.com/file/d/1S-I0fopKgTsX5yvzVDGLK9AhQuS9jnxJ/view?usp=sharing", // Add your certificate link here
+    img: "imgbg.png",
   },
   {
     role: "Web Development Internship Trainee",
@@ -85,6 +90,7 @@ export const experience = [
     duration: "July 2025",
     desc: "Developed and deployed a full-stack MERN e-commerce platform, \"Tech Bazaar,\" managing products and authentication via a secure RESTful API.",
     certificateLink: "https://courses.ibmmooc.skillsnetwork.site/certificates/5ec25edf9b204a81a425c9fd3861ea98", // Add your certificate link here
+    img: "imgbg.png",
   },
   {
     role: "Graphic Design and Development Internship",
@@ -92,6 +98,7 @@ export const experience = [
     duration: "March 2025 - April 2025",
     desc: "Designed 50+ digital graphics and promotional materials using Figma, resulting in a 15% increase in social media engagement.",
     certificateLink: "https://drive.google.com/file/d/1S_sNQ8UhRy7FteiWJNUtYLoGi6NtcyHF/view?usp=sharing", // Add your certificate link here
+    img: "imgbg.png",
   }
 ];
 

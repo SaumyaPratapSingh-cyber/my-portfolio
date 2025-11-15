@@ -5,6 +5,9 @@
   overflow-y: scroll;
   scroll-behavior: smooth;
   background-color: transparent;
+  
+  // This fixes the console warning
+  position: relative; 
 
   section {
     min-height: 100vh;
@@ -12,8 +15,9 @@
     align-items: center;
     justify-content: center;
     scroll-snap-align: start;
-    // We remove all padding here, it will be handled by .hero
-    padding: 0;
+    
+    // This removes the "black border" and fixes layout
+    padding: 0; 
   }
 }
 
@@ -27,7 +31,6 @@
   justify-content: flex-start;
   background: transparent;
   color: white;
-  //overflow: hidden; // This should be commented out or removed
 
   .wrapper {
     max-width: 1366px;
@@ -78,67 +81,10 @@
 }
 
 // -------------------- HOME PAGE --------------------
+// This section is intentionally left blank
+// as its styles are correctly handled by src/components/Hero/hero.scss
 .home-page .wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
-  height: 100vh; 
-  text-align: center;
-  padding: 0 50px; 
-
-  h2 {
-    font-size: 28px;
-    color: var(--text-secondary);
-    font-weight: 300;
-    margin-bottom: 20px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 90px;
-    font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 40px;
-    margin-top: auto;
-
-    span {
-      display: block;
-      color: rgba(225, 225, 225, 0.05);
-      background-image: url("https://cdn4.vectorstock.com/i/1000x1000/61/13/seamless-yellow-pattern-vector-1956113.jpg");
-      background-repeat: repeat;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: animate-text-texture 20s linear infinite;
-    }
-  }
-
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-}
-// Responsive styles for the Hero text on smaller screens
-@media (max-width: 768px) {
-  .home-page .wrapper { // Make selector more specific
-    h1 { font-size: 48px; }
-    h2 { font-size: 18px; }
-    .buttons {
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-
-      a,
-      button {
-        width: 80%;
-        max-width: 300px;
-      }
-    }
-  }
+  // All hero styles are in hero.scss
 }
 
 // -------------------- ABOUT PAGE --------------------
@@ -149,46 +95,21 @@
     gap: 80px;
     align-items: flex-start;
     text-align: left;
-    padding-top: 50px; // Adjust padding to allow more space
+    padding-top: 50px; 
   }
 
-  // This is the single, correct rule for the image container
+  // This is the container for the image column
   .about-image-container {
     width: 100%;
     max-width: 400px; 
     margin: 0 auto; 
     position: relative; // For the canvas
 
-    // This is for the OLD image (it will be hidden by the new component)
-    .profile-image {
-      width: 100%;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      object-fit: cover;
-    }
-
-    // This is for the OLD signature (it will be replaced by the new component)
-    .signature {
-      font-family: 'Great Vibes', cursive; 
-      font-size: 52px;
-      font-weight: 500;
-      color: #fff;
-      margin-top: 30px;
-      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00ff, // Neon color
-        0 0 20px #ff00ff, 0 0 25px #ff00ff;
-      text-align: center;
-
-      span {
-        display: inline-block;
-      }
-    }
-
-    // --- STYLES FOR THE NEW EFFECT ---
+    // --- STYLES FOR THE NEW LIQUID EFFECT ---
     .about-image-tile {
       width: 100%;
       position: relative;
-      z-index: 10; 
+      z-index: 10; // On top of the canvas
       
       .tile__figure {
         margin: 0;
@@ -203,7 +124,7 @@
         height: 100%;
         object-fit: cover;
         object-position: center;
-        opacity: 0; 
+        opacity: 0; // The JS will fade this in
         display: block;
       }
     }
@@ -225,9 +146,7 @@
       font-size: 64px;
       font-weight: 200;
       margin-bottom: 20px;
-      span {
-        color: orange;
-      }
+      span { color: orange; }
     }
     .summary-text {
       font-size: 18px;
@@ -235,23 +154,22 @@
       margin-bottom: 40px;
       line-height: 1.8;
     }
-
     .timeline-title {
-      // Style for "Academic Background"
       font-size: 36px;
       color: orange;
       margin-bottom: 20px;
-      margin-top: 40px; // Add space above this title
+      margin-top: 40px; 
     }
   }
 
+  // Academic Background Timeline
   .timeline {
     position: relative;
     max-width: 800px; 
     margin: 50px auto 0 auto; 
     padding: 20px 0;
 
-    &::before { /* Vertical line */
+    &::before {
       content: '';
       position: absolute;
       top: 0;
@@ -266,7 +184,7 @@
       position: relative;
       padding-left: 50px;
       
-      .timeline-dot { /* Orange dot */ 
+      .timeline-dot { 
         position: absolute;
         left: 0;
         top: 5px;
@@ -277,7 +195,6 @@
         border-radius: 50%;
       }
       .timeline-content {
-        /* Styles for text within each timeline item */
         h3 {
           font-size: 22px;
           color: orange;
@@ -305,7 +222,7 @@
   }
 }
 
-// -------------------- SKILLS PAGE (NEW 3D ICON DESIGN) --------------------
+// -------------------- SKILLS PAGE --------------------
 .skills-page {
   .skill-categories {
     width: 100%;
@@ -333,9 +250,9 @@
       margin-bottom: 30px;
 
       img {
-        height: 75px; /* Adjusted size for better spacing */
+        height: 75px; 
         width: auto;
-        margin: 0 10px; /* Was -20px, now creates space */
+        margin: 0 10px; 
         transition: transform 0.3s ease;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
         border-radius: 15px;
@@ -364,7 +281,7 @@
 
 // -------------------- PROJECTS PAGE (3D CAROUSEL) --------------------
 .projects-page {
-  padding: 0;
+  padding: 0; 
   .wrapper {
     max-width: none;
     padding: 0;
@@ -372,12 +289,12 @@
   .main-container {
     display: flex;
     width: 100%;
-    max-width: 1366px;
-    height: 100vh;
+    max-width: 1366px; 
+    height: 100vh; 
     gap: 60px;
     align-items: center;
     justify-content: center;
-    padding: 0 50px;
+    padding: 0 50px; 
   }
   .carousel-section {
     flex: 1;
@@ -421,7 +338,7 @@
   .card {
     position: absolute;
     width: 400px;
-    height: 225px;
+    height: 225px; 
     background: #111;
     border-radius: 20px;
     overflow: hidden;
@@ -433,14 +350,14 @@
       height: 100%;
       object-fit: cover;
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      filter: grayscale(100%);
+      filter: grayscale(100%); 
     }
   }
   .card.center {
     z-index: 10;
     transform: scale(1.1) translateZ(0);
     img {
-      filter: none;
+      filter: none; 
     }
   }
   .card.up-2 {
@@ -710,11 +627,6 @@
       color: #f44336; // Red
       font-weight: 500;
     }
-  }
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
     input,
     textarea {
       background: #111;
@@ -734,112 +646,192 @@
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // -------------------- EXPERIENCE PAGE --------------------
 .experience-page {
+  // 1. REMOVE all horizontal padding from the page
+  padding-left: 0;
+  padding-right: 0;
+  
+  // 2. Add padding back to the header text
   .wrapper {
-    text-align: left;
+    padding-left: 50px;
+    padding-right: 50px;
   }
+
   .header-section {
     text-align: center;
     margin-bottom: 80px;
-    h1 {
-      font-size: 72px;
+    h1 { font-size: 72px; margin-bottom: 15px; }
+    p { font-size: 20px; color: #a0a0a0; max-width: 800px; margin: 0 auto; }
+  }
+
+  // --- 3D PERSPECTIVE CAROUSEL STYLES ---
+
+  // 3. The main scrolling container
+  .carousel-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1366px; // Constrain to site width
+    margin: 0 auto;     // Center it
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory; 
+    scroll-behavior: smooth;
+    
+    // This creates the 3D "look"
+    perspective: 800px; 
+    
+    // Hide scrollbar
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+
+    // Add a focus ring (your accent color) for keyboard nav
+    &:focus {
+      outline: 2px solid var(--accent-color);
+      outline-offset: 10px;
+    }
+  }
+
+  // 4. The wrapper for each card (for snapping)
+  .carousel-item-wrapper {
+    position: relative;
+    flex: 0 0 350px; // Each card is 350px wide
+    padding: 0 10px; // Space between cards
+    scroll-snap-align: center; // THIS SNAPS IT TO THE MIDDLE
+  }
+
+  // 5. The actual card
+  // Find this rule inside .experience-page
+  // Find this rule inside .experience-page
+  .timeline-card {
+    width: 100%;
+    height: 450px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    background-size: cover;
+    background-position: center;
+    position: relative; 
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    padding: 24px; // Keep the padding
+
+    // REMOVE all the .card-overlay rules. We don't need them.
+
+    // --- NEW DARK TEXT STYLES ---
+    h3 { 
+      font-size: 22px; 
+      color: #111111; // Dark heading
+      font-weight: 700; 
+      margin-bottom: 5px; 
+      flex-shrink: 0;
+    }
+    .company { 
+      font-size: 18px; 
+      color: #333333; // Dark grey
+      font-weight: 500; 
+      margin-bottom: 5px; 
+      flex-shrink: 0;
+    }
+    .duration { 
+      font-size: 14px; 
+      color: #555555; // Medium dark grey
+      margin-bottom: 15px; 
+      font-style: italic; 
+      flex-shrink: 0;
+    }
+    .desc { 
+      font-size: 16px; 
+      line-height: 1.6; 
+      color: #444444; // Dark text
+      overflow-y: auto; 
+      flex-grow: 1;
       margin-bottom: 15px;
     }
-    p {
-      font-size: 20px;
-      color: #a0a0a0;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  }
-  .timeline {
-    position: relative;
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px 0;
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 10px;
-      height: 100%;
-      width: 4px;
-      background: #222;
-      border-radius: 2px;
-    }
-    .timeline-item {
-      margin-bottom: 40px;
-      position: relative;
-      padding-left: 50px;
-      .timeline-dot {
-        position: absolute;
-        left: 0;
-        top: 5px;
-        height: 25px;
-        width: 25px;
-        border: 4px solid #222;
-        background: orange;
-        border-radius: 50%;
-      }
-      .timeline-content {
-        background: #111;
-        padding: 25px;
-        border-radius: 10px;
-        border: 1px solid #222;
-        h3 {
-          font-size: 22px;
-          color: orange;
-          margin-bottom: 5px;
-        }
-        .company {
-          font-size: 18px;
-          color: white;
-          font-weight: 500;
-          margin-bottom: 5px;
-        }
-        .duration {
-          font-size: 14px;
-          color: #888;
-          margin-bottom: 10px;
-          font-style: italic;
-        }
-        .desc {
-          font-size: 16px;
-          line-height: 1.7;
-          color: #a0a0a0;
-        }
-        .certificate-link {
-          display: inline-block;
-          margin-top: 15px;
-          font-size: 14px;
-          font-weight: 500;
-          color: orange;
-          text-decoration: none;
-          border: 1px solid orange;
-          padding: 5px 10px;
-          border-radius: 5px;
-          transition: background-color 0.3s, color 0.3s;
-          &:hover {
-            background-color: orange;
-            color: black;
-          }
-        }
+    .certificate-link {
+      display: inline-block;
+      margin-top: auto; 
+      font-size: 15px; 
+      font-weight: 600; 
+      color: #000000; // Black
+      text-decoration: none;
+      border: 1px solid #222222; // Dark border
+      padding: 8px 12px; 
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+      flex-shrink: 0;
+      &:hover {
+        background-color: #000000;
+        color: #FFFFFF;
       }
     }
   }
+  
+  // 6. Spacers to center the first and last items
+  .carousel-spacer {
+    // THIS IS THE FIX for the horizontal scrollbar
+    width: calc(50% - 175px - 10px); // 50% of container, NOT 50vw
+    flex-shrink: 0;
+  }
+
+  // Mobile fallback
+  @media (max-width: 768px) {
+    .carousel-container {
+      perspective: none; 
+    }
+    
+    .carousel-item-wrapper {
+      flex: 0 0 300px; 
+      padding: 0 10px;
+    }
+
+    .carousel-spacer {
+      // 50% - (300px / 2) - 10px
+      width: calc(50% - 150px - 10px); // 50% of container, NOT 50vw
+    }
+  }
 }
-@keyframes animate-text-texture {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // -------------------- RESUME PAGE --------------------
 .resume-page {
@@ -965,5 +957,18 @@
 @media (max-width: 1024px) {
   .social-links-home {
     display: none;
+  }
+}
+
+// --- GLOBAL KEYFRAMES ---
+@keyframes animate-text-texture {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
