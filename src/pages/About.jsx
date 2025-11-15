@@ -1,20 +1,13 @@
 import { motion } from "framer-motion";
 import "./pages.scss";
-import { summary, education, experience } from "../constants";
+import { summary, education } from "../constants"; // 'experience' is imported but not used, which is fine
+import AboutImage from "../components/AboutImage/AboutImage.jsx"; // <-- 1. IMPORT THE NEW COMPONENT
 
 const About = () => {
-  const name = "Saumya Pratap Singh";
-  const letters = Array.from(name);
-
-  const signatureContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.8 } },
-  };
-
-  const letterVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { ease: "easeOut" } },
-  };
+  // We don't need the signature variants anymore
+  // const name = "Saumya Pratap Singh";
+  // const letters = Array.from(name);
+  // ... (signatureContainerVariants and letterVariants are removed) ...
 
   const imageVariants = {
     hidden: { x: -100, opacity: 0, scale: 0.8 },
@@ -34,6 +27,8 @@ const About = () => {
       exit={{ opacity: 0 }}
     >
       <div className="wrapper">
+        
+        {/* 2. REPLACE your old image <motion.div> with this one */}
         <motion.div 
           className="about-image-container"
           variants={imageVariants}
@@ -41,22 +36,12 @@ const About = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <img src="/profile.png" alt="Saumya Pratap Singh" className="profile-image" />
-          <motion.h2
-            className="signature"
-            variants={signatureContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {letters.map((letter, index) => (
-              <motion.span key={index} variants={letterVariants}>
-                {letter === " " ? "\u00A0" : letter}
-              </motion.span>
-            ))}
-          </motion.h2>
+          {/* 3. CALL THE NEW COMPONENT HERE */}
+          <AboutImage />
+          
         </motion.div>
         
+        {/* --- This is your existing content --- */}
         <motion.div 
           className="about-content"
           variants={contentVariants}

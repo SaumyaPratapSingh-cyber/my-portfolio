@@ -44,7 +44,7 @@ export const projects = [
   {
     id: 5,
     title: "Multi-Functional GUI",
-    img: "/project-gui.png", // Add your image to /public
+    img: "Multi-Functional GUI.png", // Add your image to /public
     desc: "A versatile Python-based desktop application using Tkinter, bundling multiple tools like a digital clock, calculator, notepad, and web search.",
     impact: "This project showcases core Python scripting skills, GUI development with Tkinter, and the integration of various libraries to create a practical, everyday utility.",
     tech: "Python, Modern TKinter",

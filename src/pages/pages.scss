@@ -1,5 +1,4 @@
 // Find and replace the .home-container block at the top of pages.scss
-
 .home-container {
   height: 100vh;
   scroll-snap-type: y mandatory;
@@ -7,21 +6,18 @@
   scroll-behavior: smooth;
   background-color: transparent;
 
-
-
-  // This is the new 'section' rule
-// This is the new 'section' rule
-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  scroll-snap-align: start;
+  section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scroll-snap-align: start;
+    // We remove all padding here, it will be handled by .hero
+    padding: 0;
+  }
 }
 
-
-
-}// General Page Structure
+// General Page Structure
 .page {
   min-height: 100vh;
   padding: 150px 50px 50px 50px;
@@ -29,23 +25,25 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background:transparent;
+  background: transparent;
   color: white;
-  overflow: hidden;
+  //overflow: hidden; // This should be commented out or removed
 
   .wrapper {
     max-width: 1366px;
     width: 100%;
     text-align: center;
-    h1 { 
-      font-size: 64px; 
-      font-weight: 200; 
+    h1 {
+      font-size: 64px;
+      font-weight: 200;
       margin-bottom: 20px;
-      span { color: orange; }
+      span {
+        color: orange;
+      }
     }
-    .page-intro { 
-      font-size: 18px; 
-      color: #a0a0a0; 
+    .page-intro {
+      font-size: 18px;
+      color: #a0a0a0;
       max-width: 700px;
       margin: 0 auto 80px auto;
       line-height: 1.7;
@@ -66,32 +64,28 @@ section {
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
-  
+
   &:hover {
     background-color: $hover-bg;
     color: $hover-color;
   }
 }
-.primary { @include button-style(orange, black, orange, #ffc966, black); }
-.secondary { @include button-style(transparent, white, white, white, black); }
+.primary {
+  @include button-style(orange, black, orange, #ffc966, black);
+}
+.secondary {
+  @include button-style(transparent, white, white, white, black);
+}
 
 // -------------------- HOME PAGE --------------------
-// Find and replace the .home-page block in your pages.scss file
-
-// In src/pages/pages.scss, find and replace this entire block:
-
-// Find and replace this entire block in src/pages/pages.scss
-
-// Find and replace this entire block in src/pages/pages.scss
-
 .home-page .wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center; // This vertically centers the content
-  align-items: center;     // This horizontally centers the content
-  height: 100vh;           // Set height to the full viewport height
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
   text-align: center;
-  padding: 0 50px;         // Add padding for spacing
+  padding: 0 50px; 
 
   h2 {
     font-size: 28px;
@@ -102,15 +96,15 @@ section {
     text-transform: uppercase;
     white-space: nowrap;
   }
-  
+
   h1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 90px; 
+    font-size: 90px;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 40px;
     margin-top: auto;
-    
+
     span {
       display: block;
       color: rgba(225, 225, 225, 0.05);
@@ -122,31 +116,32 @@ section {
     }
   }
 
-  .buttons { 
-    display: flex; 
-    justify-content: center; 
-    gap: 20px; 
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
   }
 }
-  // Responsive styles for the Hero text on smaller screens
-  @media (max-width: 768px) {
+// Responsive styles for the Hero text on smaller screens
+@media (max-width: 768px) {
+  .home-page .wrapper { // Make selector more specific
     h1 { font-size: 48px; }
     h2 { font-size: 18px; }
-    .buttons { 
-      flex-direction: column; 
-      gap: 15px; 
-      align-items: center; 
-      
-      // Ensure buttons in a column layout don't take full width unless intended
-      a, button { 
-        width: 80%; 
+    .buttons {
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+
+      a,
+      button {
+        width: 80%;
         max-width: 300px;
-      } 
+      }
     }
   }
+}
 
 // -------------------- ABOUT PAGE --------------------
-// Find the existing .about-page block and replace it with this:
 .about-page {
   .wrapper {
     display: grid;
@@ -157,120 +152,159 @@ section {
     padding-top: 50px; // Adjust padding to allow more space
   }
 
-  .about-image-container { // New container for image styling
+  // This is the single, correct rule for the image container
+  .about-image-container {
     width: 100%;
-    max-width: 400px; // Smaller image size
-    margin: 0 auto; // Center the image container if it's smaller
+    max-width: 400px; 
+    margin: 0 auto; 
+    position: relative; // For the canvas
+
+    // This is for the OLD image (it will be hidden by the new component)
     .profile-image {
       width: 100%;
       height: auto;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
       object-fit: cover;
     }
-    // In src/pages/pages.scss...
 
-.about-image-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  .profile-image {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    object-fit: cover;
-  }
+    // This is for the OLD signature (it will be replaced by the new component)
+    .signature {
+      font-family: 'Great Vibes', cursive; 
+      font-size: 52px;
+      font-weight: 500;
+      color: #fff;
+      margin-top: 30px;
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff00ff, // Neon color
+        0 0 20px #ff00ff, 0 0 25px #ff00ff;
+      text-align: center;
 
-  // ENSURE THIS BLOCK IS HERE AND CORRECT
-  .signature {
-    font-family: 'Great Vibes', cursive; // This applies the calligraphy font
-    font-size: 52px;
-    font-weight: 500;
-    color: #fff;
-    margin-top: 30px;
-    // This creates the red neon glow from your reference
-    text-shadow:
-      0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 15px #ff0000,
-      0 0 20px #ff0000,
-      0 0 25px #ff0000;
-    text-align: center;
-    
-    span {
-      display: inline-block;
+      span {
+        display: inline-block;
+      }
     }
-  }
-}
-    // Find this block in your pages.scss file...
-.about-image-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  .profile-image {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    object-fit: cover;
-  }
 
-  // ADD THIS NEW BLOCK INSIDE .about-image-container
-  .signature {
-    font-family: 'Great Vibes', cursive;
-    font-size: 52px;
-    font-weight: 500;
-    color: #fff;
-    margin-top: 30px;
-    text-shadow:
-      0 0 5px #fff,
-      0 0 10px #fff,
-      0 0 15px #ff00ff, // Neon color
-      0 0 20px #ff00ff,
-      0 0 25px #ff00ff;
-    text-align: center;
-    
-    span {
-      display: inline-block; // Important for the animation
+    // --- STYLES FOR THE NEW EFFECT ---
+    .about-image-tile {
+      width: 100%;
+      position: relative;
+      z-index: 10; 
+      
+      .tile__figure {
+        margin: 0;
+        width: 100%;
+        border-radius: 20px; 
+        overflow: hidden;
+      }
+      
+      .tile__image {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        opacity: 0; 
+        display: block;
+      }
     }
-  }
-}
+
+    // This is the WebGL canvas
+    #stage {
+      position: fixed; // Fixed to the viewport
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100vh; // Full viewport height
+      z-index: 9; // Behind the image
+      pointer-events: none; // Lets clicks and scroll pass through
+    }
   }
 
   .about-content {
-    h1 { font-size: 64px; font-weight: 200; margin-bottom: 20px; span { color: orange; } }
-    .summary-text { font-size: 18px; color: #d3d3d3; margin-bottom: 40px; line-height: 1.8; }
-    
-    .timeline-title { // Style for "Academic Background"
+    h1 {
+      font-size: 64px;
+      font-weight: 200;
+      margin-bottom: 20px;
+      span {
+        color: orange;
+      }
+    }
+    .summary-text {
+      font-size: 18px;
+      color: #d3d3d3;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .timeline-title {
+      // Style for "Academic Background"
       font-size: 36px;
       color: orange;
       margin-bottom: 20px;
       margin-top: 40px; // Add space above this title
     }
   }
-  
-  // The general .timeline styles below should already exist in your file.
-  // Ensure they are present and correctly define the visual timeline.
+
   .timeline {
     position: relative;
-    max-width: 800px; // Adjust as needed for width in about-page
-    margin: 50px auto 0 auto; // Adjusted margin to align better in about-page
+    max-width: 800px; 
+    margin: 50px auto 0 auto; 
     padding: 20px 0;
-    
-    &::before { /* Vertical line */ }
+
+    &::before { /* Vertical line */
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 10px;
+      height: 100%;
+      width: 4px;
+      background: #222;
+      border-radius: 2px;
+    }
     .timeline-item {
-      .timeline-dot { /* Orange dot */ }
+      margin-bottom: 40px;
+      position: relative;
+      padding-left: 50px;
+      
+      .timeline-dot { /* Orange dot */ 
+        position: absolute;
+        left: 0;
+        top: 5px;
+        height: 25px;
+        width: 25px;
+        border: 4px solid #222;
+        background: orange;
+        border-radius: 50%;
+      }
       .timeline-content {
         /* Styles for text within each timeline item */
-        h3 { font-size: 22px; color: orange; margin-bottom: 5px; }
-        .institution { font-size: 18px; color: white; font-weight: 500; margin-bottom: 5px; }
-        .duration { font-size: 14px; color: #888; margin-bottom: 10px; font-style: italic; }
-        .desc { font-size: 16px; line-height: 1.7; color: #a0a0a0; }
+        h3 {
+          font-size: 22px;
+          color: orange;
+          margin-bottom: 5px;
+        }
+        .institution {
+          font-size: 18px;
+          color: white;
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+        .duration {
+          font-size: 14px;
+          color: #888;
+          margin-bottom: 10px;
+          font-style: italic;
+        }
+        .desc {
+          font-size: 16px;
+          line-height: 1.7;
+          color: #a0a0a0;
+        }
       }
     }
   }
 }
+
 // -------------------- SKILLS PAGE (NEW 3D ICON DESIGN) --------------------
 .skills-page {
   .skill-categories {
@@ -284,112 +318,352 @@ section {
     background: #050505;
     border-radius: 20px;
     padding: 40px;
-    h2 { font-size: 32px; font-weight: 300; color: orange; margin-bottom: 30px; }
+    h2 {
+      font-size: 32px;
+      font-weight: 300;
+      color: orange;
+      margin-bottom: 30px;
+    }
     .icon-cluster {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 150px;
-        position: relative;
-        margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 150px;
+      position: relative;
+      margin-bottom: 30px;
 
-        img {
-          height: 75px; /* Adjusted size for better spacing */
-          width: auto;
-          /* This is the key change: */
-          margin: 0 10px; /* Was -20px, now creates space */
-          transition: transform 0.3s ease;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-          border-radius: 15px;
+      img {
+        height: 75px; /* Adjusted size for better spacing */
+        width: auto;
+        margin: 0 10px; /* Was -20px, now creates space */
+        transition: transform 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
 
-          &:hover {
-            transform: translateY(-10px) scale(1.1);
-            z-index: 2;
-          }
+        &:hover {
+          transform: translateY(-10px) scale(1.1);
+          z-index: 2;
         }
       }
-    .tag-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-    .tag { background: #1a1a1a; border: 1px solid #333; padding: 8px 18px; border-radius: 8px; font-size: 14px; }
+    }
+    .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .tag {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
   }
 }
 
-// -------------------- PROJECTS PAGE (CARD DESIGN) --------------------
-// Find the .projects-page block in pages.scss and replace it
-
+// -------------------- PROJECTS PAGE (3D CAROUSEL) --------------------
 .projects-page {
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 40px;
+  padding: 0;
+  .wrapper {
+    max-width: none;
+    padding: 0;
   }
-  .project-card {
-    background: #111;
-    border: 1px solid #222;
-    border-radius: 15px;
-    overflow: hidden;
-    text-align: left;
+  .main-container {
+    display: flex;
+    width: 100%;
+    max-width: 1366px;
+    height: 100vh;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 50px;
+  }
+  .carousel-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .controls-section {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(255,165,0,0.2);
-      .project-image-container img { transform: scale(1.05); }
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    padding-left: 40px;
+  }
+  .carousel-container {
+    width: 100%;
+    max-width: 500px;
+    height: 70vh;
+    position: relative;
+    perspective: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .nav-arrow {
+      display: none;
     }
-    .project-image-container {
+  }
+  .carousel-track {
+    width: 450px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .card {
+    position: absolute;
+    width: 400px;
+    height: 225px;
+    background: #111;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    img {
       width: 100%;
-      height: 220px;
-      overflow: hidden;
-      img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      filter: grayscale(100%);
     }
-    .card-content {
-      padding: 25px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      h3 { font-size: 24px; color: orange; margin-bottom: 10px; }
-      h4 { font-size: 16px; color: orange; margin-top: 15px; margin-bottom: 5px; font-weight: 500;}
-      .desc { font-size: 16px; color: #a0a0a0; }
-      .impact { font-size: 15px; color: #a0a0a0; font-style: italic; flex-grow: 1; margin-bottom: 20px; }
-      .tech-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 25px;
-        span { background: #222; padding: 5px 10px; border-radius: 5px; font-size: 12px; }
+  }
+  .card.center {
+    z-index: 10;
+    transform: scale(1.1) translateZ(0);
+    img {
+      filter: none;
+    }
+  }
+  .card.up-2 {
+    z-index: 1;
+    transform: translateY(-300px) scale(0.8) translateZ(-300px);
+    opacity: 0.7;
+  }
+  .card.up-1 {
+    z-index: 5;
+    transform: translateY(-150px) scale(0.9) translateZ(-100px);
+    opacity: 0.9;
+  }
+  .card.down-1 {
+    z-index: 5;
+    transform: translateY(150px) scale(0.9) translateZ(-100px);
+    opacity: 0.9;
+  }
+  .card.down-2 {
+    z-index: 1;
+    transform: translateY(300px) scale(0.8) translateZ(-300px);
+    opacity: 0.7;
+  }
+  .card.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .project-info {
+    text-align: center;
+    transition: all 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    max-height: 450px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    .project-name {
+      color: var(--accent-color);
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+      flex-shrink: 0;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: var(--accent-color);
+        bottom: -5px;
+        left: 0;
       }
-      .project-links {
+    }
+    .project-desc {
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      margin-bottom: 25px;
+      max-width: 500px;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-shrink: 0;
+      span {
+        background: #222;
+        padding: 5px 12px;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+    }
+    .project-links {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      a {
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 15px;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
         display: flex;
-        gap: 15px;
         align-items: center;
-        border-top: 1px solid #222;
-        padding-top: 20px;
-        margin-top: auto;
-        
-        a {
-          text-decoration: none;
-          font-weight: 500;
-          font-size: 15px;
-          padding: 8px 15px;
-          border-radius: 5px;
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          gap: 8px;
+        gap: 8px;
+      }
+      .primary-link {
+        @include button-style(orange, black, orange, #ffc966, black);
+      }
+      .secondary-link {
+        @include button-style(transparent, white, white, white, black);
+        img {
+          width: 18px;
+          height: 18px;
         }
-
-        .primary-link {
-          background-color: orange;
-          color: black;
-          &:hover { background-color: #ffc966; }
+      }
+    }
+  }
+  .dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .dot.active {
+    background: var(--accent-color);
+    transform: scale(1.2);
+  }
+  .nav-arrow {
+    position: relative;
+    background: transparent;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s ease;
+    border: none;
+    outline: none;
+  }
+  .nav-arrow:hover {
+    transform: scale(1.2);
+  }
+  .nav-arrow img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: none;
+    transition: all 0.3s ease;
+  }
+  .nav-controls {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 768px) {
+    .main-container {
+      flex-direction: column;
+      height: auto;
+      min-height: 100vh;
+      gap: 20px;
+      padding: 0 20px;
+    }
+    .carousel-section {
+      flex: none;
+      width: 100%;
+    }
+    .controls-section {
+      flex: none;
+      width: 100%;
+      padding-left: 0;
+      gap: 20px;
+    }
+    .carousel-container {
+      height: 60vh;
+      max-width: 350px;
+      .nav-arrow {
+        display: flex;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 70px;
+        &.up {
+          top: 20px;
         }
-        
-        .secondary-link {
-          background-color: #222;
-          color: white;
-          &:hover { background-color: #333; }
-          img { width: 18px; height: 18px; }
+        &.down {
+          bottom: 20px;
         }
+      }
+    }
+    .nav-controls {
+      display: none;
+    }
+    .card {
+      width: 320px;
+      height: 180px;
+    }
+    .carousel-track {
+      width: 350px;
+    }
+    .card.up-2 {
+      transform: translateY(-160px) scale(0.8) translateZ(-300px);
+    }
+    .card.up-1 {
+      transform: translateY(-80px) scale(0.9) translateZ(-100px);
+    }
+    .card.down-1 {
+      transform: translateY(80px) scale(0.9) translateZ(-100px);
+    }
+    .card.down-2 {
+      transform: translateY(160px) scale(0.8) translateZ(-300px);
+    }
+    .project-info {
+      .project-name {
+        font-size: 1.8rem;
+      }
+      .project-desc {
+        font-size: 1rem;
       }
     }
   }
@@ -403,67 +677,87 @@ section {
   align-items: center;
   text-align: left;
   .text-content {
-    h1 { margin-bottom: 20px; }
-    p { font-size: 18px; line-height: 1.7; color: #d3d3d3; margin-bottom: 20px; }
+    h1 {
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #d3d3d3;
+      margin-bottom: 20px;
+    }
     .contact-details {
       margin-top: 40px;
-      p { margin-bottom: 15px; font-size: 18px; strong { color: orange; margin-right: 10px; } }
+      p {
+        margin-bottom: 15px;
+        font-size: 18px;
+        strong {
+          color: orange;
+          margin-right: 10px;
+        }
+      }
     }
   }
-  .contact-form 
-  
-  {// In src/pages/pages.scss
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  // ... your other input, textarea styles ...
-  
-  // ADD THESE STYLES:
-  .success-message {
-    color: #4caf50; // Green
-    font-weight: 500;
-  }
-  .error-message {
-    color: #f44336; // Red
-    font-weight: 500;
-  }
-}
+  .contact-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    input, textarea 
-    {
+    .success-message {
+      color: #4caf50; // Green
+      font-weight: 500;
+    }
+    .error-message {
+      color: #f44336; // Red
+      font-weight: 500;
+    }
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    input,
+    textarea {
       background: #111;
       border: 1px solid #333;
       padding: 18px;
       border-radius: 8px;
       color: white;
       font-size: 16px;
-      &:focus { outline: none; border-color: orange; }
+      &:focus {
+        outline: none;
+        border-color: orange;
+      }
     }
-    button { align-self: flex-start; }
+    button {
+      align-self: flex-start;
+    }
   }
 }
-// ADD THIS ENTIRE BLOCK TO THE END OF pages.scss
 
+// -------------------- EXPERIENCE PAGE --------------------
 .experience-page {
-  .wrapper { text-align: left; }
-  
+  .wrapper {
+    text-align: left;
+  }
   .header-section {
     text-align: center;
     margin-bottom: 80px;
-    h1 { font-size: 72px; margin-bottom: 15px; }
-    p { font-size: 20px; color: #a0a0a0; max-width: 800px; margin: 0 auto; }
+    h1 {
+      font-size: 72px;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 20px;
+      color: #a0a0a0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
   }
-
   .timeline {
     position: relative;
     max-width: 800px;
     margin: 50px auto;
     padding: 20px 0;
-    
-    // This is the central vertical line of the timeline
     &::before {
       content: '';
       position: absolute;
@@ -474,13 +768,10 @@ section {
       background: #222;
       border-radius: 2px;
     }
-    
     .timeline-item {
       margin-bottom: 40px;
       position: relative;
-      padding-left: 50px; // Space for the dot and line
-
-      // This is the orange circle on the line
+      padding-left: 50px;
       .timeline-dot {
         position: absolute;
         left: 0;
@@ -491,37 +782,50 @@ section {
         background: orange;
         border-radius: 50%;
       }
-
-      // Find this block in your pages.scss file...
-.timeline-content {
-  background: #111;
-  padding: 25px;
-  border-radius: 10px;
-  border: 1px solid #222;
-  h3 { font-size: 22px; color: orange; margin-bottom: 5px; }
-  .company { font-size: 18px; color: white; font-weight: 500; margin-bottom: 5px; }
-  .duration { font-size: 14px; color: #888; margin-bottom: 10px; font-style: italic; }
-  .desc { font-size: 16px; line-height: 1.7; color: #a0a0a0; }
-
-  // ADD THIS NEW BLOCK INSIDE .timeline-content
-  .certificate-link {
-    display: inline-block;
-    margin-top: 15px;
-    font-size: 14px;
-    font-weight: 500;
-    color: orange;
-    text-decoration: none;
-    border: 1px solid orange;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-
-    &:hover {
-      background-color: orange;
-      color: black;
-    }
-  }
-}
+      .timeline-content {
+        background: #111;
+        padding: 25px;
+        border-radius: 10px;
+        border: 1px solid #222;
+        h3 {
+          font-size: 22px;
+          color: orange;
+          margin-bottom: 5px;
+        }
+        .company {
+          font-size: 18px;
+          color: white;
+          font-weight: 500;
+          margin-bottom: 5px;
+        }
+        .duration {
+          font-size: 14px;
+          color: #888;
+          margin-bottom: 10px;
+          font-style: italic;
+        }
+        .desc {
+          font-size: 16px;
+          line-height: 1.7;
+          color: #a0a0a0;
+        }
+        .certificate-link {
+          display: inline-block;
+          margin-top: 15px;
+          font-size: 14px;
+          font-weight: 500;
+          color: orange;
+          text-decoration: none;
+          border: 1px solid orange;
+          padding: 5px 10px;
+          border-radius: 5px;
+          transition: background-color 0.3s, color 0.3s;
+          &:hover {
+            background-color: orange;
+            color: black;
+          }
+        }
+      }
     }
   }
 }
@@ -536,28 +840,16 @@ section {
     background-position: 0% 50%;
   }
 }
-// ADD THIS ENTIRE BLOCK TO THE END OF pages.scss
 
-// Find the .resume-page block in pages.scss and replace it with this
-
-// Find and replace the .resume-page block in pages.scss
-
-// Find and replace the .resume-page block in pages.scss
-
-// Find and replace the .resume-page block in pages.scss
-
-// Find and replace the .resume-page block in pages.scss
-
+// -------------------- RESUME PAGE --------------------
 .resume-page {
-  padding: 50px; // Consistent padding
-  justify-content: center; // This will center the content vertically
+  padding: 50px;
+  justify-content: center;
   align-items: center;
   position: relative;
   background-color: #0c0c1d;
   min-height: 100vh;
   width: 100%;
-
-  // Animated gradient background effect
   &::before {
     content: '';
     position: absolute;
@@ -566,20 +858,21 @@ section {
     width: 100%;
     height: 100%;
     z-index: 0;
-    background: 
-      linear-gradient(to bottom, rgba(209, 255, 84, 0.377), transparent 50%),
+    background: linear-gradient(
+        to bottom,
+        rgba(209, 255, 84, 0.377),
+        transparent 50%
+      ),
       linear-gradient(to top, rgba(255, 0, 0, 0.178), transparent 50%);
     animation: animate-resume-bg 100s ease-in-out infinite;
   }
-
   .wrapper {
     z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px; // Space between header and resume image
+    gap: 40px;
   }
-
   .resume-header {
     width: 100%;
     max-width: 900px;
@@ -587,34 +880,35 @@ section {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
-    
-    h1 { font-size: 36px; margin: 0; font-weight: 300; }
-    
+    h1 {
+      font-size: 36px;
+      margin: 0;
+      font-weight: 300;
+    }
     .header-links {
       display: flex;
       align-items: center;
       gap: 50px;
     }
-
     .social-links {
       display: flex;
       gap: 15px;
       a {
         transition: transform 0.3s ease;
-        &:hover { transform: scale(1.1); }
+        &:hover {
+          transform: scale(1.1);
+        }
         img {
           width: 50px;
           height: 50px;
         }
       }
     }
-    
     .download-button {
       padding: 15px 15px;
       font-size: 30px;
     }
   }
-
   .resume-image-container {
     width: 100%;
     max-width: 900px;
@@ -622,40 +916,46 @@ section {
     box-shadow: 0 10px 30px rgb(255, 255, 255);
     border: 5px solid #000000;
     line-height: 0;
-    img { width: 100%; height: auto; border-radius: 10px; }
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
   }
 }
 
 // Keyframes for the background animation
 @keyframes animate-resume-bg {
-  0% { background-position: 0% 0%, 100% 100%; }
-  50% { background-position: 100% 100%, 0% 0%; }
-  100% { background-position: 0% 0%, 100% 100%; }
+  0% {
+    background-position: 0% 0%, 100% 100%;
+  }
+  50% {
+    background-position: 100% 100%, 0% 0%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%;
+  }
 }
-// ADD THIS ENTIRE BLOCK TO THE END OF pages.scss
 
-// This is the new '.social-links-home' rule
-// This is the new '.social-links-home' rule
+// -------------------- SOCIAL LINKS HOME --------------------
 .social-links-home {
   position: fixed;
   top: 50%;
-  right: 40px; // Moves it closer to the edge
+  right: 40px;
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   gap: 25px;
   z-index: 100;
-
   a {
     img {
       width: 40px;
       height: 40px;
-      opacity: 0.8; // Slightly transparent
+      opacity: 0.8;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
-
     &:hover img {
-      transform: scale(1.2); // Smaller, cleaner hover
+      transform: scale(1.2);
       opacity: 1;
     }
   }
