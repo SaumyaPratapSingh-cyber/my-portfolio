@@ -29,7 +29,7 @@ const Hero = () => {
           <Link to="/projects">
             <button className="primary">View My Work</button>
           </Link>
-          <Link to="/resume" target="_blank" rel="noopener noreferrer">
+          <Link to="/resume" target="SaumyratapSingh_resume.pdf" rel="noopener noreferrer">
             <button className="secondary">View Resume</button>
           </Link>
           <Link to="/contact">
