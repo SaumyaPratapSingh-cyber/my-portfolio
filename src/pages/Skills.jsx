@@ -20,7 +20,7 @@ const SkillOrbiter = () => {
     const animate = () => {
       // We check if a skill is hovered. If so, pause the rotation.
       if (activeSkill === null) {
-        setRotation(r => r + 0.0003);
+        setRotation(r => r + 0.001);
       }
       requestAnimationFrame(animate);
     };

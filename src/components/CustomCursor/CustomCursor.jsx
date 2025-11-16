@@ -27,10 +27,10 @@ const CustomCursor = () => {
           const dx = prevDot.x - dot.x;
           const dy = prevDot.y - dot.y;
           
-          dot.vx += dx * 0.05; // Spring physics
-          dot.vy += dy * 0.05;
-          dot.vx *= 0.8;      // Damping
-          dot.vy *= 0.8;
+          dot.vx += dx * 0.1; // Spring physics
+          dot.vy += dy * 0.1;
+          dot.vx *= 0.7;      // Damping
+          dot.vy *= 0.7;
           dot.x += dot.vx;
           dot.y += dot.vy;
 

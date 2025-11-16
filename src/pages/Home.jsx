@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-// 1. Make sure you import useEffect and useRef
-import { useRef, useEffect } from "react"; 
+import { useRef, useEffect } from "react";
 import Hero from "../components/Hero/Hero.jsx";
 import About from "./About.jsx";
 import Experience from "./Experience.jsx";
@@ -14,20 +13,17 @@ const Home = () => {
     visible: { x: 0, opacity: 1, transition: { duration: 0.5, delay: 1 } }
   };
 
-  // 2. This ref is for your scrolling container
   const scrollContainerRef = useRef(null);
 
-  // 3. THIS IS THE FIX
-  // This hook runs once when the component mounts
   useEffect(() => {
-    // Force the scroll container to the top
+    // This forces the page to the top on load (fixes the "starting on the wrong page" bug)
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTo(0, 0);
     }
-  }, []); // The empty [] means it only runs on load
+  }, []); 
 
   return (
-    // 4. Attach the ref to your container
+    // This div is your main scrolling viewport (position: relative is in Pages.scss)
     <div className="home-container" ref={scrollContainerRef}>
       <section id="home">
         <Hero />
@@ -36,7 +32,6 @@ const Home = () => {
         <About />
       </section>
       <section id="experience">
-        {/* 5. We remove the prop, it's not needed for the simple timeline */}
         <Experience />
       </section>
       <section id="skills">
@@ -49,7 +44,7 @@ const Home = () => {
         <Contact />
       </section>
 
-      {/* --- SOCIAL LINKS --- */}
+      {/* --- SOCIAL LINKS BAR RESTORED --- */}
       <motion.div
         className="social-links-home"
         variants={socialVariants}
