@@ -3,15 +3,31 @@ import { useRef, useEffect } from "react";
 import "./pages.scss";
 import { experience } from "../constants";
 
-// 1. THIS IS THE NEW, SIMPLER CARD COMPONENT
-// It's a "dumb" component. It just receives styles.
-const Card = ({ exp, i, style }) => {
+// This is the new, separate Card component
+const Card = ({ exp, i, scrollContainerRef }) => {
+  const cardRef = useRef(null);
+
+  // Track scroll progress of the card relative to the carousel
+  const { scrollXProgress } = useScroll({
+    container: scrollContainerRef,
+    target: cardRef,
+    offset: ['start end', 'end start'],
+    layoutEffect: false // FIX 1: Ensures smooth rendering on deploy
+  });
+
+  // Map the scroll progress to the strong effect
+  const rotateY = useTransform(scrollXProgress, [0, 0.5, 1], [45, 0, -45]);
+  const scale = useTransform(scrollXProgress, [0, 0.5, 1], [0.7, 1, 0.7]);
+  const opacity = useTransform(scrollXProgress, [0, 0.5, 1], [0.3, 1, 0.3]);
+
   return (
-    <div className="carousel-item-wrapper">
+    <div className="carousel-item-wrapper" ref={cardRef}>
       <motion.div
         className="timeline-card"
         style={{
-          ...style, // Pass the animated styles (rotateY, scale, opacity)
+          rotateY,
+          scale,
+          opacity,
           backgroundImage: `url(${exp.img})`
         }}
       >
@@ -31,36 +47,32 @@ const Card = ({ exp, i, style }) => {
   );
 };
 
-// 2. THIS IS THE NEW, SMARTER PARENT COMPONENT
+// This is your main page component
 const Experience = () => {
   const carouselRef = useRef(null);
 
-  // 3. THIS IS THE FIX.
-  // We track the scroll of the carousel-container itself.
-  const { scrollXProgress } = useScroll({ 
-    container: carouselRef,
-    layoutEffect: false // This fixes the Vercel bug
-  });
-
-  // ... (Keyboard navigation code is unchanged and correct) ...
+  // This handles precise keyboard scrolling (350px card + 20px padding = 370px)
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      carouselRef.current.scrollBy({ left: -370, behavior: 'smooth' });
+      carouselRef.current.scrollBy({ left: -370, behavior: 'smooth' }); // FIX 2: Precise scroll amount
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
-      carouselRef.current.scrollBy({ left: 370, behavior: 'smooth' });
+      carouselRef.current.scrollBy({ left: 370, behavior: 'smooth' }); // FIX 2: Precise scroll amount
     }
   };
 
   useEffect(() => {
     const carouselElement = carouselRef.current;
     if (!carouselElement) return;
+
     carouselElement.setAttribute('tabindex', '-1');
     const onFocus = () => document.addEventListener('keydown', handleKeyDown);
     const onBlur = () => document.removeEventListener('keydown', handleKeyDown);
+
     carouselElement.addEventListener('focus', onFocus);
     carouselElement.addEventListener('blur', onBlur);
+
     return () => {
       carouselElement.removeEventListener('focus', onFocus);
       carouselElement.removeEventListener('blur', onBlur);
@@ -89,29 +101,14 @@ const Experience = () => {
         onClick={(e) => e.currentTarget.focus()}
       >
         <div className="carousel-spacer"></div>
-        {experience.map((exp, i) => {
-          // 4. We create the scroll range for each card
-          const totalCards = experience.length;
-          // Calculate the start and end point for each card's animation
-          // e.g., Card 0: 0.0 to 0.2, Card 1: 0.2 to 0.4, etc.
-          const start = i / totalCards;
-          const end = (i + 1) / totalCards;
-          const center = (start + end) / 2;
-
-          // 5. We create the animations here, in the parent
-          const scale = useTransform(scrollXProgress, [start, center, end], [0.7, 1, 0.7]);
-          const rotateY = useTransform(scrollXProgress, [start, center, end], [45, 0, -45]);
-          const opacity = useTransform(scrollXProgress, [start, center, end], [0.3, 1, 0.3]);
-
-          return (
-            <Card 
-              exp={exp} 
-              i={i} 
-              key={i} 
-              style={{ scale, rotateY, opacity }} // Pass the styles as a prop
-            />
-          );
-        })}
+        {experience.map((exp, i) => (
+          <Card 
+            exp={exp} 
+            i={i} 
+            key={i} 
+            scrollContainerRef={carouselRef}
+          />
+        ))}
         <div className="carousel-spacer"></div>
       </div>
     </motion.div>
