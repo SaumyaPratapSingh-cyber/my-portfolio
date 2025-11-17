@@ -12,6 +12,13 @@ const Resume = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
+      {/* --- 1. NEW BACKGROUND VIDEO ELEMENT --- */}
+      <video className="resume-bg-video" autoPlay loop muted playsInline>
+        {/* Assumes 'resume-loop.mp4' is in your /public folder */}
+        <source src="/resume-loop.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      
       <div className="wrapper">
         <div className="resume-header">
           <motion.h1
