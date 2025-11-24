@@ -1,17 +1,17 @@
 import { motion } from "framer-motion";
 import "./pages.scss";
 import { skills as skillData } from "../constants";
-import React, { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 // --- This is the new Skill Orbiter Component ---
 const SkillOrbiter = () => {
   // 1. Flatten all your skills into one array
   const allSkills = useMemo(() => skillData.flatMap(category => category.items), []);
   const numSkills = allSkills.length;
-  
+
   // 2. State to track the currently hovered/active skill
   const [activeSkill, setActiveSkill] = useState(null);
-  
+
   // 3. State for the continuous rotation
   const [rotation, setRotation] = useState(0);
 
@@ -58,7 +58,7 @@ const SkillOrbiter = () => {
               className="skill-icon"
               onPointerOver={() => setActiveSkill(skill)}
               onPointerOut={() => setActiveSkill(null)}
-              
+
               // Animate position, scale, and opacity
               animate={{
                 x: x,
@@ -67,17 +67,17 @@ const SkillOrbiter = () => {
                 opacity: isDimmed ? 0.5 : 1,
                 zIndex: isActive ? 100 : 1,
               }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
+              transition={{
+                type: "spring",
+                stiffness: 300,
                 damping: 20
               }}
             >
               <img src={skill.logo} alt={skill.name} />
-              
+
               {/* Show name when hovered */}
               {isActive && (
-                <motion.span 
+                <motion.span
                   className="skill-name-tooltip"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -97,7 +97,7 @@ const SkillOrbiter = () => {
 // --- This is your main Skills page component ---
 const Skills = () => {
   return (
-    <motion.div 
+    <motion.div
       className="page skills-page"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -109,7 +109,7 @@ const Skills = () => {
           A collection of the primary technologies and tools I utilize.
           Hover over any icon to see it in detail.
         </p>
-        
+
         {/* We render the new Orbiter component */}
         <SkillOrbiter />
 

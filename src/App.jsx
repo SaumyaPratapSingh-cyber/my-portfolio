@@ -1,5 +1,5 @@
 import "./app.scss";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion"; // Make sure motion is imported
 import Navbar from "./components/navbar/Navbar.jsx";
 import Home from "./pages/Home.jsx";
@@ -20,17 +20,17 @@ const App = () => {
     hidden: { x: 100, opacity: 0 },
     visible: { x: 0, opacity: 1, transition: { duration: 0.5, delay: 1 } }
   };
-  
+
   // THIS IS THE CRITICAL LOGIC: Check if the path is exactly '/'
-  const isHomePage = location.pathname === '/'; 
+  const isHomePage = location.pathname === '/';
 
   return (
     <>
-      <ParticleBackground /> 
+      <ParticleBackground />
       <CustomCursor />
-      
-      {location.pathname !== '/resume' && <Navbar />}
-      
+
+      {location.pathname !== '/resume' && location.pathname !== '/' && <Navbar />}
+
       {/* --- CONDITIONAL SOCIAL LINKS --- */}
       {/* The social bar will ONLY render when the URL is / */}
       {isHomePage && (
@@ -47,7 +47,7 @@ const App = () => {
           <a href="https://github.com/SaumyaPratapSingh-cyber" target="_blank" rel="noopener noreferrer" title="GitHub"><img src="/github-icon.png" alt="GitHub" /></a>
         </motion.div>
       )}
-      
+
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route index element={<Home />} />

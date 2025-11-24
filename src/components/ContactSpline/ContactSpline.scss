@@ -1,20 +1,31 @@
 .contact-spline-wrapper {
-    // This is the 3D MODEL on the RIGHT
-    position: absolute;
-    flex: 0 0 45%; 
-    height: 100vh; 
-    width: 90vh;
-    z-index: 1; 
-    transform: scale(0.9);
-    padding-bottom: 70px;
-    // 1. THIS FIXES SCROLLING (and breaks hover, as you agreed)
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-
-    // --- 2. THIS IS THE NEW TRICK TO HIDE THE LOGO ---
-    //
-    // This "crops" the container from the bottom up.
-    // We are cropping 50px off the bottom. 
-    // You can change "50px" to "60px" or "40px"
-    // until the logo is perfectly gone.
-    clip-path: inset(0 0 125px 0); 
+  .tech-illustration {
+    width: 100%;
+    max-width: 500px; // Adjust based on preference
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 20px rgba(255, 165, 0, 0.3)); // Orange glow
+    animation: float 6s ease-in-out infinite;
   }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}

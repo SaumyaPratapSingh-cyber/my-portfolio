@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect } from "react";
 import Hero from "../components/Hero/Hero.jsx";
+import Navbar from "../components/navbar/Navbar.jsx";
 import About from "./About.jsx";
 import Experience from "./Experience.jsx";
 import Skills from "./Skills.jsx";
@@ -20,11 +21,12 @@ const Home = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollTo(0, 0);
     }
-  }, []); 
+  }, []);
 
   return (
     // This div is your main scrolling viewport (position: relative is in Pages.scss)
     <div className="home-container" ref={scrollContainerRef}>
+      <Navbar />
       <section id="home">
         <Hero />
       </section>
