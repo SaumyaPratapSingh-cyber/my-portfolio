@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
+import { useRef, useState, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import "./pages.scss";
-import ContactSpline from "../components/ContactSpline/ContactSpline.jsx"; // 1. Import Spline
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner.jsx";
+
+const ContactSpline = lazy(() => import("../components/ContactSpline/ContactSpline.jsx"));
 
 const Contact = () => {
   const formRef = useRef();
@@ -22,7 +24,7 @@ const Contact = () => {
       .then(
         (result) => {
           setFormState({ error: false, success: true, message: "Message sent successfully!" });
-          formRef.current.reset(); 
+          formRef.current.reset();
         },
         (error) => {
           setFormState({ error: true, success: false, message: "Failed to send message. Please try again." });
@@ -31,29 +33,31 @@ const Contact = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       className="page contact-page"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
       <div className="wrapper">
-        
+
         {/* --- LEFT COLUMN (1fr): SPLINE MODEL --- */}
-        <motion.div 
-          className="contact-model-left" // This will be the left column
+        <motion.div
+          className="contact-model-left"
           initial={{ x: -100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
         >
           <div className="contact-scene-wrapper">
-            <ContactSpline />
+            <Suspense fallback={<LoadingSpinner message="Loading 3D Model..." />}>
+              <ContactSpline />
+            </Suspense>
           </div>
         </motion.div>
-        
+
         {/* --- RIGHT COLUMN (1.2fr): ALL CONTENT --- */}
-        <motion.div 
-          className="contact-content-right" // This will be the right column
+        <motion.div
+          className="contact-content-right"
           initial={{ x: 100, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true }}
@@ -63,7 +67,7 @@ const Contact = () => {
           <div className="contact-text-details">
             <h1>Get in <span>Touch</span></h1>
             <p>I'm currently open to new opportunities and collaborations. My inbox is always open, so feel free to reach out!</p>
-            
+
             <div className="contact-details">
               <p><strong>Email:</strong> <span>saumyrajpoot666@gmail.com</span></p>
               <p><strong>Location:</strong> <span>Prayagraj, Uttar Pradesh, India</span></p>
@@ -71,7 +75,7 @@ const Contact = () => {
           </div>
 
           {/* 2. FORM */}
-          <form 
+          <form
             ref={formRef}
             onSubmit={sendEmail}
             className="contact-form"

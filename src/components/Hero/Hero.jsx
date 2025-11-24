@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import Spline from "@splinetool/react-spline";
-import { Suspense } from "react"; // <-- Keep this
+import { lazy, Suspense } from "react";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 import "./hero.scss";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const Hero = () => {
   const containerVariants = {
@@ -16,13 +18,10 @@ const Hero = () => {
   };
 
   return (
-    <div className="hero"> 
-
-      
-
+    <div className="hero">
       {/* --- LAYER 2: TEXT (FOREGROUND) --- */}
       <div className="hero-content">
-        <motion.div 
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -45,13 +44,13 @@ const Hero = () => {
           </motion.div>
         </motion.div>
       </div>
+
       {/* --- LAYER 1: 3D SCENE (BACKGROUND) --- */}
       <div className="spline-scene">
-        <Suspense fallback={<div>Loading 3D...</div>}>
+        <Suspense fallback={<LoadingSpinner message="Loading 3D Scene..." />}>
           <Spline scene="https://prod.spline.design/9A9d16rY7cJkg6ld/scene.splinecode" />
         </Suspense>
       </div>
-      
     </div>
   );
 };

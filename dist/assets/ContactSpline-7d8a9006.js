@@ -1,0 +1,1 @@
+import{j as t}from"./index-145a046f.js";function i(){return t.jsx("div",{className:"contact-spline-wrapper",children:t.jsx("img",{src:"/tech_vector_illustration.png",alt:"Futuristic Tech Illustration",className:"tech-illustration"})})}export{i as default};
