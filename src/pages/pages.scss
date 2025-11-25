@@ -5,9 +5,9 @@
   overflow-y: scroll;
   scroll-behavior: smooth;
   background-color: transparent;
-  
+
   // This fixes the console warning
-  position: relative; 
+  position: relative;
 
   section {
     min-height: 100vh;
@@ -15,9 +15,9 @@
     align-items: center;
     justify-content: center;
     scroll-snap-align: start;
-    
+
     // This removes the "black border" and fixes layout
-    padding: 0; 
+    padding: 0;
   }
 }
 
@@ -36,14 +36,17 @@
     max-width: 1366px;
     width: 100%;
     text-align: center;
+
     h1 {
       font-size: 64px;
       font-weight: 200;
       margin-bottom: 20px;
+
       span {
         color: orange;
       }
     }
+
     .page-intro {
       font-size: 18px;
       color: #a0a0a0;
@@ -73,9 +76,11 @@
     color: $hover-color;
   }
 }
+
 .primary {
   @include button-style(orange, black, orange, #ffc966, black);
 }
+
 .secondary {
   @include button-style(transparent, white, white, white, black);
 }
@@ -95,14 +100,14 @@
     gap: 80px;
     align-items: flex-start;
     text-align: left;
-    padding-top: 50px; 
+    padding-top: 50px;
   }
 
   // This is the container for the image column
   .about-image-container {
     width: 100%;
-    max-width: 400px; 
-    margin: 0 auto; 
+    max-width: 400px;
+    margin: 0 auto;
     position: relative; // For the canvas
 
     // --- STYLES FOR THE NEW LIQUID EFFECT ---
@@ -110,14 +115,14 @@
       width: 100%;
       position: relative;
       z-index: 10; // On top of the canvas
-      
+
       .tile__figure {
         margin: 0;
         width: 100%;
-        border-radius: 20px; 
+        border-radius: 20px;
         overflow: hidden;
       }
-      
+
       .tile__image {
         max-width: 100%;
         width: 100%;
@@ -146,27 +151,32 @@
       font-size: 64px;
       font-weight: 200;
       margin-bottom: 20px;
-      span { color: orange; }
+
+      span {
+        color: orange;
+      }
     }
+
     .summary-text {
       font-size: 18px;
       color: #d3d3d3;
       margin-bottom: 40px;
       line-height: 1.8;
     }
+
     .timeline-title {
       font-size: 36px;
       color: orange;
       margin-bottom: 20px;
-      margin-top: 40px; 
+      margin-top: 40px;
     }
   }
 
   // Academic Background Timeline
   .timeline {
     position: relative;
-    max-width: 800px; 
-    margin: 50px auto 0 auto; 
+    max-width: 800px;
+    margin: 50px auto 0 auto;
     padding: 20px 0;
 
     &::before {
@@ -179,12 +189,13 @@
       background: #222;
       border-radius: 2px;
     }
+
     .timeline-item {
       margin-bottom: 40px;
       position: relative;
       padding-left: 50px;
-      
-      .timeline-dot { 
+
+      .timeline-dot {
         position: absolute;
         left: 0;
         top: 5px;
@@ -194,24 +205,28 @@
         background: orange;
         border-radius: 50%;
       }
+
       .timeline-content {
         h3 {
           font-size: 22px;
           color: orange;
           margin-bottom: 5px;
         }
+
         .institution {
           font-size: 18px;
           color: white;
           font-weight: 500;
           margin-bottom: 5px;
         }
+
         .duration {
           font-size: 14px;
           color: #888;
           margin-bottom: 10px;
           font-style: italic;
         }
+
         .desc {
           font-size: 16px;
           line-height: 1.7;
@@ -224,7 +239,7 @@
 
 // -------------------- SKILLS PAGE (CLIP-PATH GALLERY) --------------------
 .skills-page {
-  
+
   // These are your original, working category styles
   .skill-categories {
     width: 100%;
@@ -232,13 +247,13 @@
     flex-direction: column;
     gap: 80px;
   }
-  
+
   .skill-category {
     border: 1px solid #222;
     background: #050505;
     border-radius: 20px;
     padding: 40px;
-    
+
     h2 {
       font-size: 32px;
       font-weight: 300;
@@ -259,7 +274,7 @@
     margin-bottom: 30px;
 
     // This fades out the other icons on hover
-    &:hover > .skill-icon-wrapper {
+    &:hover>.skill-icon-wrapper {
       filter: brightness(0.5) saturate(0.5);
     }
   }
@@ -271,11 +286,10 @@
     background: rgba(255, 255, 255, 0.05);
     border-radius: 0.5rem;
     cursor: pointer;
-    
+
     // The "blob" shape
-    clip-path: path(
-      "M 80 20 C 100 0 100 0 120 20 C 140 40 160 60 180 80 C 200 100 200 100 180 120 C 160 140 140 160 120 180 C 100 200 100 200 80 180 C 60 160 40 140 20 120 C 0 100 0 100 20 80 Z"
-    );
+    clip-path: path("M 80 20 C 100 0 100 0 120 20 C 140 40 160 60 180 80 C 200 100 200 100 180 120 C 160 140 140 160 120 180 C 100 200 100 200 80 180 C 60 160 40 140 20 120 C 0 100 0 100 20 80 Z"
+      );
     transition: filter 500ms, clip-path 500ms, background 500ms;
 
     // This is the logo *inside* the wrapper
@@ -284,7 +298,7 @@
       height: 100%;
       object-fit: contain; // This will NOT cut off your logo
       padding: 20px; // Give the logo space inside the blob
-      
+
       // Fix z-index issue during animation
       &:not(:hover) {
         animation: zIndexFix 500ms;
@@ -298,9 +312,8 @@
       background: rgba(255, 255, 255, 0.1);
 
       // The "square" shape on hover
-      clip-path: path(
-        "M 0 0 C 100 0 100 0 200 0 C 200 50 200 50 200 80 C 200 100 200 100 200 120 C 200 150 200 150 200 200 C 100 200 100 200 0 200 C 0 150 0 150 0 120 C 0 100 0 100 0 80 Z"
-      );
+      clip-path: path("M 0 0 C 100 0 100 0 200 0 C 200 50 200 50 200 80 C 200 100 200 100 200 120 C 200 150 200 150 200 200 C 100 200 100 200 0 200 C 0 150 0 150 0 120 C 0 100 0 100 0 80 Z"
+        );
     }
   }
 
@@ -311,6 +324,7 @@
     justify-content: center;
     gap: 15px;
   }
+
   .tag {
     background: #1a1a1a;
     border: 1px solid #333;
@@ -326,12 +340,15 @@
     .skill-categories {
       gap: 40px;
     }
+
     .skill-category {
       padding: 30px;
     }
+
     .skill-icon-wrapper {
       width: 90px; // Smaller icons on mobile
       height: 90px;
+
       img {
         padding: 15px;
       }
@@ -342,6 +359,7 @@
 // --- GLOBAL KEYFRAMES ---
 // (This must be at the end of the file)
 @keyframes zIndexFix {
+
   0%,
   100% {
     z-index: 10;
@@ -362,7 +380,7 @@
 
 // -------------------- SKILLS PAGE (ORBITAL CAROUSEL) --------------------
 .skills-page {
-  
+
   // Make the wrapper relative to position the orbiter
   .wrapper {
     position: relative;
@@ -370,7 +388,7 @@
     flex-direction: column;
     align-items: center;
     // We need to give it a defined height for the orbiter
-    min-height: 800px; 
+    min-height: 800px;
     padding-bottom: 100px;
   }
 
@@ -404,7 +422,7 @@
     align-items: center;
     z-index: 50;
     box-shadow: 0 0 20px 0 var(--accent-color);
-    
+
     .center-text {
       font-size: 24px;
       font-weight: 700;
@@ -441,19 +459,19 @@
   .skill-icon {
     position: absolute;
     // We center the icon on its (x, y) coordinate
-    top: 50%; 
+    top: 50%;
     left: 50%;
     width: 80px;
     height: 80px;
     margin-left: -40px; // half of width
-    margin-top: -40px;  // half of height
-    
+    margin-top: -40px; // half of height
+
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 50%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -521,27 +539,31 @@
 
 // -------------------- PROJECTS PAGE (3D CAROUSEL) --------------------
 .projects-page {
-  padding: 0; 
+  padding: 0;
+
   .wrapper {
     max-width: none;
     padding: 0;
   }
+
   .main-container {
     display: flex;
     width: 100%;
-    max-width: 1366px; 
-    height: 100vh; 
+    max-width: 1366px;
+    height: 100vh;
     gap: 60px;
     align-items: center;
     justify-content: center;
-    padding: 0 50px; 
+    padding: 0 50px;
   }
+
   .carousel-section {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .controls-section {
     flex: 1;
     display: flex;
@@ -551,6 +573,7 @@
     gap: 40px;
     padding-left: 40px;
   }
+
   .carousel-container {
     width: 100%;
     max-width: 500px;
@@ -560,10 +583,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     .nav-arrow {
       display: none;
     }
   }
+
   .carousel-track {
     width: 450px;
     height: 100%;
@@ -575,55 +600,65 @@
     transform-style: preserve-3d;
     transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
+
   .card {
     position: absolute;
     width: 400px;
-    height: 225px; 
+    height: 225px;
     background: #111;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      filter: grayscale(100%); 
+      filter: grayscale(100%);
     }
   }
+
   .card.center {
     z-index: 10;
     transform: scale(1.1) translateZ(0);
+
     img {
-      filter: none; 
+      filter: none;
     }
   }
+
   .card.up-2 {
     z-index: 1;
     transform: translateY(-300px) scale(0.8) translateZ(-300px);
     opacity: 0.7;
   }
+
   .card.up-1 {
     z-index: 5;
     transform: translateY(-150px) scale(0.9) translateZ(-100px);
     opacity: 0.9;
   }
+
   .card.down-1 {
     z-index: 5;
     transform: translateY(150px) scale(0.9) translateZ(-100px);
     opacity: 0.9;
   }
+
   .card.down-2 {
     z-index: 1;
     transform: translateY(300px) scale(0.8) translateZ(-300px);
     opacity: 0.7;
   }
+
   .card.hidden {
     opacity: 0;
     pointer-events: none;
   }
+
   .project-info {
     text-align: center;
     transition: all 0.5s ease-out;
@@ -637,11 +672,12 @@
     background-image: url("/projectbg.png"); // <-- Your image path
     background-size: cover;
     background-position: center;
-    border: 1px solid #222; 
+    border: 1px solid #222;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 
     // Dark overlay for text readability
     position: relative;
+
     &::before {
       content: '';
       position: absolute;
@@ -655,18 +691,20 @@
     }
 
     // Push all text content to render above the overlay
-    > * {
+    >* {
       position: relative;
       z-index: 2;
     }
+
     // --- END OF BACKGROUND FIX ---
 
     .project-name {
-      color: var(--accent-color); 
+      color: var(--accent-color);
       font-size: 2.2rem;
       font-weight: 700;
       margin-bottom: 20px;
       flex-shrink: 0;
+
       &::after {
         content: "";
         position: absolute;
@@ -687,179 +725,210 @@
       overflow-y: auto; // Keep scrollable description
       flex-grow: 1;
     }
-    
+
     // ... (rest of the styles are the same)
   }
-    .project-desc {
-      color: var(--text-primary);
-      font-size: 1.1rem;
-      line-height: 1.6;
-      opacity: 0.9;
-      margin-bottom: 25px;
-      max-width: 500px;
-      overflow-y: auto;
-      flex-grow: 1;
-    }
-    .tech-tags {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 30px;
-      flex-shrink: 0;
-      span {
-        background: #222;
-        padding: 5px 12px;
-        border-radius: 5px;
-        font-size: 14px;
-      }
-    }
-    .project-links {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      align-items: center;
-      flex-shrink: 0;
-      a {
-        text-decoration: none;
-        font-weight: 500;
-        font-size: 15px;
-        padding: 10px 20px;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .primary-link {
-        @include button-style(orange, black, orange, #ffc966, black);
-      }
-      .secondary-link {
-        @include button-style(transparent, white, white, white, black);
-        img {
-          width: 18px;
-          height: 18px;
-        }
-      }
-    }
+
+  .project-desc {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 25px;
+    max-width: 500px;
+    overflow-y: auto;
+    flex-grow: 1;
   }
-  .dots {
+
+  .tech-tags {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-    margin-top: 30px;
+    margin-bottom: 30px;
+    flex-shrink: 0;
+
+    span {
+      background: #222;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
   }
-  .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .dot.active {
-    background: var(--accent-color);
-    transform: scale(1.2);
-  }
-  .nav-arrow {
-    position: relative;
-    background: transparent;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+
+  .project-links {
     display: flex;
-    align-items: center;
+    gap: 15px;
     justify-content: center;
-    cursor: pointer;
-    z-index: 20;
-    transition: all 0.3s ease;
-    border: none;
-    outline: none;
+    align-items: center;
+    flex-shrink: 0;
+
+    a {
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .primary-link {
+      @include button-style(orange, black, orange, #ffc966, black);
+    }
+
+    .secondary-link {
+      @include button-style(transparent, white, white, white, black);
+
+      img {
+        width: 18px;
+        height: 18px;
+      }
+    }
   }
-  .nav-arrow:hover {
-    transform: scale(1.2);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: var(--accent-color);
+  transform: scale(1.2);
+}
+
+.nav-arrow {
+  position: relative;
+  background: transparent;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+.nav-arrow:hover {
+  transform: scale(1.2);
+}
+
+.nav-arrow img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: none;
+  transition: all 0.3s ease;
+}
+
+.nav-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    gap: 20px;
+    padding: 0 20px;
   }
-  .nav-arrow img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    filter: none;
-    transition: all 0.3s ease;
+
+  .carousel-section {
+    flex: none;
+    width: 100%;
   }
+
+  .controls-section {
+    flex: none;
+    width: 100%;
+    padding-left: 0;
+    gap: 20px;
+  }
+
+  .carousel-container {
+    height: 60vh;
+    max-width: 350px;
+
+    .nav-arrow {
+      display: flex;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 70px;
+
+      &.up {
+        top: 20px;
+      }
+
+      &.down {
+        bottom: 20px;
+      }
+    }
+  }
+
   .nav-controls {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-    align-items: center;
-    justify-content: center;
+    display: none;
   }
-  @media (max-width: 768px) {
-    .main-container {
-      flex-direction: column;
-      height: auto;
-      min-height: 100vh;
-      gap: 20px;
-      padding: 0 20px;
+
+  .card {
+    width: 320px;
+    height: 180px;
+  }
+
+  .carousel-track {
+    width: 350px;
+  }
+
+  .card.up-2 {
+    transform: translateY(-160px) scale(0.8) translateZ(-300px);
+  }
+
+  .card.up-1 {
+    transform: translateY(-80px) scale(0.9) translateZ(-100px);
+  }
+
+  .card.down-1 {
+    transform: translateY(80px) scale(0.9) translateZ(-100px);
+  }
+
+  .card.down-2 {
+    transform: translateY(160px) scale(0.8) translateZ(-300px);
+  }
+
+  .project-info {
+    .project-name {
+      font-size: 1.8rem;
     }
-    .carousel-section {
-      flex: none;
-      width: 100%;
-    }
-    .controls-section {
-      flex: none;
-      width: 100%;
-      padding-left: 0;
-      gap: 20px;
-    }
-    .carousel-container {
-      height: 60vh;
-      max-width: 350px;
-      .nav-arrow {
-        display: flex;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 70px;
-        height: 70px;
-        &.up {
-          top: 20px;
-        }
-        &.down {
-          bottom: 20px;
-        }
-      }
-    }
-    .nav-controls {
-      display: none;
-    }
-    .card {
-      width: 320px;
-      height: 180px;
-    }
-    .carousel-track {
-      width: 350px;
-    }
-    .card.up-2 {
-      transform: translateY(-160px) scale(0.8) translateZ(-300px);
-    }
-    .card.up-1 {
-      transform: translateY(-80px) scale(0.9) translateZ(-100px);
-    }
-    .card.down-1 {
-      transform: translateY(80px) scale(0.9) translateZ(-100px);
-    }
-    .card.down-2 {
-      transform: translateY(160px) scale(0.8) translateZ(-300px);
-    }
-    .project-info {
-      .project-name {
-        font-size: 1.8rem;
-      }
-      .project-desc {
-        font-size: 1rem;
-      }
+
+    .project-desc {
+      font-size: 1rem;
     }
   }
+}
 
 
 
@@ -897,12 +966,12 @@
   gap: 80px;
   align-items: center;
   text-align: left;
-  
+
   // --- LEFT COLUMN: MODEL ---
   .contact-model-left {
     position: relative;
     height: 100%;
-    
+
     .contact-scene-wrapper {
       width: 100%;
       height: 500px; // Gives the model a fixed size
@@ -914,28 +983,38 @@
   .contact-content-right {
     display: flex;
     flex-direction: column;
-    gap: 40px; 
+    gap: 40px;
   }
 
   // 1. Text Details Block (within the right column)
   .contact-text-details {
     display: flex;
     flex-direction: column;
-    gap: 15px; 
+    gap: 15px;
 
-    h1 { 
-      margin-bottom: 0; 
-      font-size: 56px; /* Adjusted size */
+    h1 {
+      margin-bottom: 0;
+      font-size: 56px;
+      /* Adjusted size */
     }
-    p { 
-      font-size: 16px; 
-      line-height: 1.6; 
-      color: #d3d3d3; 
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #d3d3d3;
     }
-    
+
     .contact-details {
       margin-top: 10px;
-      p { font-size: 16px; strong { color: orange; margin-right: 10px; } }
+
+      p {
+        font-size: 16px;
+
+        strong {
+          color: orange;
+          margin-right: 10px;
+        }
+      }
     }
   }
 
@@ -944,25 +1023,70 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    
-    input, textarea {
+
+    input,
+    textarea {
       background: #111;
       border: 1px solid #333;
       padding: 18px;
       border-radius: 8px;
       color: white;
       font-size: 16px;
+
       &:focus {
         outline: none;
         border-color: orange;
       }
     }
+
     button {
       align-self: flex-start;
     }
   }
 }
 
+// -------------------- CONTACT PAGE --------------------
+.contact-page .wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 80px;
+  align-items: center;
+  text-align: left;
+
+  .contact-model-left {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .contact-scene-wrapper {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .contact-video {
+        width: 100%;
+        height: 100%;
+        max-height: 600px;
+        object-fit: cover;
+        border-radius: 30px;
+        border: 3px solid #FFFF00;
+        box-shadow: 0 0 20px rgba(255, 255, 0, 0.2);
+      }
+    }
+  }
+
+  .contact-content-right {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+}
 
 
 
@@ -988,7 +1112,7 @@
   // 1. REMOVE all horizontal padding from the page
   padding-left: 0;
   padding-right: 0;
-  
+
   // 2. Add padding back to the header text
   .wrapper {
     padding-left: 50px;
@@ -998,8 +1122,18 @@
   .header-section {
     text-align: center;
     margin-bottom: 80px;
-    h1 { font-size: 72px; margin-bottom: 15px; }
-    p { font-size: 20px; color: #a0a0a0; max-width: 800px; margin: 0 auto; }
+
+    h1 {
+      font-size: 72px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 20px;
+      color: #a0a0a0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
   }
 
   // --- 3D PERSPECTIVE CAROUSEL STYLES ---
@@ -1010,18 +1144,21 @@
     flex-direction: row;
     width: 100%;
     max-width: 1366px; // Constrain to site width
-    margin: 0 auto;     // Center it
+    margin: 0 auto; // Center it
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x mandatory; 
+    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    
+
     // This creates the 3D "look"
-    perspective: 800px; 
-    
+    perspective: 800px;
+
     // Hide scrollbar
     scrollbar-width: none;
-    &::-webkit-scrollbar { display: none; }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     // Add a focus ring (your accent color) for keyboard nav
     &:focus {
@@ -1043,13 +1180,13 @@
   // Find this rule inside .experience-page
   .timeline-card {
     width: 100%;
-    height: 450px; 
+    height: 450px;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     background-size: cover;
     background-position: center;
-    position: relative; 
-    overflow: hidden; 
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     padding: 24px; // Keep the padding
@@ -1057,54 +1194,59 @@
     // REMOVE all the .card-overlay rules. We don't need them.
 
     // --- NEW DARK TEXT STYLES ---
-    h3 { 
-      font-size: 22px; 
+    h3 {
+      font-size: 22px;
       color: #111111; // Dark heading
-      font-weight: 700; 
-      margin-bottom: 5px; 
+      font-weight: 700;
+      margin-bottom: 5px;
       flex-shrink: 0;
     }
-    .company { 
-      font-size: 18px; 
+
+    .company {
+      font-size: 18px;
       color: #333333; // Dark grey
-      font-weight: 500; 
-      margin-bottom: 5px; 
+      font-weight: 500;
+      margin-bottom: 5px;
       flex-shrink: 0;
     }
-    .duration { 
-      font-size: 14px; 
+
+    .duration {
+      font-size: 14px;
       color: #555555; // Medium dark grey
-      margin-bottom: 15px; 
-      font-style: italic; 
+      margin-bottom: 15px;
+      font-style: italic;
       flex-shrink: 0;
     }
-    .desc { 
-      font-size: 16px; 
-      line-height: 1.6; 
+
+    .desc {
+      font-size: 16px;
+      line-height: 1.6;
       color: #444444; // Dark text
-      overflow-y: auto; 
+      overflow-y: auto;
       flex-grow: 1;
       margin-bottom: 15px;
     }
+
     .certificate-link {
       display: inline-block;
-      margin-top: auto; 
-      font-size: 15px; 
-      font-weight: 600; 
+      margin-top: auto;
+      font-size: 15px;
+      font-weight: 600;
       color: #000000; // Black
       text-decoration: none;
       border: 1px solid #222222; // Dark border
-      padding: 8px 12px; 
+      padding: 8px 12px;
       border-radius: 5px;
       transition: background-color 0.3s, color 0.3s;
       flex-shrink: 0;
+
       &:hover {
         background-color: #000000;
         color: #FFFFFF;
       }
     }
   }
-  
+
   // 6. Spacers to center the first and last items
   .carousel-spacer {
     // THIS IS THE FIX for the horizontal scrollbar
@@ -1115,11 +1257,11 @@
   // Mobile fallback
   @media (max-width: 768px) {
     .carousel-container {
-      perspective: none; 
+      perspective: none;
     }
-    
+
     .carousel-item-wrapper {
-      flex: 0 0 300px; 
+      flex: 0 0 300px;
       padding: 0 10px;
     }
 
@@ -1151,8 +1293,8 @@
 
 // -------------------- RESUME PAGE --------------------
 .resume-page {
-  padding: 50px; 
-  justify-content: center; 
+  padding: 50px;
+  justify-content: center;
   align-items: center;
   position: relative;
   background-color: #0c0c1d; // Dark background fallback
@@ -1167,7 +1309,7 @@
     width: 100vw;
     height: 100vh;
     object-fit: cover; // Ensures video covers the whole screen
-    z-index: 0; 
+    z-index: 0;
     pointer-events: none; // Cannot be interacted with
 
     // ADD A DARK OVERLAY FOR READABILITY
@@ -1183,7 +1325,7 @@
   }
 
   // --- OLD GRADIENT AND KEYFRAMES ARE REMOVED ---
-  
+
   .wrapper {
     z-index: 1; // Content must be on top of the video
     display: flex;
@@ -1199,9 +1341,17 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
-    
-    h1 { font-size: 36px; margin: 0; font-weight: 300; span { color: var(--accent-color); } }
-    
+
+    h1 {
+      font-size: 36px;
+      margin: 0;
+      font-weight: 300;
+
+      span {
+        color: var(--accent-color);
+      }
+    }
+
     .header-links {
       display: flex;
       align-items: center;
@@ -1211,13 +1361,21 @@
     .social-links {
       display: flex;
       gap: 15px;
+
       a {
         transition: transform 0.3s ease;
-        &:hover { transform: scale(1.1); }
-        img { width: 50px; height: 50px; }
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        img {
+          width: 50px;
+          height: 50px;
+        }
       }
     }
-    
+
     .download-button {
       padding: 15px 15px;
       font-size: 30px;
@@ -1229,10 +1387,15 @@
     max-width: 900px;
     border-radius: 10px;
     // We keep the box shadow simple
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2); 
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
     border: 5px solid #000000;
     line-height: 0;
-    img { width: 100%; height: auto; border-radius: 10px; }
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
   }
 }
 
@@ -1273,6 +1436,7 @@
   flex-direction: column;
   gap: 25px;
   z-index: 100;
+
   a {
     img {
       width: 40px;
@@ -1280,6 +1444,7 @@
       opacity: 0.8;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
+
     &:hover img {
       transform: scale(1.2);
       opacity: 1;
@@ -1299,24 +1464,28 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
+
 // ==================== COMPREHENSIVE RESPONSIVE STYLES ====================
 
 // --- GLOBAL / LAYOUT RESPONSIVE ---
 @media (max-width: 1024px) {
   .page {
     padding: 120px 30px 30px 30px;
-    
+
     .wrapper {
       h1 {
         font-size: 48px;
       }
+
       .page-intro {
         font-size: 16px;
       }
@@ -1327,18 +1496,20 @@
 @media (max-width: 768px) {
   .page {
     padding: 100px 20px 30px 20px;
-    
+
     .wrapper {
       h1 {
         font-size: 36px;
       }
+
       .page-intro {
         font-size: 15px;
       }
     }
   }
 
-  .primary, .secondary {
+  .primary,
+  .secondary {
     padding: 12px 24px;
     font-size: 14px;
   }
@@ -1347,11 +1518,12 @@
 @media (max-width: 480px) {
   .page {
     padding: 80px 15px 20px 15px;
-    
+
     .wrapper {
       h1 {
         font-size: 28px;
       }
+
       .page-intro {
         font-size: 14px;
       }
@@ -1376,9 +1548,11 @@
       h1 {
         font-size: 48px;
       }
+
       .summary-text {
         font-size: 16px;
       }
+
       .timeline-title {
         font-size: 28px;
       }
@@ -1400,9 +1574,11 @@
       h1 {
         font-size: 36px;
       }
+
       .summary-text {
         font-size: 15px;
       }
+
       .timeline-title {
         font-size: 24px;
       }
@@ -1411,22 +1587,25 @@
     .timeline {
       .timeline-item {
         padding-left: 35px;
-        
+
         .timeline-dot {
           height: 20px;
           width: 20px;
         }
-        
+
         .timeline-content {
           h3 {
             font-size: 18px;
           }
+
           .institution {
             font-size: 16px;
           }
+
           .duration {
             font-size: 13px;
           }
+
           .desc {
             font-size: 14px;
           }
@@ -1444,6 +1623,7 @@
 
     .contact-model-left {
       order: 2;
+
       .contact-scene-wrapper {
         height: 400px;
       }
@@ -1457,6 +1637,7 @@
       h1 {
         font-size: 42px;
       }
+
       p {
         font-size: 15px;
       }
@@ -1476,16 +1657,20 @@
       h1 {
         font-size: 32px;
       }
+
       p {
         font-size: 14px;
       }
+
       .contact-details p {
         font-size: 14px;
       }
     }
 
     .contact-form {
-      input, textarea {
+
+      input,
+      textarea {
         padding: 14px;
         font-size: 14px;
       }
@@ -1503,9 +1688,11 @@
 
     .header-section {
       margin-bottom: 60px;
+
       h1 {
         font-size: 56px;
       }
+
       p {
         font-size: 18px;
       }
@@ -1530,9 +1717,11 @@
 
     .header-section {
       margin-bottom: 40px;
+
       h1 {
         font-size: 42px;
       }
+
       p {
         font-size: 16px;
       }
@@ -1545,15 +1734,19 @@
       h3 {
         font-size: 20px;
       }
+
       .company {
         font-size: 16px;
       }
+
       .duration {
         font-size: 13px;
       }
+
       .desc {
         font-size: 14px;
       }
+
       .certificate-link {
         font-size: 14px;
         padding: 6px 10px;
@@ -1573,6 +1766,7 @@
     .center-logo {
       width: 100px;
       height: 100px;
+
       .center-text {
         font-size: 20px;
       }
@@ -1607,6 +1801,7 @@
     .center-logo {
       width: 80px;
       height: 80px;
+
       .center-text {
         font-size: 16px;
       }
@@ -1646,6 +1841,7 @@
     .center-logo {
       width: 60px;
       height: 60px;
+
       .center-text {
         font-size: 14px;
       }

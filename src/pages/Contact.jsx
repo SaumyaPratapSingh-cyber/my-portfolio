@@ -4,7 +4,7 @@ import emailjs from "@emailjs/browser";
 import "./pages.scss";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner.jsx";
 
-const ContactSpline = lazy(() => import("../components/ContactSpline/ContactSpline.jsx"));
+// const ContactSpline = lazy(() => import("../components/ContactSpline/ContactSpline.jsx"));
 
 const Contact = () => {
   const formRef = useRef();
@@ -41,7 +41,7 @@ const Contact = () => {
     >
       <div className="wrapper">
 
-        {/* --- LEFT COLUMN (1fr): SPLINE MODEL --- */}
+        {/* --- LEFT COLUMN (1fr): VIDEO --- */}
         <motion.div
           className="contact-model-left"
           initial={{ x: -100, opacity: 0 }}
@@ -49,9 +49,14 @@ const Contact = () => {
           viewport={{ once: true }}
         >
           <div className="contact-scene-wrapper">
-            <Suspense fallback={<LoadingSpinner message="Loading 3D Model..." />}>
-              <ContactSpline />
-            </Suspense>
+            <video
+              src="/ribok.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="contact-video"
+            />
           </div>
         </motion.div>
 
