@@ -2,8 +2,6 @@ import { useRef, useState, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import "./pages.scss";
-import "./contact-video.css";
-import "./overflow-fix.css";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner.jsx";
 
 // const ContactSpline = lazy(() => import("../components/ContactSpline/ContactSpline.jsx"));
