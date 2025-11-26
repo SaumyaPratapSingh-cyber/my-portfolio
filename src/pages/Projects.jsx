@@ -1,22 +1,23 @@
 import { motion, useInView } from "framer-motion"; // 1. Import useInView
 import { useState, useEffect, useRef, useCallback } from "react"; // 2. Import useCallback
 import "./pages.scss";
-import { projects } from "../constants"; 
+import "./projects-scrollbar-fix.css";
+import { projects } from "../constants";
 
 const Projects = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  
+
   // 3. This ref will be attached to the main project page
   const pageRef = useRef(null);
-  
+
   // 4. This hook will be true when 50% of the page is visible
   const isInView = useInView(pageRef, { amount: 0.5 });
-  
+
   // 5. We wrap our functions in useCallback for stability
   const updateCarousel = useCallback((newIndex) => {
     // Don't do anything if we are already animating
-    if (isAnimating) return; 
+    if (isAnimating) return;
     setIsAnimating(true);
 
     const nextIndex = (newIndex + projects.length) % projects.length;
@@ -25,7 +26,7 @@ const Projects = () => {
     // After 800ms (the CSS animation time), allow animating again
     setTimeout(() => {
       setIsAnimating(false);
-    }, 800); 
+    }, 800);
   }, [isAnimating, projects.length]); // Dependencies
 
   const handleKeydown = useCallback((e) => {
@@ -48,105 +49,116 @@ const Projects = () => {
       document.removeEventListener("keydown", handleKeydown);
     }
 
-    // Cleanup: always remove the listener when the component unmounts
+    // Cleanup function to remove listener when component unmounts
     return () => {
       document.removeEventListener("keydown", handleKeydown);
     };
-  }, [isInView, handleKeydown]); // Run this logic whenever isInView or the function changes
+  }, [isInView, handleKeydown]); // Dependencies
 
-  
   const getCardClass = (index) => {
-    const offset = (index - currentIndex + projects.length) % projects.length;
-    
-    if (offset === 0) return "center";
-    if (offset === 1) return "down-1";
-    if (offset === 2) return "down-2";
-    if (offset === projects.length - 1) return "up-1";
-    if (offset === projects.length - 2) return "up-2";
+    const diff = index - currentIndex;
+    const totalCards = projects.length;
+
+    // Normalize the difference to be within -totalCards/2 to +totalCards/2
+    const normalizedDiff = ((diff + totalCards / 2) % totalCards) - totalCards / 2;
+
+    if (normalizedDiff === 0) return "active";
+    if (normalizedDiff === 1 || normalizedDiff === -(totalCards - 1)) return "down-1";
+    if (normalizedDiff === 2 || normalizedDiff === -(totalCards - 2)) return "down-2";
+    if (normalizedDiff === -1 || normalizedDiff === totalCards - 1) return "up-1";
+    if (normalizedDiff === -2 || normalizedDiff === totalCards - 2) return "up-2";
     return "hidden";
   };
-  
-  const activeProject = projects[currentIndex] || {};
 
   return (
-    <motion.div
-      className="page projects-page"
-      ref={pageRef} // 7. Attach the ref to the main element
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <section className="page projects-page" ref={pageRef}>
       <div className="main-container">
-        
-        {/* --- LEFT SIDE: CAROUSEL --- */}
         <div className="carousel-section">
-          {/* ... (no changes to the carousel HTML) ... */}
           <div className="carousel-container">
-            <button className="nav-arrow up" onClick={() => updateCarousel(currentIndex - 1)}>
-              <img src="https://ik.imagekit.io/gopichakradhar/icons/top.png?updatedAt=1754290522765" alt="Up" />
+            <button
+              className="nav-arrow up"
+              onClick={() => updateCarousel(currentIndex - 1)}
+              aria-label="Previous project"
+            >
+              <img src="/arrow.svg" alt="Up" />
             </button>
+
             <div className="carousel-track">
               {projects.map((project, index) => (
-                <div
+                <motion.div
+                  key={index}
                   className={`card ${getCardClass(index)}`}
-                  key={project.id}
-                  data-index={index}
-                  onClick={() => updateCarousel(index)}
+                  style={{
+                    backgroundImage: `url(${project.image})`,
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <img src={project.img} alt={project.title} />
-                </div>
+                  {/* Empty card, background is set via inline style */}
+                </motion.div>
               ))}
             </div>
-            <button className="nav-arrow down" onClick={() => updateCarousel(currentIndex + 1)}>
-              <img src="https://ik.imagekit.io/gopichakradhar/icons/down.png?updatedAt=1754290523249" alt="Down" />
+
+            <button
+              className="nav-arrow down"
+              onClick={() => updateCarousel(currentIndex + 1)}
+              aria-label="Next project"
+            >
+              <img src="/arrow.svg" alt="Down" />
             </button>
           </div>
         </div>
 
-        {/* --- RIGHT SIDE: PROJECT INFO --- */}
         <div className="controls-section">
-          {/* ... (no changes to the controls HTML) ... */}
-          <div className="nav-controls">
-            <button className="nav-arrow up" onClick={() => updateCarousel(currentIndex - 1)}>
-              <img src="https://ik.imagekit.io/gopichakradhar/icons/top.png?updatedAt=1754290522765" alt="Up" />
-            </button>
-            <button className="nav-arrow down" onClick={() => updateCarousel(currentIndex + 1)}>
-              <img src="https://ik.imagekit.io/gopichakradhar/icons/down.png?updatedAt=1754290523249" alt="Down" />
-            </button>
-          </div>
           <div className="project-info">
-            <h2 className="project-name">{activeProject.title}</h2>
-            <p className="project-desc">{activeProject.desc}</p>
+            <h2 className="project-name">{projects[currentIndex].name}</h2>
+            <p className="project-desc">{projects[currentIndex].description}</p>
             <div className="tech-tags">
-              {activeProject.tech?.split(', ').map(t => <span key={t}>{t}</span>)}
+              {projects[currentIndex].tags.map((tag, i) => (
+                <span key={i}>{tag}</span>
+              ))}
             </div>
             <div className="project-links">
-              {activeProject.prototypeLink && (
-                <a href={activeProject.prototypeLink} target="_blank" rel="noopener noreferrer" className="primary-link">
-                  View Prototype
-                </a>
-              )}
-              {activeProject.link && (
-                <a href={activeProject.link} target="_blank" rel="noopener noreferrer" className="secondary-link">
-                  <img src="/github-icon.png" alt="GitHub" />
-                  View on GitHub
-                </a>
-              )}
+              <a
+                href={projects[currentIndex].link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="primary-link"
+              >
+                View Live
+              </a>
+              <a
+                href={projects[currentIndex].github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="secondary-link"
+              >
+                <img src="/github.svg" alt="GitHub" />
+                GitHub
+              </a>
             </div>
           </div>
-          <div className="dots">
-            {projects.map((project, index) => (
-              <div
-                className={`dot ${index === currentIndex ? "active" : ""}`}
-                key={project.id}
-                data-index={index}
-                onClick={() => updateCarousel(index)}
-              />
-            ))}
+
+          <div className="nav-controls">
+            <button
+              className="nav-arrow"
+              onClick={() => updateCarousel(currentIndex - 1)}
+              aria-label="Previous project"
+            >
+              <img src="/arrow.svg" alt="Previous" style={{ transform: "rotate(180deg)" }} />
+            </button>
+            <button
+              className="nav-arrow"
+              onClick={() => updateCarousel(currentIndex + 1)}
+              aria-label="Next project"
+            >
+              <img src="/arrow.svg" alt="Next" />
+            </button>
           </div>
         </div>
       </div>
-    </motion.div>
+    </section>
   );
 };
 
