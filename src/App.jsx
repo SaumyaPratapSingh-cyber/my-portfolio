@@ -1,7 +1,7 @@
 import React from 'react';
 import "./index.css";
 import CosmicBackground from "./components/CosmicBackground.jsx";
-import DockNavbar from "./components/Navbar/DockNavbar.jsx";
+import DockNavbar from "./components/navbar/DockNavbar.jsx";
 import HeroSection from "./pages/HeroSection.jsx";
 import BentoGrid from "./components/About/BentoGrid.jsx";
 import OrbitalSkills from "./components/Skills/OrbitalSkills.jsx";
