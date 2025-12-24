@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { projects } from "../constants";
 import { BsGithub, BsGlobe } from "react-icons/bs";
-import Marquee from "react-fast-marquee";
 import { Tilt } from 'react-tilt';
 
 const Projects = () => {
+  const [width, setWidth] = useState(0);
+  const carousel = useRef();
+
+  useEffect(() => {
+    // Calculate scrollable width
+    if (carousel.current) {
+      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    }
+  }, []);
+
   const defaultOptions = {
     reverse: false,
     max: 15,
@@ -32,14 +41,21 @@ const Projects = () => {
           Featured <span className="underline decoration-4 decoration-white underline-offset-4">Projects</span>
         </motion.h2>
         <p className="text-center text-gray-400 mt-4 max-w-2xl mx-auto font-medium">
-          Interactive Infinite Gallery. Hover to pause & tilt.
+          Swipe or drag to explore. Hover for details.
         </p>
       </div>
 
-      <div className="w-full">
-        <Marquee gradient={false} speed={50} pauseOnHover={true} className="py-10">
+      <div className="w-full overflow-hidden pb-10 cursor-grab active:cursor-grabbing">
+        {/* Horizontal Scroll Container */}
+        <motion.div
+          ref={carousel}
+          className="flex gap-8 px-6 lg:px-28 w-max"
+          drag="x"
+          dragConstraints={{ right: 0, left: -width }}
+          whileTap={{ cursor: "grabbing" }}
+        >
           {projects.map((project, idx) => (
-            <div key={project.id} className="mx-6 w-[400px]">
+            <div key={project.id} className="w-[400px] shrink-0">
               <Tilt options={defaultOptions}>
                 <div
                   className="bg-neutral-900/80 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-300 flex flex-col h-[520px] relative group"
@@ -77,10 +93,11 @@ const Projects = () => {
               </Tilt>
             </div>
           ))}
-        </Marquee>
+        </motion.div>
       </div>
     </section>
   );
 };
+
 
 export default Projects;
