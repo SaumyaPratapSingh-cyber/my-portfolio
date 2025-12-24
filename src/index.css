@@ -14,7 +14,8 @@
 
     /* HUD Style Glass */
     .glass-panel {
-        @apply backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_0_20px_rgba(0, 0, 0, 0.5)];
+        @apply backdrop-blur-2xl bg-white/5 border border-white/10;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     }
 
     .text-hologram {
