@@ -1,61 +1,109 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
 import './customCursor.scss';
+import { useLocation } from 'react-router-dom';
 
 const CustomCursor = () => {
-  const dotCount = 3; // The number of dots in the trail
-  const dotRefs = useRef(Array.from({ length: dotCount }, () => React.createRef()));
-  const dots = useRef([]);
-  const mouse = useRef({ x: 0, y: 0 });
+  const cursorRef = useRef(null);
+  const followerRef = useRef(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    dots.current = dotRefs.current.map(() => ({ x: 0, y: 0, vx: 0, vy: 0 }));
+    // Hide default cursor
+    document.body.style.cursor = 'none';
 
-    const onMouseMove = (e) => {
-      mouse.current = { x: e.clientX, y: e.clientY };
-    };
+    const cursor = cursorRef.current;
+    const follower = followerRef.current;
 
-    window.addEventListener('mousemove', onMouseMove);
+    if (!cursor || !follower) return;
 
-    let animationFrameId;
-
-    const animateDots = () => {
-      let prevDot = { x: mouse.current.x, y: mouse.current.y };
-
-      dots.current.forEach((dot, index) => {
-        const currentDotRef = dotRefs.current[index].current;
-        if (currentDotRef) {
-          const dx = prevDot.x - dot.x;
-          const dy = prevDot.y - dot.y;
-          
-          dot.vx += dx * 0.1; // Spring physics
-          dot.vy += dy * 0.1;
-          dot.vx *= 0.7;      // Damping
-          dot.vy *= 0.7;
-          dot.x += dot.vx;
-          dot.y += dot.vy;
-
-          currentDotRef.style.transform = `translate(${dot.x}px, ${dot.y}px)`;
-          prevDot = dot;
-        }
+    const moveCursor = (e) => {
+      gsap.to(cursor, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.1,
+        ease: 'power2.out'
       });
 
-      animationFrameId = requestAnimationFrame(animateDots);
+      // Follower with more delay/elasticity
+      gsap.to(follower, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.5, // Slower duration for trailing effect
+        ease: 'back.out(1.2)'
+      });
     };
 
-    animationFrameId = requestAnimationFrame(animateDots);
+    const handleHoverStart = () => setIsHovering(true);
+    const handleHoverEnd = () => setIsHovering(false);
+
+    // Add listeners to interactive elements
+    const addListeners = () => {
+      const interactiveElements = document.querySelectorAll('a, button, input, textarea, .cursor-pointer');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', handleHoverStart);
+        el.addEventListener('mouseleave', handleHoverEnd);
+      });
+    };
+
+    const removeListeners = () => {
+      const interactiveElements = document.querySelectorAll('a, button, input, textarea, .cursor-pointer');
+      interactiveElements.forEach(el => {
+        el.removeEventListener('mouseenter', handleHoverStart);
+        el.removeEventListener('mouseleave', handleHoverEnd);
+      });
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+    addListeners();
+
+    // Re-attach listeners on route change
+    const observer = new MutationObserver(addListeners);
+    observer.observe(document.body, { childList: true, subtree: true });
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('mousemove', moveCursor);
+      removeListeners();
+      observer.disconnect();
+      document.body.style.cursor = 'auto'; // Restore cursor on cleanup
     };
-  }, []);
+  }, [location]);
+
+  // Animation for hover state
+  useEffect(() => {
+    const cursor = cursorRef.current;
+    const follower = followerRef.current;
+
+    if (isHovering) {
+      // Scale down dot
+      gsap.to(cursor, { scale: 0.5, duration: 0.3 });
+      // Scale up follower and make it opaque
+      gsap.to(follower, {
+        scale: 3,
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        borderColor: 'transparent',
+        mixBlendMode: 'difference',
+        duration: 0.3
+      });
+    } else {
+      // Reset
+      gsap.to(cursor, { scale: 1, duration: 0.3 });
+      gsap.to(follower, {
+        scale: 1,
+        backgroundColor: 'transparent',
+        borderColor: 'black',
+        mixBlendMode: 'normal',
+        duration: 0.3
+      });
+    }
+  }, [isHovering]);
 
   return (
-    <div className="gooey-cursor-container">
-      {dotRefs.current.map((ref, i) => (
-        <div className="cursor-dot" key={i} ref={ref} />
-      ))}
-    </div>
+    <>
+      <div ref={cursorRef} className="cursor-dot" />
+      <div ref={followerRef} className="cursor-follower" />
+    </>
   );
 };
 
