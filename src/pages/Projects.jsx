@@ -19,7 +19,7 @@ const Projects = () => {
   }
 
   return (
-    <section className="py-20 bg-gray-50 overflow-hidden" id="projects">
+    <section className="py-20 bg-white overflow-hidden" id="projects">
       <div className="container mx-auto px-5 lg:px-28 mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -30,7 +30,7 @@ const Projects = () => {
           Featured <span className="underline decoration-4 decoration-black underline-offset-4">Projects</span>
         </motion.h2>
         <p className="text-center text-gray-500 mt-4 max-w-2xl mx-auto">
-          Swipe or hover to explore my latest work. 3D interactions enabled.
+          Interactive Infinite Gallery. Hover to pause & tilt.
         </p>
       </div>
 
@@ -40,30 +40,33 @@ const Projects = () => {
             <div key={project.id} className="mx-6 w-[400px]">
               <Tilt options={defaultOptions}>
                 <div
-                  className="bg-white border-2 border-black rounded-xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 flex flex-col h-[500px]"
+                  className="bg-black text-white border-2 border-black rounded-xl overflow-hidden shadow-[10px_10px_0px_0px_rgba(100,100,100,0.5)] hover:shadow-[15px_15px_0px_0px_rgba(0,0,0,0.8)] transition-all duration-300 flex flex-col h-[520px]"
                 >
-                  <div className="h-56 overflow-hidden border-b-2 border-black relative group shrink-0">
-                    <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                      <a href={project.link} target="_blank" rel="noreferrer" className="bg-white p-3 rounded-full hover:scale-110 transition-transform border-2 border-black"><BsGithub size={20} /></a>
-                      {project.prototypeLink && <a href={project.prototypeLink} target="_blank" rel="noreferrer" className="bg-white p-3 rounded-full hover:scale-110 transition-transform border-2 border-black"><BsGlobe size={20} /></a>}
+                  <div className="h-56 overflow-hidden border-b-2 border-white/10 relative group shrink-0">
+                    <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-90 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                      <a href={project.link} target="_blank" rel="noreferrer" className="bg-white text-black p-3 rounded-full hover:scale-110 transition-transform border-2 border-white"><BsGithub size={20} /></a>
+                      {project.prototypeLink && <a href={project.prototypeLink} target="_blank" rel="noreferrer" className="bg-white text-black p-3 rounded-full hover:scale-110 transition-transform border-2 border-white"><BsGlobe size={20} /></a>}
                     </div>
                   </div>
 
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-3 text-ellipsis">{project.desc}</p>
+                  <div className="p-8 flex flex-col flex-grow relative">
+                    {/* Decorative corner */}
+                    <div className="absolute top-4 right-4 text-xs font-mono text-gray-500">0{idx + 1}</div>
+
+                    <h3 className="text-2xl font-bold mb-3 text-white">{project.title}</h3>
+                    <p className="text-gray-400 text-sm mb-6 line-clamp-3 text-ellipsis leading-relaxed font-medium">{project.desc}</p>
 
                     <div className="flex flex-wrap gap-2 mt-auto">
                       {project.tech.split(',').slice(0, 3).map((tech, i) => (
-                        <span key={i} className="text-xs font-bold border-2 border-black bg-white text-black px-2 py-1 rounded-md hover:bg-black hover:text-white transition-colors cursor-default">
+                        <span key={i} className="text-xs font-bold border border-white/20 bg-white text-black px-3 py-1.5 rounded-full hover:bg-black hover:text-white hover:border-white transition-colors cursor-default">
                           {tech.trim()}
                         </span>
                       ))}
                     </div>
 
-                    <a href={project.link} target="_blank" rel="noreferrer" className="mt-6 block text-center font-bold border-2 border-black py-3 rounded-lg hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-[2px] transition-all bg-white text-black">
-                      View Details
+                    <a href={project.link} target="_blank" rel="noreferrer" className="mt-8 block text-center font-bold border-2 border-white py-3 rounded-lg hover:bg-white hover:text-black transition-all text-white tracking-wide">
+                      View Project
                     </a>
                   </div>
                 </div>
