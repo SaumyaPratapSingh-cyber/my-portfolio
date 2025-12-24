@@ -1,54 +1,97 @@
-import React from "react";
+
 import { motion } from "framer-motion";
+import { Tilt } from "react-tilt";
 
 const About = () => {
-  return (
-    <section className="py-20 px-5 lg:px-28" id="about">
-      <div className="container mx-auto flex flex-col lg:flex-row items-center gap-16">
+  const defaultOptions = {
+    reverse: false,
+    max: 15,
+    perspective: 1000,
+    scale: 1.02,
+    speed: 1000,
+    transition: true,
+    axis: null,
+    reset: true,
+    easing: "cubic-bezier(.03,.98,.52,.99)",
+  };
 
-        {/* Left: Image with Black Gloss border */}
+  return (
+    <section className="py-24 px-6 lg:px-32 relative overflow-hidden" id="about">
+      {/* Background Decorative Blobs */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
         <motion.div
-          className="lg:w-1/3 relative"
-          initial={{ opacity: 0, x: -50 }}
+          animate={{ x: [0, 50, 0], y: [0, -50, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          className="absolute top-10 left-10 w-72 h-72 bg-purple-500/20 rounded-full blur-[100px]"
+        />
+        <motion.div
+          animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/20 rounded-full blur-[100px]"
+        />
+      </div>
+
+      <div className="container mx-auto flex flex-col lg:flex-row items-center gap-20">
+
+        {/* Left: Image with Tilt and Glass Effect */}
+        <motion.div
+          className="lg:w-2/5 relative"
+          initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, type: "spring", stiffness: 50 }}
         >
-          <div className="relative z-10 border border-black/10 bg-white/50 backdrop-blur-md p-2 rounded-2xl overflow-hidden shadow-2xl">
-            <img src="/profile.png" alt="Profile" className="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-500" />
-            {/* Black corner accent */}
-            <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-black/80 rounded-tl-2xl pointer-events-none"></div>
-            <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-black/80 rounded-br-2xl pointer-events-none"></div>
-          </div>
+          <Tilt options={defaultOptions} className="relative z-10">
+            <div className="relative border border-white/20 bg-white/10 backdrop-blur-2xl p-4 rounded-3xl shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] overflow-hidden group">
+              {/* Glossy sheen overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-20"></div>
+
+              <img
+                src="/profile.png"
+                alt="Profile"
+                className="w-full h-auto object-cover rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out transform group-hover:scale-105"
+              />
+
+              {/* Corner Accents */}
+              <div className="absolute top-4 left-4 w-12 h-12 border-t-2 border-l-2 border-white/60 rounded-tl-xl pointer-events-none"></div>
+              <div className="absolute bottom-4 right-4 w-12 h-12 border-b-2 border-r-2 border-white/60 rounded-br-xl pointer-events-none"></div>
+            </div>
+          </Tilt>
         </motion.div>
 
         {/* Right: Text content */}
         <motion.div
-          className="lg:w-2/3"
-          initial={{ opacity: 0, x: 50 }}
+          className="lg:w-3/5"
+          initial={{ opacity: 0, x: 100 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, delay: 0.2, type: "spring", stiffness: 50 }}
         >
-          <h2 className="text-4xl font-extrabold mb-6 flex items-center gap-3 text-black">
-            About <span className="text-white bg-black px-2 -rotate-2 inline-block rounded-sm transform hover:rotate-2 transition-transform cursor-default shadow-lg">Me</span>
-          </h2>
+          <div className="relative">
+            <h2 className="text-5xl lg:text-6xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 drop-shadow-sm flex items-center gap-4">
+              About <span className="text-white bg-black px-4 py-1 -rotate-3 inline-block rounded-lg transform hover:rotate-0 transition-transform duration-300 shadow-2xl skew-x-[-10deg] border border-white/20">Me</span>
+            </h2>
+          </div>
 
-          <p className="text-gray-700 text-lg leading-relaxed mb-6 font-medium">
-            I'm <span className="font-bold text-black border-b-2 border-black/30">Saumya Pratap Singh</span>, a passionate Full Stack Developer and AI Enthusiast based in India.
-            My journey in tech is driven by a curiosity to understand how things work and a desire to build solutions that make a difference.
-          </p>
+          <div className="bg-white/5 backdrop-blur-lg border border-white/10 p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden group">
+            <div className="absolute -right-10 -top-10 w-40 h-40 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
 
-          <p className="text-gray-600 leading-relaxed mb-8">
-            I specialize in building robust web applications using the <span className="font-bold text-black border-b-2 border-black/30">MERN Stack</span> and creating cross-platform mobile experiences with <span className="font-bold text-black border-b-2 border-black/30">Flutter</span>.
-            Beyond coding, I'm deeply interested in Artificial Intelligence and its potential to reshape the future.
-          </p>
+            <p className="text-gray-800 text-lg leading-loose mb-6 font-medium relative z-10">
+              I&apos;m <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">Saumya Pratap Singh</span>, a passionate Full Stack Developer and AI Enthusiast based in India.
+              My journey in tech is driven by a curiosity to understand how things work and a desire to build solutions that make a difference.
+            </p>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <Stat number="03+" label="Years Experience" />
-            <Stat number="10+" label="Projects Completed" />
-            <Stat number="05+" label="Tech Stack Mastered" />
-            <Stat number="02+" label="Happy Clients" />
+            <p className="text-gray-600 leading-loose text-lg relative z-10">
+              I specialize in building robust web applications using the <span className="font-bold border-b-2 border-purple-400 text-black">MERN Stack</span> and creating cross-platform mobile experiences with <span className="font-bold border-b-2 border-blue-400 text-black">Flutter</span>.
+              Beyond coding, I&apos;m deeply interested in Artificial Intelligence and its potential to reshape the future.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+            <Stat number="03+" label="Years Exp." delay={0.4} />
+            <Stat number="10+" label="Projects" delay={0.5} />
+            <Stat number="05+" label="Tech Stacks" delay={0.6} />
+            <Stat number="02+" label="Clients" delay={0.7} />
           </div>
         </motion.div>
 
@@ -57,11 +100,17 @@ const About = () => {
   );
 };
 
-const Stat = ({ number, label }) => (
-  <div className="bg-white/50 backdrop-blur-md border border-neutral-200 p-4 rounded-xl text-center hover:bg-white hover:shadow-xl transition-all group">
-    <h4 className="text-3xl font-extrabold text-black group-hover:scale-110 transition-transform">{number}</h4>
-    <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mt-1 group-hover:text-black">{label}</p>
-  </div>
+const Stat = ({ number, label, delay }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: delay }}
+    className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-center hover:bg-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-300 group cursor-default"
+  >
+    <h4 className="text-4xl font-black text-gray-900 group-hover:scale-110 transition-transform duration-300">{number}</h4>
+    <p className="text-xs text-gray-600 font-bold uppercase tracking-wider mt-2 group-hover:text-black">{label}</p>
+  </motion.div>
 )
 
 export default About;
