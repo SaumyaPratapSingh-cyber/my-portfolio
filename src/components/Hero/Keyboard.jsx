@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Spline from '@splinetool/react-spline';
-import { motion } from 'framer-motion';
 
 export default function Keyboard() {
     const [loading, setLoading] = useState(true);
@@ -13,7 +12,7 @@ export default function Keyboard() {
                 </div>
             )}
             <Spline
-                scene="https://prod.spline.design/ovH22HjXv-2-J30e/scene.splinecode"
+                scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
                 className="w-full h-full scale-100 lg:scale-110"
                 onLoad={() => setLoading(false)}
             />
