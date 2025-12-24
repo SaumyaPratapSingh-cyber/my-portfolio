@@ -22,7 +22,9 @@ export default function Navbar() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`fixed lg:px-28 px-5 top-0 left-0 w-full z-50 bg-white p-5 transition-shadow duration-300 ${hasShadow ? "shadow-md" : "shadow-none"
+      className={`fixed lg:px-28 px-5 top-0 left-0 w-full z-50 p-5 transition-all duration-300 ${hasShadow
+          ? "bg-white/10 backdrop-blur-lg border-b border-white/20 shadow-lg py-4"
+          : "bg-transparent py-5"
         }`}
     >
       <div className="container mx-auto flex justify-between items-center">

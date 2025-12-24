@@ -9,7 +9,7 @@ import CustomCursor from './components/CustomCursor/CustomCursor';
 
 export default function App() {
   return (
-    <div className='font-sora bg-white text-black min-h-screen'>
+    <div className='font-sora text-black min-h-screen relative'>
       <CustomCursor />
       <Navbar />
       <main className="pt-20">

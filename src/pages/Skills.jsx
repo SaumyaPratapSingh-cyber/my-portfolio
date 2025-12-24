@@ -4,7 +4,7 @@ import { skills } from "../constants";
 
 const Skills = () => {
   return (
-    <section className="bg-white text-black py-20 px-5 lg:px-28" id="skills">
+    <section className="py-20 px-5 lg:px-28 relative" id="skills">
       <div className="container mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -36,18 +36,18 @@ const Skills = () => {
                   duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: idx * 0.5 // Stagger the float
+                  delay: idx * 0.5
                 }}
-                className="bg-white border-2 border-black p-6 rounded-2xl h-full transition-all duration-300 hover:bg-black hover:text-white hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] group cursor-pointer"
+                className="bg-white/20 backdrop-blur-md border border-white/30 p-6 rounded-2xl h-full transition-all duration-300 hover:bg-black/80 hover:backdrop-blur-xl hover:text-white hover:border-black/50 hover:shadow-[10px_10px_20px_rgba(0,0,0,0.2)] group cursor-pointer"
               >
-                <h3 className="text-xl font-bold mb-6 border-b-2 border-gray-200 pb-2 group-hover:border-gray-700">{category.title}</h3>
+                <h3 className="text-xl font-bold mb-6 border-b-2 border-black/10 pb-2 group-hover:border-gray-600">{category.title}</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {category.items.map((skill, i) => (
-                    <div key={i} className="flex flex-col items-center gap-3 p-3 rounded-xl border border-gray-200 group-hover:border-gray-700 transition-colors bg-gray-50 group-hover:bg-neutral-900">
-                      <div className="w-10 h-10 p-1 bg-white rounded-lg flex items-center justify-center border border-gray-100 group-hover:animate-pulse">
+                    <div key={i} className="flex flex-col items-center gap-3 p-3 rounded-xl border border-white/40 bg-white/30 group-hover:bg-neutral-800 group-hover:border-neutral-700 transition-colors">
+                      <div className="w-10 h-10 p-1 bg-white/80 rounded-lg flex items-center justify-center border border-white/50 group-hover:animate-pulse">
                         <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain" />
                       </div>
-                      <span className="text-sm font-bold text-gray-600 group-hover:text-gray-300">{skill.name}</span>
+                      <span className="text-sm font-bold text-gray-800 group-hover:text-gray-300">{skill.name}</span>
                     </div>
                   ))}
                 </div>
