@@ -1,152 +1,60 @@
-import { motion, useInView } from "framer-motion"; // 1. Import useInView
-import { useState, useEffect, useRef, useCallback } from "react"; // 2. Import useCallback
-import "./pages.scss";
-import { projects } from "../constants"; 
+import React from "react";
+import { motion } from "framer-motion";
+import { projects } from "../constants";
+import { BsGithub, BsGlobe } from "react-icons/bs";
 
 const Projects = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  
-  // 3. This ref will be attached to the main project page
-  const pageRef = useRef(null);
-  
-  // 4. This hook will be true when 50% of the page is visible
-  const isInView = useInView(pageRef, { amount: 0.5 });
-  
-  // 5. We wrap our functions in useCallback for stability
-  const updateCarousel = useCallback((newIndex) => {
-    // Don't do anything if we are already animating
-    if (isAnimating) return; 
-    setIsAnimating(true);
-
-    const nextIndex = (newIndex + projects.length) % projects.length;
-    setCurrentIndex(nextIndex);
-
-    // After 800ms (the CSS animation time), allow animating again
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 800); 
-  }, [isAnimating, projects.length]); // Dependencies
-
-  const handleKeydown = useCallback((e) => {
-    if (e.key === "ArrowUp") {
-      e.preventDefault(); // Stop the page from scrolling
-      updateCarousel(currentIndex - 1);
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault(); // Stop the page from scrolling
-      updateCarousel(currentIndex + 1);
-    }
-  }, [currentIndex, updateCarousel]); // Dependencies
-
-  // 6. This useEffect now adds/removes the listener based on isInView
-  useEffect(() => {
-    if (isInView) {
-      // If the component is in view, add the key listener
-      document.addEventListener("keydown", handleKeydown);
-    } else {
-      // If it's not in view, remove the listener
-      document.removeEventListener("keydown", handleKeydown);
-    }
-
-    // Cleanup: always remove the listener when the component unmounts
-    return () => {
-      document.removeEventListener("keydown", handleKeydown);
-    };
-  }, [isInView, handleKeydown]); // Run this logic whenever isInView or the function changes
-
-  
-  const getCardClass = (index) => {
-    const offset = (index - currentIndex + projects.length) % projects.length;
-    
-    if (offset === 0) return "center";
-    if (offset === 1) return "down-1";
-    if (offset === 2) return "down-2";
-    if (offset === projects.length - 1) return "up-1";
-    if (offset === projects.length - 2) return "up-2";
-    return "hidden";
-  };
-  
-  const activeProject = projects[currentIndex] || {};
-
   return (
-    <motion.div
-      className="page projects-page"
-      ref={pageRef} // 7. Attach the ref to the main element
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <div className="main-container">
-        
-        {/* --- LEFT SIDE: CAROUSEL --- */}
-        <div className="carousel-section">
-          {/* ... (no changes to the carousel HTML) ... */}
-          <div className="carousel-container">
-            <button className="nav-arrow up" onClick={() => updateCarousel(currentIndex - 1)}>
-              <img src="https://ik.imagekit.io/gopichakradhar/icons/top.png?updatedAt=1754290522765" alt="Up" />
-            </button>
-            <div className="carousel-track">
-              {projects.map((project, index) => (
-                <div
-                  className={`card ${getCardClass(index)}`}
-                  key={project.id}
-                  data-index={index}
-                  onClick={() => updateCarousel(index)}
-                >
-                  <img src={project.img} alt={project.title} />
-                </div>
-              ))}
-            </div>
-            <button className="nav-arrow down" onClick={() => updateCarousel(currentIndex + 1)}>
-              <img src="https://ik.imagekit.io/gopichakradhar/icons/down.png?updatedAt=1754290523249" alt="Down" />
-            </button>
-          </div>
-        </div>
+    <section className="py-20 px-5 lg:px-28 bg-gray-50" id="projects">
+      <div className="container mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-4xl lg:text-5xl font-extrabold text-center mb-16"
+        >
+          Featured <span className="underline decoration-4 decoration-black underline-offset-4">Projects</span>
+        </motion.h2>
 
-        {/* --- RIGHT SIDE: PROJECT INFO --- */}
-        <div className="controls-section">
-          {/* ... (no changes to the controls HTML) ... */}
-          <div className="nav-controls">
-            <button className="nav-arrow up" onClick={() => updateCarousel(currentIndex - 1)}>
-              <img src="https://ik.imagekit.io/gopichakradhar/icons/top.png?updatedAt=1754290522765" alt="Up" />
-            </button>
-            <button className="nav-arrow down" onClick={() => updateCarousel(currentIndex + 1)}>
-              <img src="https://ik.imagekit.io/gopichakradhar/icons/down.png?updatedAt=1754290523249" alt="Down" />
-            </button>
-          </div>
-          <div className="project-info">
-            <h2 className="project-name">{activeProject.title}</h2>
-            <p className="project-desc">{activeProject.desc}</p>
-            <div className="tech-tags">
-              {activeProject.tech?.split(', ').map(t => <span key={t}>{t}</span>)}
-            </div>
-            <div className="project-links">
-              {activeProject.prototypeLink && (
-                <a href={activeProject.prototypeLink} target="_blank" rel="noopener noreferrer" className="primary-link">
-                  View Prototype
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {projects.map((project, idx) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-white border-2 border-black rounded-xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300 flex flex-col"
+            >
+              <div className="h-48 overflow-hidden border-b-2 border-black relative group">
+                <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                  <a href={project.link} target="_blank" rel="noreferrer" className="bg-white p-2 rounded-full hover:scale-110 transition-transform"><BsGithub size={20} /></a>
+                  {project.prototypeLink && <a href={project.prototypeLink} target="_blank" rel="noreferrer" className="bg-white p-2 rounded-full hover:scale-110 transition-transform"><BsGlobe size={20} /></a>}
+                </div>
+              </div>
+
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                <p className="text-gray-600 text-sm mb-4 line-clamp-3 flex-grow">{project.desc}</p>
+
+                <div className="flex flex-wrap gap-2 mt-auto">
+                  {project.tech.split(',').slice(0, 3).map((tech, i) => (
+                    <span key={i} className="text-xs font-bold bg-black text-white px-2 py-1 rounded-md">
+                      {tech.trim()}
+                    </span>
+                  ))}
+                </div>
+
+                <a href={project.link} target="_blank" rel="noreferrer" className="mt-6 block text-center font-bold border-2 border-black py-2 rounded-lg hover:bg-black hover:text-white transition-colors">
+                  View Details
                 </a>
-              )}
-              {activeProject.link && (
-                <a href={activeProject.link} target="_blank" rel="noopener noreferrer" className="secondary-link">
-                  <img src="/github-icon.png" alt="GitHub" />
-                  View on GitHub
-                </a>
-              )}
-            </div>
-          </div>
-          <div className="dots">
-            {projects.map((project, index) => (
-              <div
-                className={`dot ${index === currentIndex ? "active" : ""}`}
-                key={project.id}
-                data-index={index}
-                onClick={() => updateCarousel(index)}
-              />
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </motion.div>
+    </section>
   );
 };
 

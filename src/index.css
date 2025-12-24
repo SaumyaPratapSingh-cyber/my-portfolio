@@ -1,24 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
     body {
-        @apply bg-void-black text-white overflow-x-hidden;
-        font-feature-settings: "ss01", "ss02", "cv01", "cv02";
-        -webkit-font-smoothing: antialiased;
-    }
-}
-
-@layer components {
-
-    /* HUD Style Glass */
-    .glass-panel {
-        @apply backdrop-blur-2xl bg-white/5 border border-white/10;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .text-hologram {
-        text-shadow: 0 0 10px rgba(46, 185, 223, 0.5);
+        @apply font-sora bg-white text-black overflow-x-hidden;
     }
 }

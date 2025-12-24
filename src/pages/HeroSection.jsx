@@ -1,145 +1,122 @@
-import React, { Suspense, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, useGLTF, Float, Environment, Sparkles } from '@react-three/drei';
-import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { Download, ArrowRight } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { IoLogoLinkedin, IoLogoTwitter } from "react-icons/io5";
+import { BiLogoGmail } from "react-icons/bi";
+import { BsGithub } from "react-icons/bs";
+import { TypeAnimation } from "react-type-animation";
 
-const Robot = (props) => {
-    const { scene } = useGLTF('/robot.glb');
+export default function HeroSection() {
     return (
-        <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-            <primitive object={scene} {...props} />
-        </Float>
-    );
-};
+        <div className="container mx-auto px-5 lg:px-28 min-h-[90vh] flex items-center" id="home">
+            <div className="flex justify-between items-center flex-col-reverse lg:flex-row w-full gap-12">
 
-const MagneticButton = ({ children, className }) => {
-    const ref = useRef(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const xSpring = useSpring(x, { stiffness: 150, damping: 15 });
-    const ySpring = useSpring(y, { stiffness: 150, damping: 15 });
+                <motion.div
+                    className="lg:w-[50%]"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                >
 
-    const handleMouseMove = (e) => {
-        const { clientX, clientY } = e;
-        const { left, top, width, height } = ref.current.getBoundingClientRect();
-        const centerX = left + width / 2;
-        const centerY = top + height / 2;
-        x.set((clientX - centerX) * 0.3);
-        y.set((clientY - centerY) * 0.3);
-    };
+                    <div className="text-3xl lg:text-6xl flex flex-col gap-3 font-extrabold text-black leading-tight">
+                        <motion.span
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 }}
+                            className="text-lg lg:text-2xl font-semibold text-gray-500 mb-2"
+                        >
+                            Hello, I am
+                        </motion.span>
 
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
+                        <TypeAnimation
+                            sequence={[
+                                'Saumya Pratap Singh',
+                                1000,
+                                'A Fullstack Dev',
+                                1000,
+                                'A UI/UX Designer',
+                                1000,
+                            ]}
+                            wrapper="span"
+                            speed={50}
+                            style={{ display: 'inline-block', color: 'black' }}
+                            repeat={Infinity}
+                        />
 
-    return (
-        <motion.button
-            ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ x: xSpring, y: ySpring }}
-            className={className}
-        >
-            {children}
-        </motion.button>
-    );
-};
-
-const HeroSection = () => {
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
-
-    const handleMouseMove = (e) => {
-        mouseX.set(e.clientX / window.innerWidth - 0.5);
-        mouseY.set(e.clientY / window.innerHeight - 0.5);
-    };
-
-    const x = useSpring(useTransform(mouseX, [-0.5, 0.5], [15, -15]), { stiffness: 100, damping: 20 });
-    const y = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), { stiffness: 100, damping: 20 });
-
-    return (
-        <section
-            id="home"
-            className="relative min-h-screen flex items-center justify-center overflow-hidden bg-void-black"
-            onMouseMove={handleMouseMove}
-        >
-            {/* Parallax Background Grid */}
-            <motion.div
-                style={{ x: useTransform(x, (val) => val * 0.5), y: useTransform(y, (val) => val * 0.5) }}
-                className="absolute inset-0 bg-cyber-grid bg-[length:40px_40px] opacity-20 pointer-events-none"
-            />
-
-            <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10 w-full h-full">
-
-                {/* Left: Typography */}
-                <div className="flex flex-col items-start">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <h2 className="text-hologram-blue font-mono tracking-widest text-sm mb-4 border border-hologram-blue/20 bg-hologram-blue/5 px-3 py-1 rounded-sm w-fit">
-                             // SYSTEM: ONLINE
-                        </h2>
-
-                        <h1 className="text-6xl md:text-8xl font-display font-bold leading-none mb-6 text-white">
-                            Building Digital <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-hologram-blue to-neon-purple relative inline-block">
-                                Realities
-                                <span className="absolute -inset-1 bg-hologram-blue/20 blur-xl"></span>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 }}
+                            className="flex flex-col lg:flex-row gap-2 lg:gap-4 mt-2"
+                        >
+                            <span>Fullstack</span>
+                            <span
+                                className="text-white"
+                                style={{ WebkitTextStroke: "2px black" }}
+                            >
+                                Developer
                             </span>
-                        </h1>
+                        </motion.h2>
 
-                        <p className="text-gray-400 text-xl font-light max-w-lg mb-10 font-sans">
-                            <span className="text-white font-bold">Saumya Pratap Singh.</span> Full Stack Engineer.
-                            <br /> Architecting the future of the web with 3D depth and fluid motion.
-                        </p>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 }}
+                            className="text-xl lg:text-3xl mt-2 font-medium text-gray-600"
+                        >
+                            Based In <span className="text-black font-bold">India.</span>
+                        </motion.h2>
+                    </div>
 
-                        <div className="flex flex-wrap gap-6">
-                            <MagneticButton className="relative group px-8 py-4 bg-hologram-blue/10 border border-hologram-blue/50 text-hologram-blue font-bold rounded-lg overflow-hidden flex items-center gap-3 hover:bg-hologram-blue hover:text-black transition-all duration-300">
-                                <a href="/SaumyratapSingh_resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
-                                    <Download size={20} /> Download Resume
-                                </a>
-                                <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-12"></div>
-                            </MagneticButton>
-
-                            <MagneticButton className="px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-lg hover:bg-white/10 hover:border-white/30 transition-all flex items-center gap-3">
-                                My Work <ArrowRight size={20} />
-                            </MagneticButton>
-                        </div>
-                    </motion.div>
-                </div>
-
-                {/* Right: 3D Robot in Canvas */}
-                <div className="h-[600px] w-full relative">
-                    <motion.div
-                        className="w-full h-full"
-                        style={{ x, y }}
+                    <motion.p
+                        className="text-gray-600 text-sm lg:text-lg mt-8 leading-relaxed max-w-xl"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, duration: 0.8 }}
                     >
-                        <Canvas camera={{ position: [0, 0, 8], fov: 40 }}>
-                            <ambientLight intensity={0.5} />
-                            <spotLight position={[10, 10, 10]} angle={0.3} penumbra={1} intensity={2} color="#2EB9DF" />
-                            <pointLight position={[-10, -10, -10]} color="#9D00FF" intensity={2} />
+                        Passionate about building scalable digital solutions. I specialize in the
+                        <span className="bg-black text-white px-1 mx-1">MERN Stack</span> and
+                        <span className="bg-black text-white px-1 mx-1">Flutter</span> development.
+                        Focused on creating intuitive experiences that solve real-world problems.
+                    </motion.p>
 
-                            <Suspense fallback={null}>
-                                <Environment preset="city" />
-                                <Robot scale={2.8} position={[0, -1.5, 0]} rotation={[0, -0.2, 0]} />
-                                <Sparkles count={100} scale={10} size={2} speed={0.4} opacity={0.5} color="#2EB9DF" />
-                            </Suspense>
-
-                            <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} />
-                        </Canvas>
+                    <motion.div
+                        className="flex items-center gap-x-6 mt-10"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.8, duration: 0.8 }}
+                    >
+                        <SocialBtn href="mailto:saumyrajpoot666@gmail.com" icon={BiLogoGmail} />
+                        <SocialBtn href="https://www.linkedin.com/in/saumya-pratap-singh-a27890287" icon={IoLogoLinkedin} />
+                        <SocialBtn href="https://github.com/SaumyaPratapSingh-cyber" icon={BsGithub} />
                     </motion.div>
+                </motion.div>
 
-                    {/* Glowing Orb Behind */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-neon-purple/20 blur-[100px] rounded-full -z-10 animate-pulse-fast"></div>
-                </div>
-
+                <motion.div
+                    className="lg:w-[45%] w-full flex justify-center lg:justify-end"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                >
+                    {/* Using the vector illustration provided in assets */}
+                    <img
+                        className="w-full max-w-[500px] object-contain drop-shadow-2xl"
+                        src="/tech_vector_illustration.png"
+                        alt="Hero Illustration"
+                    />
+                </motion.div>
             </div>
-        </section>
+        </div>
     );
-};
+}
 
-export default HeroSection;
+const SocialBtn = ({ href, icon: Icon }) => (
+    <motion.a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        className="bg-white p-3 rounded-md border-2 border-black text-black text-xl lg:text-2xl hover:bg-black hover:text-white transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+        whileTap={{ scale: 0.95 }}
+    >
+        <Icon />
+    </motion.a>
+)
