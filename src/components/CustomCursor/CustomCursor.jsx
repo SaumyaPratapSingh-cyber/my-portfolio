@@ -1,110 +1,212 @@
-import React, { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import './customCursor.scss';
-import { useLocation } from 'react-router-dom';
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import gsap from "gsap";
+import { cn } from "../../lib/utils";
+import { useMouse } from "../../hooks/use-mouse";
+import { useMediaQuery } from "../../hooks/use-media-query";
+import { useLocation } from "react-router-dom";
+import './customCursor.scss'; // Ensure styles are imported
+
+// Gsap Ticker Function
+function useTicker(callback, paused) {
+  useEffect(() => {
+    if (!paused && callback) {
+      gsap.ticker.add(callback);
+    }
+    return () => {
+      gsap.ticker.remove(callback);
+    };
+  }, [callback, paused]);
+}
+
+const EMPTY = {};
+function useInstance(value = {}) {
+  const ref = useRef(EMPTY);
+  if (ref.current === EMPTY) {
+    ref.current = typeof value === "function" ? value() : value;
+  }
+  return ref.current;
+}
+
+// Function for Mouse Move Scale Change
+function getScale(diffX, diffY) {
+  const distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
+  return Math.min(distance / 735, 0.35);
+}
+
+// Function For Mouse Movement Angle in Degrees
+function getAngle(diffX, diffY) {
+  return (Math.atan2(diffY, diffX) * 180) / Math.PI;
+}
+
+function getRekt(el) {
+  if (el.classList.contains("cursor-can-hover"))
+    return el.getBoundingClientRect();
+  else if (el.parentElement?.classList.contains("cursor-can-hover"))
+    return el.parentElement.getBoundingClientRect();
+  else if (
+    el.parentElement?.parentElement?.classList.contains("cursor-can-hover")
+  )
+    return el.parentElement.parentElement.getBoundingClientRect();
+  return null;
+}
+
+const CURSOR_DIAMETER = 20; // Reduced from 50 for a cleaner look
 
 const CustomCursor = () => {
-  const cursorRef = useRef(null);
-  const followerRef = useRef(null);
-  const [isHovering, setIsHovering] = useState(false);
   const location = useLocation();
+  // Simplified preloader mock since we don't have that context
+  const isLoading = false;
+  const loadingPercent = 100;
 
-  useEffect(() => {
-    // Hide default cursor
-    document.body.style.cursor = 'none';
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
-    const cursor = cursorRef.current;
-    const follower = followerRef.current;
+  // React Refs for Jelly Blob and Text
+  const jellyRef = useRef(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const { x, y } = useMouse();
 
-    if (!cursor || !follower) return;
+  // Save pos and velocity Objects
+  const pos = useInstance(() => ({ x: 0, y: 0 }));
+  const vel = useInstance(() => ({ x: 0, y: 0 }));
+  const set = useInstance();
 
-    const moveCursor = (e) => {
-      gsap.to(cursor, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.1,
-        ease: 'power2.out'
-      });
+  // Set GSAP quick setter Values on useLayoutEffect Update
+  useLayoutEffect(() => {
+    set.x = gsap.quickSetter(jellyRef.current, "x", "px");
+    set.y = gsap.quickSetter(jellyRef.current, "y", "px");
+    set.r = gsap.quickSetter(jellyRef.current, "rotate", "deg");
+    set.sx = gsap.quickSetter(jellyRef.current, "scaleX");
+    set.sy = gsap.quickSetter(jellyRef.current, "scaleY");
+    set.width = gsap.quickSetter(jellyRef.current, "width", "px");
+  }, []);
 
-      // Follower with more delay/elasticity
-      gsap.to(follower, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.5, // Slower duration for trailing effect
-        ease: 'back.out(1.2)'
-      });
-    };
+  // Start Animation loop
+  const loop = useCallback(() => {
+    if (!set.width || !set.sx || !set.sy || !set.r) return;
+    // Calculate angle and scale based on velocity
+    var rotation = getAngle(+vel.x, +vel.y); // Mouse Move Angle
+    var scale = getScale(+vel.x, +vel.y); // Blob Squeeze Amount
 
-    const handleHoverStart = () => setIsHovering(true);
-    const handleHoverEnd = () => setIsHovering(false);
-
-    // Add listeners to interactive elements
-    const addListeners = () => {
-      const interactiveElements = document.querySelectorAll('a, button, input, textarea, .cursor-pointer');
-      interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', handleHoverStart);
-        el.addEventListener('mouseleave', handleHoverEnd);
-      });
-    };
-
-    const removeListeners = () => {
-      const interactiveElements = document.querySelectorAll('a, button, input, textarea, .cursor-pointer');
-      interactiveElements.forEach(el => {
-        el.removeEventListener('mouseenter', handleHoverStart);
-        el.removeEventListener('mouseleave', handleHoverEnd);
-      });
-    };
-
-    window.addEventListener('mousemove', moveCursor);
-    addListeners();
-
-    // Re-attach listeners on route change
-    const observer = new MutationObserver(addListeners);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    return () => {
-      window.removeEventListener('mousemove', moveCursor);
-      removeListeners();
-      observer.disconnect();
-      document.body.style.cursor = 'auto'; // Restore cursor on cleanup
-    };
-  }, [location]);
-
-  // Animation for hover state
-  useEffect(() => {
-    const cursor = cursorRef.current;
-    const follower = followerRef.current;
-
-    if (isHovering) {
-      // Scale down dot
-      gsap.to(cursor, { scale: 0.5, duration: 0.3 });
-      // Scale up follower and make it opaque
-      gsap.to(follower, {
-        scale: 3,
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        borderColor: 'transparent',
-        mixBlendMode: 'difference',
-        duration: 0.3
-      });
+    // Set GSAP quick setter Values on Loop Function
+    if (!isHovering && !isLoading) {
+      set.x(pos.x);
+      set.y(pos.y);
+      set.width(CURSOR_DIAMETER + scale * 100); // Reduced scale factor
+      set.r(rotation);
+      set.sx(1 + scale);
+      set.sy(1 - scale * 2);
     } else {
-      // Reset
-      gsap.to(cursor, { scale: 1, duration: 0.3 });
-      gsap.to(follower, {
-        scale: 1,
-        backgroundColor: 'transparent',
-        borderColor: 'black',
-        mixBlendMode: 'normal',
-        duration: 0.3
-      });
+      set.r(0);
     }
-  }, [isHovering]);
+  }, [isHovering, isLoading]);
 
+  const [cursorMoved, setCursorMoved] = useState(false);
+
+  // Run on Mouse Move
+  useLayoutEffect(() => {
+    if (isMobile) return;
+
+    const setFromEvent = (e) => {
+      if (!jellyRef.current) return;
+      if (!cursorMoved) {
+        setCursorMoved(true);
+      }
+
+      const el = e.target;
+
+      // Adapted hover detection: Check for 'a', 'button', or 'cursor-pointer' classes
+      const isInteractive =
+        el.tagName.toLowerCase() === 'a' ||
+        el.tagName.toLowerCase() === 'button' ||
+        el.closest('a') ||
+        el.closest('button') ||
+        el.classList.contains('cursor-pointer') ||
+        window.getComputedStyle(el).cursor === 'pointer';
+
+      if (isInteractive) {
+        setIsHovering(true);
+        // If we wanted to "snap" to the element we would use getBoundingClientRect here
+        // For now, we will just stick to the elastic effect but maybe scale up
+        gsap.to(jellyRef.current, {
+          width: CURSOR_DIAMETER * 2.5,
+          height: CURSOR_DIAMETER * 2.5,
+          duration: 0.4,
+          ease: "elastic.out(1, 0.3)",
+          backgroundColor: "rgba(255, 255, 255, 0.1)",
+          mixBlendMode: "difference"
+        });
+      } else {
+        if (isHovering) {
+          setIsHovering(false);
+          gsap.to(jellyRef.current, {
+            width: CURSOR_DIAMETER,
+            height: CURSOR_DIAMETER,
+            backgroundColor: "transparent",
+            mixBlendMode: "normal",
+            duration: 0.4
+          });
+        }
+      }
+
+      // Mouse X and Y
+      const x = e.clientX;
+      const y = e.clientY;
+
+      // Animate Position and calculate Velocity with GSAP
+      gsap.to(pos, {
+        x: x,
+        y: y,
+        duration: 0.8, // Slightly faster follow
+        ease: "power3.out", // Smoother ease
+        onUpdate: () => {
+          vel.x = (x - pos.x) * 1.2;
+          vel.y = (y - pos.y) * 1.2;
+        },
+      });
+
+      loop();
+    };
+
+    if (!isLoading) window.addEventListener("mousemove", setFromEvent);
+    return () => {
+      if (!isLoading) window.removeEventListener("mousemove", setFromEvent);
+    };
+  }, [isLoading, isMobile, isHovering]);
+
+  useTicker(loop, isLoading || !cursorMoved || isMobile);
+  if (isMobile) return null;
+
+  // Return UI
   return (
     <>
-      <div ref={cursorRef} className="cursor-dot" />
-      <div ref={followerRef} className="cursor-follower" />
+      <div
+        ref={jellyRef}
+        className={cn(
+          `w-[${CURSOR_DIAMETER}px] h-[${CURSOR_DIAMETER}px] border border-black dark:border-white`,
+          "fixed left-0 top-0 rounded-full z-[999] pointer-events-none will-change-transform",
+          "translate-x-[-50%] translate-y-[-50%]"
+        )}
+        style={{
+          zIndex: 9999,
+          // backdropFilter: "invert(100%)", // Removed invert for cleaner glass look
+        }}
+      ></div>
+      <div
+        className="w-2 h-2 rounded-full fixed bg-black pointer-events-none transition-none z-[10000]"
+        style={{
+          top: 0,
+          left: 0,
+          transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`
+        }}
+      ></div>
     </>
   );
-};
+}
 
 export default CustomCursor;
