@@ -33,7 +33,7 @@ function useInstance(value = {}) {
   return ref.current;
 }
 
-// Function for Mouse Move Scale Change
+// Function for Mouse Move Scale Change (Velocity Squeezing)
 function getScale(diffX, diffY) {
   const distance = Math.sqrt(Math.pow(diffX, 2) + Math.pow(diffY, 2));
   return Math.min(distance / 735, 0.35);
@@ -60,52 +60,62 @@ const CustomCursor = () => {
   const vel = useInstance(() => ({ x: 0, y: 0 }));
   const set = useInstance();
 
-  // Set GSAP quick setter Values on useLayoutEffect Update
+  // Set GSAP quick setter Values
   useLayoutEffect(() => {
     set.x = gsap.quickSetter(jellyRef.current, "x", "px");
     set.y = gsap.quickSetter(jellyRef.current, "y", "px");
     set.r = gsap.quickSetter(jellyRef.current, "rotate", "deg");
+    // We will use CSS variable or direct scale for hover expansion to avoid conflict
+    // But for the jelly effect, we typically set scaleX and scaleY
     set.sx = gsap.quickSetter(jellyRef.current, "scaleX");
     set.sy = gsap.quickSetter(jellyRef.current, "scaleY");
-    set.width = gsap.quickSetter(jellyRef.current, "width", "px");
   }, []);
 
-  // Start Animation loop
+  // Animation Loop
   const loop = useCallback(() => {
-    if (!set.width || !set.sx || !set.sy || !set.r) return;
-    // Calculate angle and scale based on velocity
-    var rotation = getAngle(+vel.x, +vel.y); // Mouse Move Angle
-    var scale = getScale(+vel.x, +vel.y); // Blob Squeeze Amount
+    if (!set.sx || !set.sy || !set.r) return;
 
-    // Set GSAP quick setter Values on Loop Function
-    if (!isHovering && !isLoading) {
-      set.x(pos.x);
-      set.y(pos.y);
-      set.width(CURSOR_DIAMETER + scale * 200);
-      set.r(rotation);
+    // Calculate angle and scale based on velocity
+    var rotation = getAngle(+vel.x, +vel.y);
+    var scale = getScale(+vel.x, +vel.y);
+
+    // General movement updates
+    set.x(pos.x);
+    set.y(pos.y);
+    set.r(rotation);
+
+    // If hovering, we set a Fixed Large Scale. 
+    // If NOT hovering, we apply the "Jelly" squeeze based on velocity.
+    if (isHovering) {
+      // When hovering, we override the jelly effect with a fixed expansion
+      // We do this via GSAP in the event listener, but we ensure the loop doesn't fight it
+      // actually, simpler to let GSAP handle the 'scale' tween in the event listener
+      // and only update X/Y/Rotation here.
+    } else {
+      // Normal Jelly Physics
       set.sx(1 + scale);
       set.sy(1 - scale * 2);
     }
-  }, [isHovering, isLoading]);
+
+  }, [isHovering]); // Re-run loop definition if hover state changes
 
   const [cursorMoved, setCursorMoved] = useState(false);
 
-  // Separate Logic: Mouse Move (Fast) vs Hover Check (Event Delegated)
   useEffect(() => {
     if (isMobile) return;
 
     const onMouseMove = (e) => {
       if (!cursorMoved) setCursorMoved(true);
 
-      // Purely update position target
       const x = e.clientX;
       const y = e.clientY;
 
+      // Animate Position (Always Smooth)
       gsap.to(pos, {
         x: x,
         y: y,
-        duration: 0.8,
-        ease: "power3.out",
+        duration: 0.6, // Slightly tighter follow
+        ease: "power2.out",
         onUpdate: () => {
           vel.x = (x - pos.x) * 1.2;
           vel.y = (y - pos.y) * 1.2;
@@ -115,27 +125,27 @@ const CustomCursor = () => {
       loop();
     };
 
-    // Hover Detection via Event Delegation (Performance: runs only on enter/leave, not every pixel)
     const onMouseOver = (e) => {
       const el = e.target;
+      // Robust check for interactive elements
       const isInteractive =
         el.tagName.toLowerCase() === 'a' ||
         el.tagName.toLowerCase() === 'button' ||
         el.closest('a') ||
         el.closest('button') ||
-        el.classList.contains('cursor-pointer'); // Removed expensive getComputedStyle check
+        el.classList.contains('cursor-pointer') ||
+        window.getComputedStyle(el).cursor === 'pointer';
 
       if (isInteractive) {
         setIsHovering(true);
-        if (jellyRef.current) {
-          gsap.to(jellyRef.current, {
-            width: CURSOR_DIAMETER * 2,
-            height: CURSOR_DIAMETER * 2,
-            duration: 0.4,
-            ease: "elastic.out(1, 0.3)",
-            backgroundColor: "white",
-          });
-        }
+        // GPU Transform Scale instead of Width/Height
+        gsap.to(jellyRef.current, {
+          scale: 2.5, // Scale up
+          duration: 0.3,
+          ease: "back.out(1.7)", // Nice pop effect
+          backgroundColor: "white",
+          overwrite: "auto" // Ensure we override any existing tweens
+        });
       }
     };
 
@@ -146,18 +156,19 @@ const CustomCursor = () => {
         el.tagName.toLowerCase() === 'button' ||
         el.closest('a') ||
         el.closest('button') ||
-        el.classList.contains('cursor-pointer');
+        el.classList.contains('cursor-pointer') ||
+        window.getComputedStyle(el).cursor === 'pointer';
 
       if (isInteractive) {
         setIsHovering(false);
-        if (jellyRef.current) {
-          gsap.to(jellyRef.current, {
-            width: CURSOR_DIAMETER,
-            height: CURSOR_DIAMETER,
-            backgroundColor: "white",
-            duration: 0.4
-          });
-        }
+        // Return to normal scale
+        gsap.to(jellyRef.current, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out",
+          backgroundColor: "white",
+          overwrite: "auto"
+        });
       }
     };
 
@@ -170,31 +181,28 @@ const CustomCursor = () => {
       window.removeEventListener("mouseover", onMouseOver);
       window.removeEventListener("mouseout", onMouseOut);
     };
-  }, [isMobile, cursorMoved, loop]); // Removed isHovering from deps to prevent re-binding constantly
+  }, [isMobile, cursorMoved, loop]);
 
-  useTicker(loop, isLoading || !cursorMoved || isMobile);
+  useTicker(loop, !cursorMoved || isMobile);
   if (isMobile) return null;
 
   return (
-    <>
-      <div
-        ref={jellyRef}
-        className={cn(
-          "fixed left-0 top-0 rounded-full z-[9999] pointer-events-none will-change-transform flex items-center justify-center transition-colors duration-300",
-          "translate-x-[-50%] translate-y-[-50%]"
-        )}
-        style={{
-          width: CURSOR_DIAMETER,
-          height: CURSOR_DIAMETER,
-          backgroundColor: "white",
-          mixBlendMode: "difference",
-        }}
-      >
-        {!isHovering && (
-          <div className="relative w-[30%] h-[15%] bg-black rounded-t-full rotate-180"></div>
-        )}
-      </div>
-    </>
+    <div
+      ref={jellyRef}
+      className={cn(
+        "fixed left-0 top-0 rounded-full z-[9999] pointer-events-none will-change-transform flex items-center justify-center",
+        "translate-x-[-50%] translate-y-[-50%]"
+      )}
+      style={{
+        width: CURSOR_DIAMETER,
+        height: CURSOR_DIAMETER,
+        backgroundColor: "white",
+        mixBlendMode: "difference",
+      }}
+    >
+      {/* Explicitly hiding the inner dot on hover using opacity for performance */}
+      <div className={`relative w-[30%] h-[15%] bg-black rounded-t-full rotate-180 transition-opacity duration-200 ${isHovering ? 'opacity-0' : 'opacity-100'}`}></div>
+    </div>
   );
 }
 
