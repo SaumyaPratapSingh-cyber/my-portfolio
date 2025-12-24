@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply bg-matte-black text-soft-white overflow-x-hidden;
+        @apply bg-void-black text-white overflow-x-hidden;
         font-feature-settings: "ss01", "ss02", "cv01", "cv02";
         -webkit-font-smoothing: antialiased;
     }
@@ -12,12 +12,12 @@
 
 @layer components {
 
-    /* Hype4 Style Cards: Cleaner, darker, subtler border */
+    /* HUD Style Glass */
     .glass-panel {
-        @apply backdrop-blur-xl bg-charcoal/60 border border-white/5 shadow-2xl;
+        @apply backdrop-blur-2xl bg-white/5 border border-white/10 shadow-[0_0_20px_rgba(0, 0, 0, 0.5)];
     }
 
-    .text-glow {
-        text-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
+    .text-hologram {
+        text-shadow: 0 0 10px rgba(46, 185, 223, 0.5);
     }
 }

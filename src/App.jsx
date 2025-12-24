@@ -1,7 +1,7 @@
 import React from 'react';
 import "./index.css";
 import CosmicBackground from "./components/CosmicBackground.jsx";
-import DockNavbar, { TopBar } from "./components/navbar/DockNavbar.jsx";
+import DockNavbar from "./components/navbar/DockNavbar.jsx";
 import HeroSection from "./pages/HeroSection.jsx";
 import BentoGrid from "./components/About/BentoGrid.jsx";
 import OrbitalSkills from "./components/Skills/OrbitalSkills.jsx";
@@ -15,7 +15,6 @@ import { Element } from 'react-scroll';
 const App = () => {
   return (
     <>
-      <TopBar />
       <CosmicBackground />
       <CustomCursor /> {/* Assuming this component handles the cursor logic */}
 
