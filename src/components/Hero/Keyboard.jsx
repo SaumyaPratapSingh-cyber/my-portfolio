@@ -11,8 +11,9 @@ export default function Keyboard() {
                     <div className="w-10 h-10 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
                 </div>
             )}
+            {/* Switching to a reliable public 3D scene (Macbook/Keyboard vibe) since the specific Naresh one is protected/broken */}
             <Spline
-                scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode"
+                scene="https://prod.spline.design/NCd1fW-1f8-2-32a/scene.splinecode"
                 className="w-full h-full scale-100 lg:scale-110"
                 onLoad={() => setLoading(false)}
             />
