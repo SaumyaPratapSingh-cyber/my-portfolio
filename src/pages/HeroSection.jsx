@@ -18,12 +18,12 @@ export default function HeroSection() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                 >
 
-                    <div className="text-3xl lg:text-6xl flex flex-col gap-3 font-extrabold text-black leading-tight">
+                    <div className="text-3xl lg:text-6xl flex flex-col gap-3 font-extrabold text-white leading-tight">
                         <motion.span
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
-                            className="text-lg lg:text-2xl font-semibold text-gray-500 mb-2"
+                            className="text-lg lg:text-2xl font-semibold text-gray-400 mb-2"
                         >
                             Hello, I am
                         </motion.span>
@@ -39,7 +39,7 @@ export default function HeroSection() {
                             ]}
                             wrapper="span"
                             speed={50}
-                            style={{ display: 'inline-block', color: 'black' }}
+                            style={{ display: 'inline-block', color: 'white' }}
                             repeat={Infinity}
                         />
 
@@ -51,8 +51,8 @@ export default function HeroSection() {
                         >
                             <span>Fullstack</span>
                             <span
-                                className="text-white"
-                                style={{ WebkitTextStroke: "2px black" }}
+                                className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 to-white"
+                                style={{ WebkitTextStroke: "1px white" }}
                             >
                                 Developer
                             </span>
@@ -62,21 +62,21 @@ export default function HeroSection() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
-                            className="text-xl lg:text-3xl mt-2 font-medium text-gray-600"
+                            className="text-xl lg:text-3xl mt-2 font-medium text-gray-400"
                         >
-                            Based In <span className="text-black font-bold">India.</span>
+                            Based In <span className="text-white font-bold">India.</span>
                         </motion.h2>
                     </div>
 
                     <motion.p
-                        className="text-gray-600 text-sm lg:text-lg mt-8 leading-relaxed max-w-xl"
+                        className="text-gray-400 text-sm lg:text-lg mt-8 leading-relaxed max-w-xl"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
                     >
                         Passionate about building scalable digital solutions. I specialize in the
-                        <span className="bg-black text-white px-1 mx-1">MERN Stack</span> and
-                        <span className="bg-black text-white px-1 mx-1">Flutter</span> development.
+                        <span className="bg-white text-black px-1 mx-1 font-bold">MERN Stack</span> and
+                        <span className="bg-white text-black px-1 mx-1 font-bold">Flutter</span> development.
                         Focused on creating intuitive experiences that solve real-world problems.
                     </motion.p>
 
@@ -110,7 +110,7 @@ const SocialBtn = ({ href, icon: Icon }) => (
         href={href}
         target="_blank"
         rel="noreferrer"
-        className="bg-white p-3 rounded-md border-2 border-black text-black text-xl lg:text-2xl hover:bg-black hover:text-white transition-all duration-300 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]"
+        className="bg-black p-3 rounded-md border border-white text-white text-xl lg:text-2xl hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:shadow-[0_0_25px_rgba(255,255,255,0.5)]"
         whileTap={{ scale: 0.95 }}
     >
         <Icon />
