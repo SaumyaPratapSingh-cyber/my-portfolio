@@ -15,23 +15,31 @@
     "@react-three/fiber": "^8.18.0",
     "@react-three/gltfjsx": "^4.3.4",
     "@splinetool/react-spline": "^4.1.0",
-    "framer-motion": "^11.3.8",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.9.1",
+    "framer-motion": "^11.18.2",
     "gsap": "^3.13.0",
+    "lucide-react": "^0.562.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.25.1",
     "react-scroll": "^1.9.3",
-    "sass": "^1.77.8",
-    "three": "^0.158.0"
+    "react-tilt": "^1.0.2",
+    "sass": "^1.97.1",
+    "three": "^0.158.0",
+    "tsparticles": "^3.9.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.23",
     "eslint": "^8.45.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.18",
     "vite": "^4.4.5"
   }
 }

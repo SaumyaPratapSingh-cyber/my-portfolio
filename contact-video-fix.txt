@@ -1,0 +1,19 @@
+// Add this inside .contact-scene-wrapper (around line 975-979)
+
+.contact-scene-wrapper {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .contact-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+    border: 3px solid #FFFF00;
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.2);
+  }
+}

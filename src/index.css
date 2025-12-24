@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply bg-deep-space text-white overflow-x-hidden;
+        font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+@layer components {
+    .glass-panel {
+        @apply backdrop-blur-md bg-white/5 border border-white/10 shadow-xl;
+    }
+}
