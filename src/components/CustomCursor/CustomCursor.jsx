@@ -49,13 +49,11 @@ const CURSOR_DIAMETER = 48;
 const CustomCursor = () => {
   const location = useLocation();
   const isLoading = false;
-
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  // React Refs for Jelly Blob and Text
+  // React Refs
   const jellyRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
-  const { x, y } = useMouse();
 
   // Save pos and velocity Objects
   const pos = useInstance(() => ({ x: 0, y: 0 }));
@@ -92,52 +90,17 @@ const CustomCursor = () => {
 
   const [cursorMoved, setCursorMoved] = useState(false);
 
-  // Run on Mouse Move
-  useLayoutEffect(() => {
+  // Separate Logic: Mouse Move (Fast) vs Hover Check (Event Delegated)
+  useEffect(() => {
     if (isMobile) return;
 
-    const setFromEvent = (e) => {
-      if (!jellyRef.current) return;
-      if (!cursorMoved) {
-        setCursorMoved(true);
-      }
+    const onMouseMove = (e) => {
+      if (!cursorMoved) setCursorMoved(true);
 
-      const el = e.target;
-
-      const isInteractive =
-        el.tagName.toLowerCase() === 'a' ||
-        el.tagName.toLowerCase() === 'button' ||
-        el.closest('a') ||
-        el.closest('button') ||
-        el.classList.contains('cursor-pointer') ||
-        window.getComputedStyle(el).cursor === 'pointer';
-
-      if (isInteractive) {
-        setIsHovering(true);
-        gsap.to(jellyRef.current, {
-          width: CURSOR_DIAMETER * 2,
-          height: CURSOR_DIAMETER * 2,
-          duration: 0.4,
-          ease: "elastic.out(1, 0.3)",
-          backgroundColor: "white", // Mix-blend handle the contrast
-        });
-      } else {
-        if (isHovering) {
-          setIsHovering(false);
-          gsap.to(jellyRef.current, {
-            width: CURSOR_DIAMETER,
-            height: CURSOR_DIAMETER,
-            backgroundColor: "white",
-            duration: 0.4
-          });
-        }
-      }
-
-      // Mouse X and Y
+      // Purely update position target
       const x = e.clientX;
       const y = e.clientY;
 
-      // Animate Position and calculate Velocity with GSAP
       gsap.to(pos, {
         x: x,
         y: y,
@@ -152,32 +115,81 @@ const CustomCursor = () => {
       loop();
     };
 
-    if (!isLoading) window.addEventListener("mousemove", setFromEvent);
-    return () => {
-      if (!isLoading) window.removeEventListener("mousemove", setFromEvent);
+    // Hover Detection via Event Delegation (Performance: runs only on enter/leave, not every pixel)
+    const onMouseOver = (e) => {
+      const el = e.target;
+      const isInteractive =
+        el.tagName.toLowerCase() === 'a' ||
+        el.tagName.toLowerCase() === 'button' ||
+        el.closest('a') ||
+        el.closest('button') ||
+        el.classList.contains('cursor-pointer'); // Removed expensive getComputedStyle check
+
+      if (isInteractive) {
+        setIsHovering(true);
+        if (jellyRef.current) {
+          gsap.to(jellyRef.current, {
+            width: CURSOR_DIAMETER * 2,
+            height: CURSOR_DIAMETER * 2,
+            duration: 0.4,
+            ease: "elastic.out(1, 0.3)",
+            backgroundColor: "white",
+          });
+        }
+      }
     };
-  }, [isLoading, isMobile, isHovering]);
+
+    const onMouseOut = (e) => {
+      const el = e.target;
+      const isInteractive =
+        el.tagName.toLowerCase() === 'a' ||
+        el.tagName.toLowerCase() === 'button' ||
+        el.closest('a') ||
+        el.closest('button') ||
+        el.classList.contains('cursor-pointer');
+
+      if (isInteractive) {
+        setIsHovering(false);
+        if (jellyRef.current) {
+          gsap.to(jellyRef.current, {
+            width: CURSOR_DIAMETER,
+            height: CURSOR_DIAMETER,
+            backgroundColor: "white",
+            duration: 0.4
+          });
+        }
+      }
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseover", onMouseOver);
+    window.addEventListener("mouseout", onMouseOut);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseover", onMouseOver);
+      window.removeEventListener("mouseout", onMouseOut);
+    };
+  }, [isMobile, cursorMoved, loop]); // Removed isHovering from deps to prevent re-binding constantly
 
   useTicker(loop, isLoading || !cursorMoved || isMobile);
   if (isMobile) return null;
 
-  // Return UI
   return (
     <>
       <div
         ref={jellyRef}
         className={cn(
-          "fixed left-0 top-0 rounded-full z-[9999] pointer-events-none will-change-transform flex items-center justify-center",
+          "fixed left-0 top-0 rounded-full z-[9999] pointer-events-none will-change-transform flex items-center justify-center transition-colors duration-300",
           "translate-x-[-50%] translate-y-[-50%]"
         )}
         style={{
           width: CURSOR_DIAMETER,
           height: CURSOR_DIAMETER,
-          backgroundColor: "white", // White base
-          mixBlendMode: "difference", // CRTICAL: Auto-inverts colors
+          backgroundColor: "white",
+          mixBlendMode: "difference",
         }}
       >
-        {/* Inner Semi-Circle (Black in Difference mode = White on Black background, Black on White background) */}
         {!isHovering && (
           <div className="relative w-[30%] h-[15%] bg-black rounded-t-full rotate-180"></div>
         )}
