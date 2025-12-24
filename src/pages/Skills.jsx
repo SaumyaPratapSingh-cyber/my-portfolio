@@ -1,9 +1,7 @@
-import React, { useMemo, Suspense } from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { skills } from "../constants";
-
-// Lazy load Spline to avoid blocking main thread
-const Spline = React.lazy(() => import('@splinetool/react-spline'));
+import TechNucleus from "../components/TechNucleus/TechNucleus";
 
 const Skills = () => {
   // Flatten all skills into a single array
@@ -18,33 +16,32 @@ const Skills = () => {
   return (
     <section className="py-20 relative overflow-hidden min-h-screen flex flex-col items-center justify-center bg-white z-20" id="skills">
 
-      {/* Central Content: Title + 3D Object */}
-      <div className="relative z-30 flex flex-col items-center justify-center -mt-20">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] relative"
-        >
-          {/* 3D Spline Object - "Tech Sphere/Cube" */}
-          {/* Using a reliable public Spline Scene URL for a tech/abstract object */}
-          <Suspense fallback={<div className="w-full h-full rounded-full bg-gray-100 animate-pulse"></div>}>
-            <Spline scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode" />
-          </Suspense>
-        </motion.div>
-
+      {/* Central Content: Title + 3D Tech Nucleus */}
+      <div className="relative z-30 flex flex-col items-center justify-center -mt-10">
+        {/* Title ABOVE the Core */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl lg:text-5xl font-extrabold text-center mt-[-50px] text-black relative z-40"
+          className="text-4xl lg:text-5xl font-extrabold text-center mb-0 text-black relative z-40"
         >
           My <span className="underline decoration-4 decoration-black underline-offset-4">Skills</span>
         </motion.h2>
-        <p className="text-gray-500 font-medium mt-4">Tech that drives innovation.</p>
+
+        {/* 3D Tech Nucleus - Floating in Center */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="w-[300px] h-[300px] lg:w-[400px] lg:h-[400px] relative mt-[-20px] mb-[-40px]"
+        >
+          <TechNucleus />
+        </motion.div>
+
+        <p className="text-gray-500 font-medium relative z-40">Tech that drives innovation.</p>
       </div>
 
-      {/* Orbit Container - Positioned LOWER to frame the content but NOT overlap the section above */}
+      {/* Orbit Container */}
       <div
         className="absolute bottom-[-550px] lg:bottom-[-500px] flex items-center justify-center pointer-events-none z-10"
         style={{
@@ -66,7 +63,6 @@ const Skills = () => {
             boxShadow: "0 0 150px rgba(0,0,0,0.1)"
           }}
         >
-          {/* Inner white circle */}
           <div className="absolute inset-4 rounded-full bg-white z-0"></div>
 
           {allSkills.map((skill, index) => {
