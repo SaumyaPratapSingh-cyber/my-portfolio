@@ -1,63 +1,90 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 import { skills } from "../constants";
 
 const Skills = () => {
+  // Flatten all skills into a single array
+  const allSkills = useMemo(() => {
+    return skills.flatMap(category => category.items);
+  }, []);
+
+  // Configuration
+  const RADIUS = 800; // Large radius for the arc effect
+  const DURATION = 60; // Slow rotation speed
+
   return (
-    <section className="py-20 px-5 lg:px-28 relative" id="skills">
-      <div className="container mx-auto">
+    <section className="py-20 relative overflow-hidden h-[120vh] flex flex-col items-center justify-start bg-white" id="skills">
+      <div className="container mx-auto relative z-10 text-center mb-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl lg:text-5xl font-extrabold text-center mb-16 text-black"
+          className="text-4xl lg:text-5xl font-extrabold text-center mb-4 text-black"
         >
           My <span className="underline decoration-4 decoration-black underline-offset-4">Skills</span>
         </motion.h2>
+        <p className="text-gray-500 font-medium">Packed with Innovation. Orbiting around excellence.</p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {skills.map((category, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                type: "spring",
-                stiffness: 100,
-                damping: 15,
-                delay: idx * 0.1
-              }}
-              className="h-full"
-            >
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: idx * 0.5
+      {/* Orbit Container - Positioned to show only the top arc */}
+      <div
+        className="absolute top-[30%] lg:top-[40%] flex items-center justify-center pointer-events-none"
+        style={{
+          width: RADIUS * 2,
+          height: RADIUS * 2,
+        }}
+      >
+        {/* Rotating Ring */}
+        <motion.div
+          className="w-full h-full rounded-full border border-black/5 relative flex items-center justify-center pointer-events-auto hover:pause-animation"
+          animate={{ rotate: 360 }}
+          transition={{ duration: DURATION, repeat: Infinity, ease: "linear" }}
+          style={{
+            boxShadow: "0 0 100px rgba(0,0,0,0.05)",
+          }}
+        >
+          {/* Central "Core" (Optional visual anchor) */}
+          <div className="absolute w-[400px] h-[400px] rounded-full bg-gradient-to-b from-black/5 to-transparent blur-3xl"></div>
+
+          {allSkills.map((skill, index) => {
+            const total = allSkills.length;
+            const angle = (360 / total) * index;
+
+            return (
+              <div
+                key={index}
+                className="absolute left-1/2 top-1/2"
+                style={{
+                  transform: `rotate(${angle}deg) translate(${RADIUS}px)`,
                 }}
-                className="bg-white/60 backdrop-blur-xl border border-neutral-200 p-6 rounded-2xl h-full transition-all duration-300 hover:bg-black hover:border-black hover:shadow-[0_10px_40px_rgba(0,0,0,0.2)] group cursor-pointer relative overflow-hidden"
               >
-                {/* Shiny gloss effect on top */}
-                <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:opacity-20"></div>
-
-                <h3 className="text-xl font-bold mb-6 border-b border-black/10 pb-2 text-black group-hover:border-white/30 group-hover:text-white transition-colors">{category.title}</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {category.items.map((skill, i) => (
-                    <div key={i} className="flex flex-col items-center gap-3 p-3 rounded-xl border border-black/5 bg-transparent group-hover:bg-white/10 group-hover:border-white/20 transition-colors">
-                      <div className="w-10 h-10 p-1 bg-white rounded-lg flex items-center justify-center border border-neutral-200 group-hover:scale-110 transition-transform">
-                        <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain" />
-                      </div>
-                      <span className="text-sm font-bold text-gray-700 group-hover:text-white transition-colors">{skill.name}</span>
+                {/* Counter-Rotating Content (Keeps icon upright) */}
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: DURATION, repeat: Infinity, ease: "linear" }}
+                  className="group"
+                >
+                  <div className="relative flex flex-col items-center justify-center w-24 h-24 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-black/5 p-4 transition-all duration-300 hover:scale-125 hover:z-50 hover:shadow-2xl hover:border-black/20 group-hover:bg-white cursor-pointer -translate-x-1/2 -translate-y-1/2">
+                    {/* Gloss Shine */}
+                    <div className="absolute top-0 left-0 w-full h-full rounded-2xl overflow-hidden pointer-events-none">
+                      <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-gradient-to-tr from-transparent via-white/40 to-transparent rotate-45 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-          ))}
-        </div>
+
+                    <div className="w-10 h-10 mb-2">
+                      <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain drop-shadow-sm" />
+                    </div>
+                    <span className="text-xs font-bold text-gray-800 text-center leading-tight group-hover:text-black">{skill.name}</span>
+
+                    {/* Proficiency Badge on Hover */}
+                    <div className="absolute -top-3 right-0 bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
+                      {skill.proficiency || "100"}%
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
