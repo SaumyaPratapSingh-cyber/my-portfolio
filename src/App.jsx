@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/navbar/Navbar';
 import HeroSection from './pages/HeroSection';
 import Skills from './pages/Skills';
 import About from './pages/About';
