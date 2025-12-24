@@ -9,8 +9,8 @@ const Skills = () => {
   }, []);
 
   // Configuration
-  const RADIUS = 800; // Large radius for the arc effect
-  const DURATION = 60; // Slow rotation speed
+  const RADIUS = 800;
+  const DURATION = 80;
 
   return (
     <section className="py-20 relative overflow-hidden h-[120vh] flex flex-col items-center justify-start bg-white" id="skills">
@@ -23,28 +23,34 @@ const Skills = () => {
         >
           My <span className="underline decoration-4 decoration-black underline-offset-4">Skills</span>
         </motion.h2>
-        <p className="text-gray-500 font-medium">Packed with Innovation. Orbiting around excellence.</p>
+        <p className="text-gray-500 font-medium">Tech that drives innovation.</p>
       </div>
 
-      {/* Orbit Container - Positioned to show only the top arc */}
+      {/* Orbit Container - Positioned at BOTTOM to create a "Hill/Planet" arc */}
       <div
-        className="absolute top-[30%] lg:top-[40%] flex items-center justify-center pointer-events-none"
+        className="absolute bottom-[-700px] flex items-center justify-center pointer-events-none"
         style={{
           width: RADIUS * 2,
           height: RADIUS * 2,
         }}
       >
-        {/* Rotating Ring */}
+        {/* Rotating Ring with Black/White Design */}
         <motion.div
-          className="w-full h-full rounded-full border border-black/5 relative flex items-center justify-center pointer-events-auto hover:pause-animation"
+          className="w-full h-full rounded-full relative flex items-center justify-center pointer-events-auto hover:pause-animation"
           animate={{ rotate: 360 }}
           transition={{ duration: DURATION, repeat: Infinity, ease: "linear" }}
           style={{
-            boxShadow: "0 0 100px rgba(0,0,0,0.05)",
+            // Black and White Conic Design
+            background: `
+                        radial-gradient(transparent 65%, white 65.5%),
+                        conic-gradient(from 0deg, #000000 0deg 180deg, #f0f0f0 180deg 360deg)
+                    `,
+            border: "2px solid rgba(0,0,0,0.1)",
+            boxShadow: "0 0 100px rgba(0,0,0,0.05)"
           }}
         >
-          {/* Central "Core" (Optional visual anchor) */}
-          <div className="absolute w-[400px] h-[400px] rounded-full bg-gradient-to-b from-black/5 to-transparent blur-3xl"></div>
+          {/* Inner white circle to create the "Ring" effect from the gradient */}
+          <div className="absolute inset-2 rounded-full bg-white z-0"></div>
 
           {allSkills.map((skill, index) => {
             const total = allSkills.length;
@@ -53,32 +59,30 @@ const Skills = () => {
             return (
               <div
                 key={index}
-                className="absolute left-1/2 top-1/2"
+                className="absolute left-1/2 top-1/2 z-10"
                 style={{
                   transform: `rotate(${angle}deg) translate(${RADIUS}px)`,
                 }}
               >
-                {/* Counter-Rotating Content (Keeps icon upright) */}
+                {/* Counter-Rotating Content: "Tech Upwards" - Text Above Icon? User said "Tech upwards" */}
                 <motion.div
                   animate={{ rotate: -360 }}
                   transition={{ duration: DURATION, repeat: Infinity, ease: "linear" }}
-                  className="group"
+                  className="group relative"
                 >
-                  <div className="relative flex flex-col items-center justify-center w-24 h-24 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-black/5 p-4 transition-all duration-300 hover:scale-125 hover:z-50 hover:shadow-2xl hover:border-black/20 group-hover:bg-white cursor-pointer -translate-x-1/2 -translate-y-1/2">
-                    {/* Gloss Shine */}
-                    <div className="absolute top-0 left-0 w-full h-full rounded-2xl overflow-hidden pointer-events-none">
-                      <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-gradient-to-tr from-transparent via-white/40 to-transparent rotate-45 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  {/* Connector Line (Spoke) */}
+                  <div className="absolute top-1/2 left-1/2 w-[1px] h-[50px] bg-black/10 origin-top -translate-x-1/2 -z-10 absolute-center"></div>
+
+                  <div className="flex flex-col-reverse items-center gap-3 transition-all duration-300 group-hover:scale-125 group-hover:-translate-y-4">
+                    {/* Card (Icon) */}
+                    <div className="relative flex items-center justify-center w-20 h-20 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg border border-black/5 p-4 group-hover:shadow-[0_0_30px_rgba(0,0,0,0.2)] group-hover:border-black transition-all">
+                      <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain" />
                     </div>
 
-                    <div className="w-10 h-10 mb-2">
-                      <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain drop-shadow-sm" />
-                    </div>
-                    <span className="text-xs font-bold text-gray-800 text-center leading-tight group-hover:text-black">{skill.name}</span>
-
-                    {/* Proficiency Badge on Hover */}
-                    <div className="absolute -top-3 right-0 bg-black text-white text-[10px] font-bold px-2 py-0.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
-                      {skill.proficiency || "100"}%
-                    </div>
+                    {/* Text Above (Upwards) */}
+                    <span className="text-sm font-extrabold uppercase tracking-wider text-black bg-white px-2 py-1 rounded shadow-sm border border-black/5 group-hover:bg-black group-hover:text-white transition-colors">
+                      {skill.name}
+                    </span>
                   </div>
                 </motion.div>
               </div>
