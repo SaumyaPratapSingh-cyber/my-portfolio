@@ -10,7 +10,7 @@ import { cn } from "../../lib/utils";
 import { useMouse } from "../../hooks/use-mouse";
 import { useMediaQuery } from "../../hooks/use-media-query";
 import { useLocation } from "react-router-dom";
-import './customCursor.scss'; // Ensure styles are imported
+import './customCursor.scss';
 
 // Gsap Ticker Function
 function useTicker(callback, paused) {
@@ -44,25 +44,11 @@ function getAngle(diffX, diffY) {
   return (Math.atan2(diffY, diffX) * 180) / Math.PI;
 }
 
-function getRekt(el) {
-  if (el.classList.contains("cursor-can-hover"))
-    return el.getBoundingClientRect();
-  else if (el.parentElement?.classList.contains("cursor-can-hover"))
-    return el.parentElement.getBoundingClientRect();
-  else if (
-    el.parentElement?.parentElement?.classList.contains("cursor-can-hover")
-  )
-    return el.parentElement.parentElement.getBoundingClientRect();
-  return null;
-}
-
-const CURSOR_DIAMETER = 20; // Reduced from 50 for a cleaner look
+const CURSOR_DIAMETER = 48; // Bigger size as requested
 
 const CustomCursor = () => {
   const location = useLocation();
-  // Simplified preloader mock since we don't have that context
   const isLoading = false;
-  const loadingPercent = 100;
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -97,12 +83,10 @@ const CustomCursor = () => {
     if (!isHovering && !isLoading) {
       set.x(pos.x);
       set.y(pos.y);
-      set.width(CURSOR_DIAMETER + scale * 100); // Reduced scale factor
+      set.width(CURSOR_DIAMETER + scale * 200);
       set.r(rotation);
       set.sx(1 + scale);
       set.sy(1 - scale * 2);
-    } else {
-      set.r(0);
     }
   }, [isHovering, isLoading]);
 
@@ -120,7 +104,6 @@ const CustomCursor = () => {
 
       const el = e.target;
 
-      // Adapted hover detection: Check for 'a', 'button', or 'cursor-pointer' classes
       const isInteractive =
         el.tagName.toLowerCase() === 'a' ||
         el.tagName.toLowerCase() === 'button' ||
@@ -131,15 +114,13 @@ const CustomCursor = () => {
 
       if (isInteractive) {
         setIsHovering(true);
-        // If we wanted to "snap" to the element we would use getBoundingClientRect here
-        // For now, we will just stick to the elastic effect but maybe scale up
         gsap.to(jellyRef.current, {
-          width: CURSOR_DIAMETER * 2.5,
-          height: CURSOR_DIAMETER * 2.5,
+          width: CURSOR_DIAMETER * 2,
+          height: CURSOR_DIAMETER * 2,
           duration: 0.4,
           ease: "elastic.out(1, 0.3)",
-          backgroundColor: "rgba(255, 255, 255, 0.1)",
-          mixBlendMode: "difference"
+          backgroundColor: "rgba(0, 0, 0, 0.1)", // Semi-transparent when expanded
+          mixBlendMode: "normal"
         });
       } else {
         if (isHovering) {
@@ -147,7 +128,7 @@ const CustomCursor = () => {
           gsap.to(jellyRef.current, {
             width: CURSOR_DIAMETER,
             height: CURSOR_DIAMETER,
-            backgroundColor: "transparent",
+            backgroundColor: "black", // Return to solid black
             mixBlendMode: "normal",
             duration: 0.4
           });
@@ -162,8 +143,8 @@ const CustomCursor = () => {
       gsap.to(pos, {
         x: x,
         y: y,
-        duration: 0.8, // Slightly faster follow
-        ease: "power3.out", // Smoother ease
+        duration: 0.8,
+        ease: "power3.out",
         onUpdate: () => {
           vel.x = (x - pos.x) * 1.2;
           vel.y = (y - pos.y) * 1.2;
@@ -188,23 +169,21 @@ const CustomCursor = () => {
       <div
         ref={jellyRef}
         className={cn(
-          `w-[${CURSOR_DIAMETER}px] h-[${CURSOR_DIAMETER}px] border border-black dark:border-white`,
-          "fixed left-0 top-0 rounded-full z-[999] pointer-events-none will-change-transform",
+          "fixed left-0 top-0 rounded-full z-[999] pointer-events-none will-change-transform flex items-center justify-center",
           "translate-x-[-50%] translate-y-[-50%]"
         )}
         style={{
+          width: CURSOR_DIAMETER,
+          height: CURSOR_DIAMETER,
+          backgroundColor: "black", // Base color: Black Circle
           zIndex: 9999,
-          // backdropFilter: "invert(100%)", // Removed invert for cleaner glass look
         }}
-      ></div>
-      <div
-        className="w-2 h-2 rounded-full fixed bg-black pointer-events-none transition-none z-[10000]"
-        style={{
-          top: 0,
-          left: 0,
-          transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`
-        }}
-      ></div>
+      >
+        {/* Inner White Semi-Circle Graphic */}
+        {!isHovering && (
+          <div className="relative w-[30%] h-[15%] bg-white rounded-t-full rotate-180"></div>
+        )}
+      </div>
     </>
   );
 }
