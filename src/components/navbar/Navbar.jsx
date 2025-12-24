@@ -23,19 +23,19 @@ export default function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={`fixed lg:px-28 px-5 top-0 left-0 w-full z-50 p-5 transition-all duration-300 ${hasShadow
-        ? "bg-black/80 backdrop-blur-xl border-b border-white/20 shadow-lg py-4"
+        ? "bg-white/80 backdrop-blur-xl border-b border-black/5 shadow-md py-4"
         : "bg-transparent py-5"
         }`}
     >
       <div className="container mx-auto flex justify-between items-center">
         <div
-          className="h-9 cursor-pointer font-sora font-extrabold text-2xl flex items-center text-white"
+          className="h-9 cursor-pointer font-sora font-extrabold text-2xl flex items-center text-black"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           Saumya<span className="text-gray-500">.</span>
         </div>
 
-        <ul className="hidden lg:flex items-center gap-x-7 font-bold text-sm tracking-wide text-white">
+        <ul className="hidden lg:flex items-center gap-x-7 font-bold text-sm tracking-wide text-black">
           {["about", "skills", "projects", "contact"].map((section) => (
             <motion.li
               key={section}
@@ -46,7 +46,7 @@ export default function Navbar() {
                 {section.charAt(0).toUpperCase() + section.slice(1)}
               </Link>
               <motion.span
-                className="absolute -bottom-1 left-0 w-0 transition-all duration-300 group-hover:w-full h-[2px] bg-white"
+                className="absolute -bottom-1 left-0 w-0 transition-all duration-300 group-hover:w-full h-[2px] bg-black"
               ></motion.span>
             </motion.li>
           ))}
@@ -57,16 +57,16 @@ export default function Navbar() {
           className="hidden relative lg:inline-block px-5 py-2.5 font-bold group cursor-pointer"
           whileHover={{ y: -2 }}
         >
-          {/* Offset Shadow Button Style - White on Black */}
-          <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-white group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-          <span className="absolute inset-0 w-full h-full bg-black border-2 border-white group-hover:bg-white"></span>
-          <span className="relative text-white group-hover:text-black flex items-center gap-x-3 text-sm">
+          {/* Offset Shadow Button Style */}
+          <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+          <span className="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+          <span className="relative text-black group-hover:text-white flex items-center gap-x-3 text-sm">
             Resume <TbDownload size={18} />
           </span>
         </motion.a>
 
         <motion.button
-          className="lg:hidden text-2xl text-white"
+          className="lg:hidden text-2xl text-black"
           onClick={() => setIsOpen(!isOpen)}
           whileHover={{ scale: 1.2 }}
         >
@@ -82,7 +82,7 @@ export default function Navbar() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden fixed top-0 left-0 h-screen w-full bg-black z-40 flex flex-col items-center justify-center gap-8 text-white"
+            className="lg:hidden fixed top-0 left-0 h-screen w-full bg-white z-40 flex flex-col items-center justify-center gap-8 text-black"
           >
             <ul className="flex flex-col items-center gap-y-8 font-bold text-2xl">
               {["about", "skills", "projects", "contact"].map((section) => (
@@ -102,9 +102,9 @@ export default function Navbar() {
               href="/SaumyratapSingh_resume.pdf" target="_blank"
               className="relative inline-block px-6 py-3 font-bold group"
             >
-              <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-white group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-              <span className="absolute inset-0 w-full h-full bg-black border-2 border-white group-hover:bg-white"></span>
-              <span className="relative text-white group-hover:text-black flex items-center gap-x-3">
+              <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+              <span className="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+              <span className="relative text-black group-hover:text-white flex items-center gap-x-3">
                 Resume <TbDownload size={20} />
               </span>
             </a>

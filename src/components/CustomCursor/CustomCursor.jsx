@@ -44,7 +44,7 @@ function getAngle(diffX, diffY) {
   return (Math.atan2(diffY, diffX) * 180) / Math.PI;
 }
 
-const CURSOR_DIAMETER = 48; // Bigger size as requested
+const CURSOR_DIAMETER = 48;
 
 const CustomCursor = () => {
   const location = useLocation();
@@ -119,8 +119,7 @@ const CustomCursor = () => {
           height: CURSOR_DIAMETER * 2,
           duration: 0.4,
           ease: "elastic.out(1, 0.3)",
-          backgroundColor: "rgba(0, 0, 0, 0.1)", // Semi-transparent when expanded
-          mixBlendMode: "normal"
+          backgroundColor: "white", // Mix-blend handle the contrast
         });
       } else {
         if (isHovering) {
@@ -128,8 +127,7 @@ const CustomCursor = () => {
           gsap.to(jellyRef.current, {
             width: CURSOR_DIAMETER,
             height: CURSOR_DIAMETER,
-            backgroundColor: "black", // Return to solid black
-            mixBlendMode: "normal",
+            backgroundColor: "white",
             duration: 0.4
           });
         }
@@ -169,19 +167,19 @@ const CustomCursor = () => {
       <div
         ref={jellyRef}
         className={cn(
-          "fixed left-0 top-0 rounded-full z-[999] pointer-events-none will-change-transform flex items-center justify-center",
+          "fixed left-0 top-0 rounded-full z-[9999] pointer-events-none will-change-transform flex items-center justify-center",
           "translate-x-[-50%] translate-y-[-50%]"
         )}
         style={{
           width: CURSOR_DIAMETER,
           height: CURSOR_DIAMETER,
-          backgroundColor: "black", // Base color: Black Circle
-          zIndex: 9999,
+          backgroundColor: "white", // White base
+          mixBlendMode: "difference", // CRTICAL: Auto-inverts colors
         }}
       >
-        {/* Inner White Semi-Circle Graphic */}
+        {/* Inner Semi-Circle (Black in Difference mode = White on Black background, Black on White background) */}
         {!isHovering && (
-          <div className="relative w-[30%] h-[15%] bg-white rounded-t-full rotate-180"></div>
+          <div className="relative w-[30%] h-[15%] bg-black rounded-t-full rotate-180"></div>
         )}
       </div>
     </>

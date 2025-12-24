@@ -19,7 +19,9 @@ const Projects = () => {
   }
 
   return (
-    <section className="py-20 relative overflow-hidden" id="projects">
+    <section className="py-20 relative overflow-hidden bg-black text-white" id="projects">
+      {/* Explicit Black Background for this section */}
+
       <div className="container mx-auto px-5 lg:px-28 mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -40,10 +42,10 @@ const Projects = () => {
             <div key={project.id} className="mx-6 w-[400px]">
               <Tilt options={defaultOptions}>
                 <div
-                  className="bg-black border border-white/20 rounded-xl overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-300 flex flex-col h-[520px] relative group"
+                  className="bg-neutral-900/80 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden shadow-2xl hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] transition-all duration-300 flex flex-col h-[520px] relative group"
                 >
                   {/* Gloss Shine */}
-                  <div className="absolute top-0 right-0 w-[200%] h-[200%] bg-gradient-to-b from-white/5 to-transparent -rotate-45 translate-x-1/2 -translate-y-1/2 pointer-events-none group-hover:opacity-100 transition-opacity opacity-50"></div>
+                  <div className="absolute top-0 right-0 w-[200%] h-[200%] bg-gradient-to-b from-white/10 to-transparent -rotate-45 translate-x-1/2 -translate-y-1/2 pointer-events-none group-hover:opacity-100 transition-opacity opacity-50"></div>
 
                   <div className="h-56 overflow-hidden border-b border-white/10 relative shrink-0">
                     <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100" />
@@ -54,7 +56,7 @@ const Projects = () => {
                   </div>
 
                   <div className="p-8 flex flex-col flex-grow relative z-10">
-                    <div className="absolute top-4 right-4 text-xs font-mono text-gray-600">0{idx + 1}</div>
+                    <div className="absolute top-4 right-4 text-xs font-mono text-gray-500">0{idx + 1}</div>
 
                     <h3 className="text-2xl font-bold mb-3 text-white tracking-tight group-hover:text-gray-200 transition-colors">{project.title}</h3>
                     <p className="text-gray-400 text-sm mb-6 line-clamp-3 text-ellipsis leading-relaxed font-medium">{project.desc}</p>

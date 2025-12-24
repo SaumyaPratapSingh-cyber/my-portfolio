@@ -6,13 +6,13 @@
 
 @layer base {
     body {
-        @apply font-sora text-white overflow-x-hidden;
-        background-color: #000000;
-        /* Pitch Black Base */
+        @apply font-sora text-black overflow-x-hidden;
+        background-color: #ffffff;
+        /* Reverted to White Base */
     }
 }
 
-/* Global Dark Studio Background - High Performance */
+/* Global Glossy Mesh (Subtle on White) */
 body::before {
     content: "";
     position: fixed;
@@ -21,9 +21,5 @@ body::before {
     width: 100%;
     height: 100%;
     z-index: -1;
-    /* Subtle Spotlight Effect: Dark Gray center fading to Pitch Black */
-    background: radial-gradient(circle at 50% 30%, #1a1a1a 0%, #000000 70%);
-    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, #ffffff 0%, #f0f0f0 100%);
 }
-
-/* Remove old animations for 'No Lag' performance */
