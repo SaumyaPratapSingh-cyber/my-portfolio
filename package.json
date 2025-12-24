@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@react-three/drei": "^9.122.0",
-    "@react-three/fiber": "^8.18.0",
+    "@react-three/drei": "^9.108.3",
+    "@react-three/fiber": "^8.16.8",
     "@react-three/gltfjsx": "^4.3.4",
     "@splinetool/react-spline": "^4.1.0",
     "@tsparticles/react": "^3.0.0",
@@ -26,7 +26,7 @@
     "react-scroll": "^1.9.3",
     "react-tilt": "^1.0.2",
     "sass": "^1.97.1",
-    "three": "^0.158.0",
+    "three": "^0.160.0",
     "tsparticles": "^3.9.1"
   },
   "devDependencies": {
