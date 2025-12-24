@@ -41,56 +41,44 @@ const BentoGrid = () => {
 
                 {/* Box 1: Large Bio - Spans 2 cols on md */}
                 <motion.div
-                    className="glass-panel p-8 md:col-span-2 rounded-3xl relative overflow-hidden group"
+                    className="glass-panel p-8 md:col-span-2 rounded-3xl relative overflow-hidden group border border-white/5 bg-gradient-to-br from-white/5 to-transparent"
                     whileHover={{ scale: 1.01 }}
                 >
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-neon-purple/20 blur-[60px] rounded-full group-hover:bg-neon-purple/30 transition-all" />
-                    <h3 className="text-2xl font-bold mb-4 font-display">Who I Am</h3>
-                    <p className="text-gray-300 leading-relaxed text-lg">
-                        I am a passionate Full Stack Developer dedicated to building immersive digital experiences.
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-acid-green/10 blur-[60px] rounded-full group-hover:bg-acid-green/20 transition-all" />
+                    <h3 className="text-3xl font-bold mb-4 font-display text-white">Who I Am</h3>
+                    <p className="text-gray-400 leading-relaxed text-lg font-light">
+                        I am a passionate <span className="text-soft-white font-medium">Full Stack Developer</span> dedicated to building immersive digital experiences.
                         With a strong foundation in modern web technologies, I love merging creativity with code to solve real-world problems.
-                        My journey is defined by constant learning and a drive to innovate.
+                        My journey is defined by constant learning and a drive to <span className="text-acid-green">innovate</span>.
                     </p>
                 </motion.div>
 
-                {/* Box 2: Location Map */}
+                {/* Box 2: Profile Image */}
                 <motion.div
-                    className="glass-panel p-0 md:col-span-1 rounded-3xl relative overflow-hidden flex flex-col items-center justify-center min-h-[200px]"
+                    className="glass-panel p-0 md:col-span-1 rounded-3xl relative overflow-hidden h-full min-h-[250px] group"
                     whileHover={{ scale: 1.02 }}
                 >
-                    {/* Simulated Map Background - Dark Mode Map Look */}
-                    <div className="absolute inset-0 bg-[#1a1a1a] opacity-80">
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-30"
-                            style={{ backgroundImage: 'radial-gradient(circle, #333 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
-                        {/* Abstract "Streets" */}
-                        <div className="absolute top-0 left-1/3 w-1 h-full bg-gray-800 rotate-12"></div>
-                        <div className="absolute top-1/2 left-0 w-full h-1 bg-gray-800 -rotate-6"></div>
-                    </div>
-
-                    <div className="z-10 flex flex-col items-center">
-                        <div className="relative">
-                            <div className="w-4 h-4 bg-neon-cyan rounded-full animate-ping absolute inset-0"></div>
-                            <div className="w-4 h-4 bg-neon-cyan rounded-full relative z-10 border-2 border-white"></div>
-                        </div>
-                        <div className="mt-3 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 flex items-center gap-2">
-                            <MapPin size={16} className="text-neon-cyan" />
-                            <span className="text-sm font-semibold">Lucknow, India</span>
+                    <img src="/profile.png" alt="Saumya" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-110 group-hover:scale-100" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+                        <div className="inline-flex items-center gap-2 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full w-fit border border-white/10">
+                            <MapPin size={14} className="text-acid-green" />
+                            <span className="text-xs font-semibold text-white">Lucknow, India</span>
                         </div>
                     </div>
                 </motion.div>
 
-                {/* Box 3: Open to Work */}
+                {/* Box 3: Open to Work - Styled to match Hype4 */}
                 <motion.div
-                    className="glass-panel p-6 md:col-span-1 rounded-3xl flex flex-col items-center justify-center gap-4 group"
+                    className="glass-panel p-6 md:col-span-1 rounded-3xl flex flex-col items-center justify-center gap-4 group bg-[#111] border border-white/5 hover:border-acid-green/50 transition-colors cursor-default"
                     whileHover={{ scale: 1.02 }}
                 >
                     <div className="relative w-16 h-16 flex items-center justify-center">
-                        <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full animate-pulse"></div>
-                        <div className="w-4 h-4 bg-green-500 rounded-full animate-ping absolute"></div>
-                        <div className="w-6 h-6 bg-green-500 rounded-full border-4 border-[#050505] z-10"></div>
+                        <div className="absolute inset-0 bg-acid-green/20 blur-xl rounded-full animate-pulse"></div>
+                        <div className="w-4 h-4 bg-acid-green rounded-full animate-ping absolute"></div>
+                        <div className="w-6 h-6 bg-acid-green rounded-full border-4 border-[#0a0a0a] z-10"></div>
                     </div>
-                    <h3 className="text-xl font-bold">Open to Work</h3>
-                    <p className="text-xs text-center text-gray-400 uppercase tracking-widest">Available for Freelance & Full-time</p>
+                    <h3 className="text-xl font-bold font-display tracking-tight text-white">Open to Work</h3>
+                    <p className="text-xs text-center text-gray-500 uppercase tracking-widest font-mono">Available Now</p>
                 </motion.div>
 
                 {/* Box 4: GitHub Activity */}

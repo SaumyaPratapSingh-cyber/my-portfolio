@@ -1,7 +1,6 @@
 import { base64Decode } from './numeric-encoding-utils';
-import { strToUtf8array } from './utf8-utils';
 
-function getKeyIdBytes(str: string): Uint8Array<ArrayBuffer> {
+function getKeyIdBytes(str: string): Uint8Array {
   const keyIdbytes = strToUtf8array(str).subarray(0, 16);
   const paddedkeyIdbytes = new Uint8Array(16);
   paddedkeyIdbytes.set(keyIdbytes, 16 - keyIdbytes.length);
@@ -21,12 +20,10 @@ export function changeEndianness(keyId: Uint8Array) {
   swap(keyId, 6, 7);
 }
 
-export function convertDataUriToArrayBytes(
-  uri: string,
-): Uint8Array<ArrayBuffer> | null {
+export function convertDataUriToArrayBytes(uri: string): Uint8Array | null {
   // data:[<media type][;attribute=value][;base64],<data>
   const colonsplit = uri.split(':');
-  let keydata: Uint8Array<ArrayBuffer> | null = null;
+  let keydata: Uint8Array | null = null;
   if (colonsplit[0] === 'data' && colonsplit.length === 2) {
     const semicolonsplit = colonsplit[1].split(';');
     const commasplit = semicolonsplit[semicolonsplit.length - 1].split(',');
@@ -42,4 +39,10 @@ export function convertDataUriToArrayBytes(
     }
   }
   return keydata;
+}
+
+export function strToUtf8array(str: string): Uint8Array {
+  return Uint8Array.from(unescape(encodeURIComponent(str)), (c) =>
+    c.charCodeAt(0)
+  );
 }

@@ -4,14 +4,20 @@
 
 @layer base {
     body {
-        @apply bg-deep-space text-white overflow-x-hidden;
+        @apply bg-matte-black text-soft-white overflow-x-hidden;
         font-feature-settings: "ss01", "ss02", "cv01", "cv02";
         -webkit-font-smoothing: antialiased;
     }
 }
 
 @layer components {
+
+    /* Hype4 Style Cards: Cleaner, darker, subtler border */
     .glass-panel {
-        @apply backdrop-blur-md bg-white/5 border border-white/10 shadow-xl;
+        @apply backdrop-blur-xl bg-charcoal/60 border border-white/5 shadow-2xl;
+    }
+
+    .text-glow {
+        text-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
     }
 }
