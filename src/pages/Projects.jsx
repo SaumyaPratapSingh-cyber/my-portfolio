@@ -24,13 +24,13 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white border-2 border-black rounded-xl overflow-hidden shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 transition-all duration-300 flex flex-col"
+              className="bg-white border-2 border-black rounded-xl overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-2 transition-all duration-300 flex flex-col"
             >
               <div className="h-48 overflow-hidden border-b-2 border-black relative group">
                 <img src={project.img} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                  <a href={project.link} target="_blank" rel="noreferrer" className="bg-white p-2 rounded-full hover:scale-110 transition-transform"><BsGithub size={20} /></a>
-                  {project.prototypeLink && <a href={project.prototypeLink} target="_blank" rel="noreferrer" className="bg-white p-2 rounded-full hover:scale-110 transition-transform"><BsGlobe size={20} /></a>}
+                  <a href={project.link} target="_blank" rel="noreferrer" className="bg-white p-3 rounded-full hover:scale-110 transition-transform border-2 border-black"><BsGithub size={20} /></a>
+                  {project.prototypeLink && <a href={project.prototypeLink} target="_blank" rel="noreferrer" className="bg-white p-3 rounded-full hover:scale-110 transition-transform border-2 border-black"><BsGlobe size={20} /></a>}
                 </div>
               </div>
 
@@ -40,13 +40,13 @@ const Projects = () => {
 
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {project.tech.split(',').slice(0, 3).map((tech, i) => (
-                    <span key={i} className="text-xs font-bold bg-black text-white px-2 py-1 rounded-md">
+                    <span key={i} className="text-xs font-bold border-2 border-black bg-white text-black px-2 py-1 rounded-md hover:bg-black hover:text-white transition-colors cursor-default">
                       {tech.trim()}
                     </span>
                   ))}
                 </div>
 
-                <a href={project.link} target="_blank" rel="noreferrer" className="mt-6 block text-center font-bold border-2 border-black py-2 rounded-lg hover:bg-black hover:text-white transition-colors">
+                <a href={project.link} target="_blank" rel="noreferrer" className="mt-6 block text-center font-bold border-2 border-black py-2 rounded-lg hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-[2px] transition-all bg-white text-black">
                   View Details
                 </a>
               </div>

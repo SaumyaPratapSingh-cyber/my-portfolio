@@ -14,8 +14,8 @@ export default function App() {
       <Navbar />
       <main className="pt-20">
         <HeroSection />
-        <Skills />
         <About />
+        <Skills />
         <Projects />
         <Contact />
       </main>
