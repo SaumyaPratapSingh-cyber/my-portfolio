@@ -4,6 +4,16 @@ import { img } from "framer-motion/client";
 
 export const projects = [
   {
+    id: 6,
+    title: "OpenBank Pro",
+    img: "/open-bank-pro.png",
+    desc: "A cutting-edge, full-stack banking simulation featuring a hyper-modern 'Cosmic Glassmorphism' UI, secure role-based access, and comprehensive financial tools.",
+    impact: "Replicates a real-world digital banking environment with advanced functionalities like UPI payments, loan management, investment tracking, and a robust admin portal for AML monitoring.",
+    tech: "MERN Stack (MongoDB, Express, React 19, Node.js), Tailwind CSS v4, Framer Motion",
+    link: "https://github.com/SaumyaPratapSingh-cyber/Open-Bank-Pro",
+    prototypeLink: "https://open-bank-pro.vercel.app/",
+  },
+  {
     id: 1,
     title: "Clean-Sweep AI",
     img: "/project-cleansweep.png",
@@ -66,7 +76,7 @@ export const experience = [
     duration: "August 2025 - September 2025",
     desc: "Spearheaded CleanSweep AI, a data-driven platform linking citizens, authorities, and recyclers for smarter cleanup.",
     certificateLink: "https://lnkd.in/p/gwd9DCqn", // Add your certificate link here
-    img:"imgbg.png",
+    img: "imgbg.png",
   },
   {
     role: "Core Member",
@@ -106,12 +116,12 @@ export const experience = [
 
 // This line must start with "export const"
 export const education = [
-    {
-        degree: "B.Tech, Computer Science",
-        institution: "United College of Engineering and Research",
-        duration: "2023 - 2027",
-        courses: "Key Courses: Data Structures, AI, DBMS, OOPs, Full Stack Web Dev, OS, Machine Learning."
-    },
+  {
+    degree: "B.Tech, Computer Science",
+    institution: "United College of Engineering and Research",
+    duration: "2023 - 2027",
+    courses: "Key Courses: Data Structures, AI, DBMS, OOPs, Full Stack Web Dev, OS, Machine Learning."
+  },
 ];
 
 export const summary = "I am an aspiring Software Engineer with a passion for building scalable and efficient systems using modern technologies. My expertise spans C++, Python, and cloud-native architectures (BaaS), grounded in a strong understanding of data structures and algorithms. I thrive in dynamic environments, driving projects from conception to deployment, and am committed to continuous learning and community leadership.";
