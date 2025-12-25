@@ -42,7 +42,7 @@ const Projects = () => {
             <div key={project.id} className="w-full max-w-[400px]">
               <Tilt options={defaultOptions}>
                 <div
-                  className="bg-gradient-to-br from-white/10 via-neutral-900/60 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl overflow-hidden shadow-lg hover:shadow-[0_0_50px_rgba(255,255,255,0.2)] transition-all duration-300 flex flex-col h-[520px] relative group"
+                  className="bg-gradient-to-br from-white/10 via-neutral-900/60 to-white/5 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden shadow-lg hover:shadow-[0_0_50px_rgba(255,255,255,0.2)] transition-all duration-300 flex flex-col min-h-[520px] h-auto relative group"
                 >
                   {/* Gloss Shine */}
                   <div className="absolute top-0 right-0 w-[200%] h-[200%] bg-gradient-to-b from-white/20 to-transparent -rotate-45 translate-x-1/2 -translate-y-1/2 pointer-events-none group-hover:opacity-100 transition-opacity opacity-40"></div>

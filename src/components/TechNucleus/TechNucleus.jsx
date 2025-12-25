@@ -42,7 +42,7 @@ const CyberCube = () => {
                 <Icosahedron ref={outerRef} args={[1.8, 0]}>
                     <MeshTransmissionMaterial
                         backside
-                        backsideThickness={5}
+                        backsideThickness={1}
                         thickness={2}
                         chromaticAberration={1}
                         anisotropy={0.5}
@@ -51,6 +51,8 @@ const CyberCube = () => {
                         temporalDistortion={0.2}
                         roughness={0}
                         color="#818cf8" // Tech Blue Transmission
+                        resolution={256}
+                        samples={4}
                     />
                 </Icosahedron>
 

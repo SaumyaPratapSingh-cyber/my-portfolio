@@ -49,7 +49,7 @@ const Skills = () => {
           {row1.map((skill, index) => (
             <div key={index} className="mx-6 group relative cursor-pointer">
               <div className="flex flex-col items-center gap-3 transition-transform duration-300 group-hover:-translate-y-2">
-                <div className="w-20 h-20 bg-black/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/10 p-4 flex items-center justify-center relative overflow-hidden group-hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] group-hover:border-white/50 transition-all">
+                <div className="w-20 h-20 bg-black/95 rounded-2xl shadow-xl border border-white/10 p-4 flex items-center justify-center relative overflow-hidden group-hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] group-hover:border-white/50 transition-all">
                   {/* Glass Shine */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain filter drop-shadow-lg transform group-hover:scale-110 transition-transform" />
@@ -67,7 +67,7 @@ const Skills = () => {
           {row2.map((skill, index) => (
             <div key={index} className="mx-6 group relative cursor-pointer">
               <div className="flex flex-col items-center gap-3 transition-transform duration-300 group-hover:-translate-y-2">
-                <div className="w-20 h-20 bg-black/95 backdrop-blur-xl rounded-2xl shadow-xl border border-white/10 p-4 flex items-center justify-center relative overflow-hidden group-hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] group-hover:border-white/50 transition-all">
+                <div className="w-20 h-20 bg-black/95 rounded-2xl shadow-xl border border-white/10 p-4 flex items-center justify-center relative overflow-hidden group-hover:shadow-[0_0_30px_rgba(0,0,0,0.3)] group-hover:border-white/50 transition-all">
                   {/* Glass Shine */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   <img src={skill.logo} alt={skill.name} className="w-full h-full object-contain filter drop-shadow-lg transform group-hover:scale-110 transition-transform" />
