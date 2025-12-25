@@ -88,7 +88,7 @@ const About = () => {
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
-            <Stat number="03+" label="Years Exp." delay={0.4} />
+            <Stat number="01+" label="Years Exp." delay={0.4} />
             <Stat number="10+" label="Projects" delay={0.5} />
             <Stat number="05+" label="Tech Stacks" delay={0.6} />
             <Stat number="02+" label="Clients" delay={0.7} />
