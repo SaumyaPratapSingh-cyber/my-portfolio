@@ -28,47 +28,46 @@ export default function HeroSection() {
                             Hello, I am
                         </motion.span>
 
-                        <TypeAnimation
-                            sequence={[
-                                'Full Stack Developer',
-                                1000,
-                                'UI/UX Designer',
-                                1000,
-                                'Aspiring Software Engineer',
-                                1000,
-                                'Flutter Developer',
-                                1000,
-                                'Agentic AI Developer',
-                                1000,
-                                'End-to-End Solutions (BaaS)',
-                                1000,
-                            ]}
-                            wrapper="span"
-                            speed={50}
-                            style={{ display: 'inline-block', color: 'black' }}
-                            repeat={Infinity}
-                        />
-
-                        <motion.h2
+                        {/* 1. Name */}
+                        <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ type: "spring", stiffness: 100, delay: 0.3 }}
-                            className="flex flex-col lg:flex-row gap-2 lg:gap-4 mt-2"
+                            transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
+                            className="text-4xl lg:text-7xl font-bold text-black mt-2 mb-4 leading-tight"
                         >
-                            <span>Saumya Pratap</span>
-                            <span
-                                className="text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-black"
-                                style={{ WebkitTextStroke: "1px black" }}
-                            >
-                                Singh
-                            </span>
-                        </motion.h2>
+                            Saumya Pratap Singh
+                        </motion.h1>
 
+                        {/* 2. Rotating Roles */}
+                        <div className="text-2xl lg:text-4xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-black h-[50px] lg:h-[60px] flex items-center">
+                            <TypeAnimation
+                                sequence={[
+                                    'Full Stack Developer',
+                                    1000,
+                                    'UI/UX Designer',
+                                    1000,
+                                    'Aspiring Software Engineer',
+                                    1000,
+                                    'Flutter Developer',
+                                    1000,
+                                    'Agentic AI Developer',
+                                    1000,
+                                    'End-to-End Solutions (BaaS)',
+                                    1000,
+                                ]}
+                                wrapper="span"
+                                speed={50}
+                                style={{ display: 'inline-block' }}
+                                repeat={Infinity}
+                            />
+                        </div>
+
+                        {/* 3. Based In */}
                         <motion.h2
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
-                            className="text-xl lg:text-3xl mt-2 font-medium text-gray-600"
+                            className="text-xl lg:text-3xl mt-4 font-medium text-gray-500"
                         >
                             Based In <span className="text-black font-bold">India.</span>
                         </motion.h2>
