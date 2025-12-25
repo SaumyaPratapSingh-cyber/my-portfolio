@@ -81,8 +81,9 @@ const Experience = () => {
   }, []);
 
   return (
-    <motion.div 
+    <motion.div
       className="page experience-page"
+      id="experience"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -94,18 +95,18 @@ const Experience = () => {
           <p className="page-intro">A timeline of my internships and professional roles. (Click to focus, then use arrow keys or scroll)</p>
         </div>
       </div>
-      
-      <div 
-        className="carousel-container" 
+
+      <div
+        className="carousel-container"
         ref={carouselRef}
         onClick={(e) => e.currentTarget.focus()}
       >
         <div className="carousel-spacer"></div>
         {experience.map((exp, i) => (
-          <Card 
-            exp={exp} 
-            i={i} 
-            key={i} 
+          <Card
+            exp={exp}
+            i={i}
+            key={i}
             scrollContainerRef={carouselRef}
           />
         ))}

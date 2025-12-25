@@ -36,7 +36,7 @@ export default function Navbar() {
         </div>
 
         <ul className="hidden lg:flex items-center gap-x-7 font-bold text-sm tracking-wide text-black">
-          {["about", "skills", "projects", "contact"].map((section) => (
+          {["about", "experience", "skills", "projects", "contact"].map((section) => (
             <motion.li
               key={section}
               className="group relative cursor-pointer"
@@ -85,7 +85,7 @@ export default function Navbar() {
             className="lg:hidden fixed top-0 left-0 h-screen w-full bg-white z-40 flex flex-col items-center justify-center gap-8 text-black"
           >
             <ul className="flex flex-col items-center gap-y-8 font-bold text-2xl">
-              {["about", "skills", "projects", "contact"].map((section) => (
+              {["about", "experience", "skills", "projects", "contact"].map((section) => (
                 <li key={section}>
                   <Link
                     to={section}
