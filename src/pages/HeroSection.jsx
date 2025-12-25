@@ -30,11 +30,17 @@ export default function HeroSection() {
 
                         <TypeAnimation
                             sequence={[
-                                'Saumya Pratap Singh',
+                                'Full Stack Developer',
                                 1000,
-                                'A Fullstack Dev',
+                                'UI/UX Designer',
                                 1000,
-                                'A UI/UX Designer',
+                                'Aspiring Software Engineer',
+                                1000,
+                                'Flutter Developer',
+                                1000,
+                                'Agentic AI Developer',
+                                1000,
+                                'End-to-End Solutions (BaaS)',
                                 1000,
                             ]}
                             wrapper="span"
@@ -49,12 +55,12 @@ export default function HeroSection() {
                             transition={{ type: "spring", stiffness: 100, delay: 0.3 }}
                             className="flex flex-col lg:flex-row gap-2 lg:gap-4 mt-2"
                         >
-                            <span>Fullstack</span>
+                            <span>Saumya Pratap</span>
                             <span
                                 className="text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-black"
                                 style={{ WebkitTextStroke: "1px black" }}
                             >
-                                Developer
+                                Singh
                             </span>
                         </motion.h2>
 
@@ -74,10 +80,7 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
                     >
-                        Passionate about building scalable digital solutions. I specialize in the
-                        <span className="bg-black text-white px-1 mx-1 font-bold">MERN Stack</span> and
-                        <span className="bg-black text-white px-1 mx-1 font-bold">Flutter</span> development.
-                        Focused on creating intuitive experiences that solve real-world problems.
+                        Aspiring Software Engineer with a background in creating end-to-end applications. Adept at leveraging <span className="text-black font-bold">C++</span>, <span className="text-black font-bold">Python</span>, and <span className="text-black font-bold">cloud-native architectures (BaaS)</span> to build scalable and efficient systems.
                     </motion.p>
 
                     <motion.div

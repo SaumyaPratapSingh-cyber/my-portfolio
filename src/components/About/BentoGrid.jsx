@@ -29,7 +29,7 @@ const BentoGrid = () => {
                     </div>
 
                     <p className="text-gray-400 leading-relaxed font-light z-10 mt-6 text-lg">
-                        Fueling the web with interactive, high-performance code. I specialize in building scalable applications with a focus on <span className="text-white font-bold">Cyber-Physical Systems</span> and engaging UI/UX.
+                        Aspiring Software Engineer with a background in creating end-to-end applications. Adept at leveraging <span className="text-white font-bold">C++</span>, <span className="text-white font-bold">Python</span>, and cloud-native architectures <span className="text-white font-bold">(BaaS)</span> to build scalable and efficient systems.
                     </p>
 
                     {/* Decorative HUD Elements */}
