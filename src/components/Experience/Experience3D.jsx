@@ -45,24 +45,18 @@ const CyberHelix = () => {
                 {points.map((point, i) => (
                     <mesh key={i} position={point}>
                         <sphereGeometry args={[0.15, 16, 16]} />
-                        <MeshTransmissionMaterial
-                            backside
-                            backsideThickness={1}
-                            thickness={0.5}
-                            chromaticAberration={0.5}
-                            anisotropy={0.5}
-                            distortion={0.2}
-                            distortionScale={0.5}
-                            temporalDistortion={0.1}
-                            color={i % 2 === 0 ? "#ffffff" : "#444444"} // Black and White theme
-                            roughness={0}
-                            transmission={0.9}
+                        {/* Switched to Chrome Material for Performance (Glass was too heavy for 30 instances) */}
+                        <meshStandardMaterial
+                            color={i % 2 === 0 ? "#ffffff" : "#aaaaaa"}
+                            metalness={0.9}
+                            roughness={0.1}
                         />
                     </mesh>
                 ))}
 
                 {/* Surrounding Particles */}
-                {Array.from({ length: 20 }).map((_, i) => (
+                {/* Reduced count to 15 for performance */}
+                {Array.from({ length: 15 }).map((_, i) => (
                     <Float key={`p-${i}`} speed={2} rotationIntensity={2} floatIntensity={4}>
                         <mesh position={[
                             (Math.random() - 0.5) * 10,
@@ -70,7 +64,7 @@ const CyberHelix = () => {
                             (Math.random() - 0.5) * 10
                         ]}>
                             <octahedronGeometry args={[0.1]} />
-                            <meshBasicMaterial color="#ffffff" transparent opacity={0.4} />
+                            <meshBasicMaterial color="#ffffff" transparent opacity={0.3} />
                         </mesh>
                     </Float>
                 ))}
@@ -83,11 +77,13 @@ const Experience3D = () => {
     return (
         <div className="absolute inset-0 w-full h-full -z-10 bg-black">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-900/10 to-black opacity-50 z-0"></div>
-            <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
+            {/* Added dpr for performance optimization on high-res screens */}
+            <Canvas camera={{ position: [0, 0, 10], fov: 45 }} dpr={[1, 1.5]}>
                 <Environment preset="city" />
                 <ambientLight intensity={0.5} />
                 <pointLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
-                <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+                {/* Reduced star count for performance */}
+                <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />
                 <CyberHelix />
             </Canvas>
         </div>

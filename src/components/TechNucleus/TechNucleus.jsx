@@ -85,7 +85,7 @@ const CyberCube = () => {
 const TechNucleus = () => {
     return (
         <div className="w-full h-full relative z-10">
-            <Canvas shadows camera={{ position: [0, 0, 8], fov: 40 }} className="bg-transparent">
+            <Canvas shadows camera={{ position: [0, 0, 8], fov: 40 }} className="bg-transparent" dpr={[1, 2]}>
                 {/* Environment for nice reflections on the Glass */}
                 <Environment preset="city" />
 
