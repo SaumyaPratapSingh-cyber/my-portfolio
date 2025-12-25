@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import React from "react";
-import Experience3D from "../components/Experience/Experience3D"; // Import the new 3D component
+import Experience3D from "../components/Experience/Experience3D";
 import { experience } from "../constants";
-import "./pages.scss"; // Keeping basics, but overriding with Tailwind mostly
+import "./pages.scss";
 
 const Experience = () => {
   return (
@@ -46,55 +46,81 @@ const Experience = () => {
 const TimelineItem = ({ data, index }) => {
   const isEven = index % 2 === 0;
 
+  // Generate a placeholder logo letter since we don't have all SVGs
+  const logoLetter = data.company.charAt(0);
+  const isGoogle = data.company.toLowerCase().includes("google") || data.company.toLowerCase().includes("gdg");
+
   return (
     <div className={`relative flex flex-col lg:flex-row items-center lg:justify-between w-full group ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
 
       {/* Dot & Connector */}
-      <div className="absolute left-8 lg:left-1/2 w-4 h-4 bg-white rounded-full shadow-[0_0_20px_rgba(255,255,255,0.8)] z-20 transform -translate-x-1/2 lg:group-hover:scale-150 transition-transform duration-500 border-2 border-black"></div>
+      <div className="absolute left-8 lg:left-1/2 w-4 h-4 bg-black border-2 border-white rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)] z-20 transform -translate-x-1/2 lg:group-hover:scale-150 transition-transform duration-500"></div>
 
-      {/* Empty Spacer for alternating layout */}
+      {/* Empty Spacer */}
       <div className="hidden lg:block lg:w-5/12"></div>
 
       {/* Content Card */}
       <motion.div
-        initial={{ opacity: 0, x: isEven ? 50 : -50 }} // Slide in from sides
+        initial={{ opacity: 0, x: isEven ? 50 : -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.7, delay: index * 0.1, type: "spring", stiffness: 50 }}
         className={`w-full lg:w-5/12 pl-20 lg:pl-0 ${!isEven ? 'lg:text-right' : 'lg:text-left'}`}
       >
-        <div className="relative p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden hover:border-white/30 transition-all duration-500 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+        {/* 
+                    NEW CARD DESIGN:
+                    - Black Background
+                    - White/Grey Border
+                    - "Header Row": [Logo] [Title+Role] ... [Date]
+                */}
+        <div className="relative p-6 md:p-8 bg-black border border-white/20 rounded-xl hover:border-white/60 transition-colors duration-300">
 
-          {/* Glossy Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          {/* Header Row */}
+          <div className={`flex flex-col gap-4 mb-6 ${!isEven ? 'lg:flex-row-reverse lg:text-right' : 'md:flex-row md:items-start'}`}>
 
-          {/* Content */}
-          <div className="relative z-10 flex flex-col gap-3">
-            {/* Date Tag */}
-            <div className={`inline-block px-4 py-1 rounded-full text-xs font-bold tracking-wider bg-black/50 border border-white/10 w-fit text-gray-300 mb-2 ${!isEven ? 'lg:ml-auto lg:mr-0' : ''}`}>
-              {data.duration}
+            {/* Logo Circle */}
+            <div className={`flex-shrink-0 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-zinc-900 ${!isEven ? 'lg:ml-auto' : ''}`}>
+              {isGoogle ? (
+                <img src="/google.png" alt="G" className="w-6 h-6 object-contain" onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerText = 'G' }} />
+              ) : (
+                <span className="text-white font-bold text-lg">{logoLetter}</span>
+              )}
             </div>
 
-            <h3 className="text-2xl font-bold text-white">{data.role}</h3>
-            <h4 className="text-xl text-gray-400 font-medium">{data.company}</h4>
+            {/* Title & Role */}
+            <div className="flex-grow">
+              <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">{data.role}</h3>
+              <h4 className="text-lg text-gray-400 font-medium mt-1">{data.company}</h4>
+            </div>
 
-            <p className="text-gray-400 leading-relaxed text-sm mt-2">
-              {data.desc}
-            </p>
+            {/* Date (Top Right on Desktop) */}
+            <div className="flex-shrink-0 self-start">
+              <span className="inline-block px-3 py-1 rounded border border-white/10 bg-white/5 text-xs font-mono text-gray-400">
+                {data.duration}
+              </span>
+            </div>
 
-            {/* Certificate Link Button */}
-            {data.certificateLink && (
+          </div>
+
+          {/* Description */}
+          <p className={`text-gray-400 leading-relaxed text-sm md:text-base border-t border-white/10 pt-4 ${!isEven ? 'lg:text-right' : 'lg:text-left'}`}>
+            {data.desc}
+          </p>
+
+          {/* Button */}
+          {data.certificateLink && (
+            <div className={`mt-6 flex ${!isEven ? 'lg:justify-end' : 'justify-start'}`}>
               <a
                 href={data.certificateLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-6 px-6 py-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/50 text-white text-sm font-semibold transition-all duration-300 flex items-center gap-2 w-fit ${!isEven ? 'lg:ml-auto lg:mr-0' : ''}`}
+                className="inline-flex items-center gap-2 text-sm font-bold text-white uppercase tracking-wider hover:text-gray-300 transition-colors"
               >
-                <span>View Certificate</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17l9.2-9.2M17 8v9M8.8 8h9.2" /></svg>
+                View Certificate <span className="text-lg">↗</span>
               </a>
-            )}
-          </div>
+            </div>
+          )}
+
         </div>
       </motion.div>
     </div>
