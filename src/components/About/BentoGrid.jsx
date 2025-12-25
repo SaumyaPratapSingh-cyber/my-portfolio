@@ -20,7 +20,7 @@ const BentoGrid = () => {
 
                     <div className="flex items-start gap-6 z-10">
                         <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-hologram-blue/30 shadow-[0_0_20px_rgba(46,185,223,0.3)] shrink-0">
-                            <img src="/profile.png" alt="Profile" className="w-full h-full object-cover scale-110" loading="lazy" />
+                            <img src="/profile.png" alt="Profile" className="w-full h-full object-cover scale-110" />
                         </div>
                         <div>
                             <h3 className="text-3xl font-display font-bold text-white mb-2">Saumya Pratap Singh</h3>
