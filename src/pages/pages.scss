@@ -996,12 +996,18 @@
       margin-bottom: 0;
       font-size: 56px;
       /* Adjusted size */
+
+      span {
+        color: #ffffff;
+        /* Override orange with white */
+      }
     }
 
     p {
       font-size: 16px;
       line-height: 1.6;
-      color: #d3d3d3;
+      color: #e0e0e0;
+      /* Slightly lighter grey for better contrast on black */
     }
 
     .contact-details {
@@ -1026,21 +1032,51 @@
 
     input,
     textarea {
-      background: #111;
-      border: 1px solid #333;
+      background: #000;
+      /* Black background */
+      border: 1px solid #fff;
+      /* White border */
       padding: 18px;
       border-radius: 8px;
-      color: white;
+      color: #fff;
+      /* White text */
       font-size: 16px;
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: #888;
+      }
 
       &:focus {
         outline: none;
-        border-color: orange;
+        border-color: #fff;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        background: #111;
       }
     }
 
     button {
       align-self: flex-start;
+      margin-top: 10px;
+      padding: 15px 40px;
+      background: #ffffff;
+      /* White background */
+      color: #000000;
+      /* Black text */
+      border: 1px solid #ffffff;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #000000;
+        /* Black background */
+        color: #ffffff;
+        /* White text */
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      }
     }
   }
 }
