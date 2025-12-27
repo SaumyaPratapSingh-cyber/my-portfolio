@@ -30,61 +30,45 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-modern-page" id="contact">
-      <motion.div
-        className="contact-modern-card"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        {/* --- LEFT SIDE: IMAGE --- */}
-        <div className="contact-image-side">
-          <div className="image-wrapper">
-            <img src="/vector-1.png" alt="Contact Illustration" />
-            <div className="glow-effect"></div>
-          </div>
+    <div className="contact-inverted-wrapper" id="contact">
+      {/* LEFT SIDE: WHITE + IMAGE */}
+      <div className="contact-left-white">
+        <div className="image-container">
+          <img src="/conpage.png" alt="Contact Illustration" />
         </div>
+      </div>
 
-        {/* --- RIGHT SIDE: FORM --- */}
-        <div className="contact-form-side">
-          <div className="contact-header">
-            <h1>Let's <span className="highlight">Connect</span></h1>
-            <p>Ready to start your next project? Drop me a line.</p>
-          </div>
+      {/* RIGHT SIDE: BLACK + FORM */}
+      <div className="contact-right-black">
+        <div className="form-container">
+          <h2>Message Us</h2>
 
-          <form ref={formRef} onSubmit={sendEmail} className="modern-form">
+          <form ref={formRef} onSubmit={sendEmail} className="inverted-form">
             <div className="input-group">
-              <input type="text" name="from_name" placeholder="Name" required />
+              <label>Name</label>
+              <input type="text" name="from_name" required />
             </div>
             <div className="input-group">
-              <input type="email" name="from_email" placeholder="Email Address" required />
+              <label>Email</label>
+              <input type="email" name="from_email" required />
             </div>
             <div className="input-group">
-              <textarea name="message" rows="5" placeholder="Project Details..." required></textarea>
+              <label>Message</label>
+              <textarea name="message" rows="5" required></textarea>
             </div>
 
-            <button type="submit" className="submit-btn">
-              <span>Send Message</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            <button type="submit" className="submit-btn-inverted">
+              Submit
             </button>
 
             {formState.message && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className={`status-message ${formState.error ? "error" : "success"}`}
-              >
+              <p className={`status-msg ${formState.error ? "error" : "success"}`}>
                 {formState.message}
-              </motion.div>
+              </p>
             )}
           </form>
-
-          <div className="contact-socials-mini">
-            <p className="email-link">saumyrajpoot666@gmail.com</p>
-          </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
