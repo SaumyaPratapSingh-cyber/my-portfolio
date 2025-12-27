@@ -14,6 +14,16 @@ export const projects = [
     prototypeLink: "https://open-bank-pro.vercel.app/",
   },
   {
+    id: 7,
+    title: "Gymnite - Elite Performance Ecosystem",
+    img: "/gymnite.png",
+    desc: "A hyper-modern gym management platform offering a frictionless experience for members to join, book zones, and shop, while providing admins a command center for operations.",
+    impact: "Revolutionizes gym operations with a cinematic, Bento-grid design, seamless digital access cards, and an integrated e-commerce & loyalty system for improved member engagement.",
+    tech: "Next.js 16, TypeScript, Tailwind CSS, Framer Motion, Supabase",
+    link: "https://github.com/SaumyaPratapSingh-cyber/Gymnite",
+    prototypeLink: "https://gymnite.vercel.app/",
+  },
+  {
     id: 1,
     title: "Clean-Sweep AI",
     img: "/project-cleansweep.png",
