@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import "./pages.scss";
-import ContactSpline from "../components/ContactSpline/ContactSpline.jsx";
 
 const Contact = () => {
   const formRef = useRef();
@@ -31,65 +30,62 @@ const Contact = () => {
   };
 
   return (
-    <motion.div
-      className="page contact-page"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      id="contact"
-    >
-      <div className="wrapper">
-
-        {/* --- LEFT COLUMN (1fr): SPLINE MODEL --- */}
-        <motion.div
-          className="contact-model-left"
-          initial={{ x: -100, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          <div className="contact-scene-wrapper">
-            <ContactSpline />
+    <div className="contact-modern-page" id="contact">
+      <motion.div
+        className="contact-modern-card"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        {/* --- LEFT SIDE: IMAGE --- */}
+        <div className="contact-image-side">
+          <div className="image-wrapper">
+            <img src="/vector-1.png" alt="Contact Illustration" />
+            <div className="glow-effect"></div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* --- RIGHT COLUMN (1.2fr): ALL CONTENT --- */}
-        <motion.div
-          className="contact-content-right"
-          initial={{ x: 100, opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-          {/* 1. TEXT DETAILS */}
-          <div className="contact-text-details">
-            <h1>Get in <span>Touch</span></h1>
-            <p>I'm currently open to new opportunities and collaborations. My inbox is always open, so feel free to reach out!</p>
+        {/* --- RIGHT SIDE: FORM --- */}
+        <div className="contact-form-side">
+          <div className="contact-header">
+            <h1>Let's <span className="highlight">Connect</span></h1>
+            <p>Ready to start your next project? Drop me a line.</p>
+          </div>
 
-            <div className="contact-details">
-              <p><strong>Email:</strong> <span>saumyrajpoot666@gmail.com</span></p>
-              <p><strong>Location:</strong> <span>Prayagraj, Uttar Pradesh, India</span></p>
+          <form ref={formRef} onSubmit={sendEmail} className="modern-form">
+            <div className="input-group">
+              <input type="text" name="from_name" placeholder="Name" required />
             </div>
-          </div>
+            <div className="input-group">
+              <input type="email" name="from_email" placeholder="Email Address" required />
+            </div>
+            <div className="input-group">
+              <textarea name="message" rows="5" placeholder="Project Details..." required></textarea>
+            </div>
 
-          {/* 2. FORM */}
-          <form
-            ref={formRef}
-            onSubmit={sendEmail}
-            className="contact-form"
-          >
-            <input type="text" placeholder="Your Name" required name="from_name" />
-            <input type="email" placeholder="Your Email" required name="from_email" />
-            <textarea placeholder="Your Message" rows="6" required name="message"></textarea>
-            <button type="submit" className="primary">Send Message</button>
+            <button type="submit" className="submit-btn">
+              <span>Send Message</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+
             {formState.message && (
-              <span className={formState.error ? "error-message" : "success-message"}>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className={`status-message ${formState.error ? "error" : "success"}`}
+              >
                 {formState.message}
-              </span>
+              </motion.div>
             )}
           </form>
-        </motion.div>
-      </div>
-    </motion.div>
+
+          <div className="contact-socials-mini">
+            <p className="email-link">saumyrajpoot666@gmail.com</p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 
