@@ -992,7 +992,7 @@
 
   // --- RIGHT SIDE: BLACK + FORM ---
   .contact-right-black {
-    flex: 0 0 50%; // Occupy right half
+    flex: 0 0 58%; // Increased size (wider blob)
     background: #000000;
     display: flex;
     flex-direction: column;
@@ -1003,19 +1003,18 @@
     z-index: 2;
 
     // THE CURVE:
-    // This creates a convex curve pointing towards the left
-    border-top-left-radius: 100% 50%;
-    border-bottom-left-radius: 100% 50%;
-    // Adjust these percentages to get the desired "blob" shape
+    // convex curve
+    border-top-left-radius: 50% 50%; // Adjusted for a smoother, larger curve
+    border-bottom-left-radius: 50% 50%;
 
     // Shadow to separate layers
-    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.1);
+    box-shadow: -30px 0 60px rgba(0, 0, 0, 0.2);
 
     .form-container {
       width: 100%;
       max-width: 500px;
-      // Center content slightly to the right to account for curve
-      padding-left: 40px;
+      // Increased padding to avoid overlapping the curve
+      padding-left: 80px;
 
       h2 {
         font-size: 56px;
@@ -1044,7 +1043,7 @@
           textarea {
             background: transparent;
             border: 1px solid #ffffff;
-            border-radius: 20px; // Rounded like reference
+            border-radius: 20px;
             padding: 15px 20px;
             color: #ffffff;
             font-size: 16px;
@@ -1071,7 +1070,7 @@
           color: #000000;
           font-size: 18px;
           font-weight: 700;
-          border-radius: 30px; // Pill shape
+          border-radius: 30px;
           border: none;
           cursor: pointer;
           align-self: flex-start;

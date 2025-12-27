@@ -58,7 +58,7 @@ const CosmicBackground = () => {
                         interactivity: {
                             events: {
                                 onHover: {
-                                    enable: true,
+                                    enable: false, // Disabled for performance
                                     mode: "bubble",
                                 },
                             },
@@ -78,7 +78,7 @@ const CosmicBackground = () => {
                             links: {
                                 color: "#ffffff",
                                 distance: 150,
-                                enable: false, // Stars usually don't have links in a "deep space" look, but can enable if desired
+                                enable: false,
                                 opacity: 0.5,
                                 width: 1,
                             },
@@ -89,7 +89,7 @@ const CosmicBackground = () => {
                                     default: "out",
                                 },
                                 random: true,
-                                speed: 0.5,
+                                speed: 0.3, // Slower for smoother feel
                                 straight: false,
                             },
                             number: {
@@ -97,7 +97,7 @@ const CosmicBackground = () => {
                                     enable: true,
                                     area: 800,
                                 },
-                                value: 100, // Star count
+                                value: 30, // Reduced from 100 to 30 for performance
                             },
                             opacity: {
                                 value: { min: 0.1, max: 0.8 },
