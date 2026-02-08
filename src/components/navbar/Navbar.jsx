@@ -53,7 +53,7 @@ export default function Navbar() {
         </ul>
 
         <motion.a
-          href="/SaumyratapSingh_resume.pdf" target="_blank"
+          href="/SaumyaPratapSinghResume.pdf" target="_blank"
           className="hidden relative lg:inline-block px-5 py-2.5 font-bold group cursor-pointer"
           whileHover={{ y: -2 }}
         >
@@ -99,7 +99,7 @@ export default function Navbar() {
               ))}
             </ul>
             <a
-              href="/SaumyratapSingh_resume.pdf" target="_blank"
+              href="/SaumyaPratapSinghResume.pdf" target="_blank"
               className="relative inline-block px-6 py-3 font-bold group"
             >
               <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>

@@ -33,7 +33,7 @@ const DockNavbar = () => {
 
             {/* Resume Button - Red Highlight as requested */}
             <DockItem mouseX={mouseX}>
-                <a href="/SaumyratapSingh_resume.pdf" target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center text-white bg-red-500/20 rounded-full border border-red-500/50 hover:bg-red-500 hover:border-red-500 transition-all">
+                <a href="/SaumyaPratapSinghResume.pdf" target="_blank" rel="noopener noreferrer" className="w-full h-full flex items-center justify-center text-white bg-red-500/20 rounded-full border border-red-500/50 hover:bg-red-500 hover:border-red-500 transition-all">
                     <FileText size={22} strokeWidth={1.5} />
                 </a>
             </DockItem>
