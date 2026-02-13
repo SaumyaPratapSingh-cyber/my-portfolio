@@ -1,39 +1,52 @@
 import React, { useState } from 'react';
-import Navbar from './components/navbar/Navbar';
-import HeroSection from './pages/HeroSection';
-import Skills from './pages/Skills';
-import About from './pages/About';
-import Experience from './pages/Experience';
-import Projects from './pages/Projects';
-import Contact from './pages/Contact';
-import CustomCursor from './components/CustomCursor/CustomCursor';
-import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
+import { ReactLenis } from '@studio-freight/react-lenis';
 import { AnimatePresence } from 'framer-motion';
 
-export default function App() {
+// Components
+import Navbar from './components/ui/Navbar';
+import Footer from './components/ui/Footer';
+import CustomCursor from './components/CustomCursor/CustomCursor';
+import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
+
+// Pages
+import HeroSection from './pages/HeroSection';
+import About from './pages/About';
+import Experience from './pages/Experience';
+import Skills from './pages/Skills';
+import Projects from './pages/Projects';
+import Contact from './pages/Contact';
+
+function App() {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div className='font-sora text-black min-h-screen relative'>
-      <CustomCursor />
+    <ReactLenis root>
+      <div className="bg-hive-black min-h-screen text-white font-mono selection:bg-hive-blue selection:text-white relative">
+        <CustomCursor />
 
-      <AnimatePresence mode='wait'>
-        {loading ? (
-          <WelcomeScreen key="welcome" onComplete={() => setLoading(false)} />
-        ) : (
-          <>
-            <Navbar />
-            <main className="pt-20">
-              <HeroSection />
-              <About />
-              <Experience />
-              <Skills />
-              <Projects />
-              <Contact />
-            </main>
-          </>
-        )}
-      </AnimatePresence>
-    </div>
-  )
+        <AnimatePresence mode="wait">
+          {loading ? (
+            <WelcomeScreen key="welcome" onComplete={() => setLoading(false)} />
+          ) : (
+            <>
+              <Navbar />
+
+              <main className="relative z-10">
+                <HeroSection />
+                <About />
+                <Experience />
+                <Skills />
+                <Projects />
+                <Contact />
+              </main>
+
+              <Footer />
+            </>
+          )}
+        </AnimatePresence>
+      </div>
+    </ReactLenis>
+  );
 }
+
+export default App;

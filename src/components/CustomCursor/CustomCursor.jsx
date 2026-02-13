@@ -46,60 +46,61 @@ function getAngle(diffX, diffY) {
 
 const CURSOR_DIAMETER = 48;
 
-const CustomCursor = () => {
-  const location = useLocation();
-  const isLoading = false;
+export default function CustomCursor({ isHovering }) {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   // React Refs
-  const jellyRef = useRef(null);
-  const [isHovering, setIsHovering] = useState(false);
+  const arrowRef = useRef(null);
+  const trailRef = useRef([]);
 
   // Save pos and velocity Objects
   const pos = useInstance(() => ({ x: 0, y: 0 }));
   const vel = useInstance(() => ({ x: 0, y: 0 }));
   const set = useInstance();
 
+  // Trail state
+  const [trail, setTrail] = useState(Array(15).fill({ x: 0, y: 0 }));
+
   // Set GSAP quick setter Values
   useLayoutEffect(() => {
-    set.x = gsap.quickSetter(jellyRef.current, "x", "px");
-    set.y = gsap.quickSetter(jellyRef.current, "y", "px");
-    set.r = gsap.quickSetter(jellyRef.current, "rotate", "deg");
-    // We will use CSS variable or direct scale for hover expansion to avoid conflict
-    // But for the jelly effect, we typically set scaleX and scaleY
-    set.sx = gsap.quickSetter(jellyRef.current, "scaleX");
-    set.sy = gsap.quickSetter(jellyRef.current, "scaleY");
+    set.x = gsap.quickSetter(arrowRef.current, "x", "px");
+    set.y = gsap.quickSetter(arrowRef.current, "y", "px");
+    set.r = gsap.quickSetter(arrowRef.current, "rotate", "deg");
+    set.sx = gsap.quickSetter(arrowRef.current, "scaleX");
+    set.sy = gsap.quickSetter(arrowRef.current, "scaleY");
   }, []);
 
   // Animation Loop
   const loop = useCallback(() => {
-    if (!set.sx || !set.sy || !set.r) return;
+    if (!set.x || !set.y) return;
 
-    // Calculate angle and scale based on velocity
+    // Calculate angle based on velocity
     var rotation = getAngle(+vel.x, +vel.y);
     var scale = getScale(+vel.x, +vel.y);
 
     // General movement updates
     set.x(pos.x);
     set.y(pos.y);
-    set.r(rotation);
 
-    // If hovering, we set a Fixed Large Scale. 
-    // If NOT hovering, we apply the "Jelly" squeeze based on velocity.
-    if (isHovering) {
-      // When hovering, we override the jelly effect with a fixed expansion
-      // We do this via GSAP in the event listener, but we ensure the loop doesn't fight it
-      // actually, simpler to let GSAP handle the 'scale' tween in the event listener
-      // and only update X/Y/Rotation here.
-    } else {
-      // Normal Jelly Physics
-      set.sx(1 + scale);
-      set.sy(1 - scale * 2);
+    // Smooth rotation for arrow
+    // Arrow points RIGHT (0 deg) by default.
+    // If velocity is low, keep previous rotation or default to -45 (top-left ish)
+    if (Math.abs(vel.x) > 0.5 || Math.abs(vel.y) > 0.5) {
+      set.r(rotation);
     }
 
-  }, [isHovering]); // Re-run loop definition if hover state changes
+    // Trail updates
+    setTrail(prev => {
+      const newTrail = [...prev];
+      newTrail.pop();
+      newTrail.unshift({ x: pos.x, y: pos.y });
+      return newTrail;
+    });
+
+  }, []);
 
   const [cursorMoved, setCursorMoved] = useState(false);
+  const [isHoveringLocal, setIsHoveringLocal] = useState(false);
 
   useEffect(() => {
     if (isMobile) return;
@@ -114,11 +115,11 @@ const CustomCursor = () => {
       gsap.to(pos, {
         x: x,
         y: y,
-        duration: 0.6, // Slightly tighter follow
+        duration: 0.15, // Slightly looser for "flying" feel
         ease: "power2.out",
         onUpdate: () => {
-          vel.x = (x - pos.x) * 1.2;
-          vel.y = (y - pos.y) * 1.2;
+          vel.x = x - pos.x;
+          vel.y = y - pos.y;
         },
       });
 
@@ -127,7 +128,6 @@ const CustomCursor = () => {
 
     const onMouseOver = (e) => {
       const el = e.target;
-      // Robust check for interactive elements
       const isInteractive =
         el.tagName.toLowerCase() === 'a' ||
         el.tagName.toLowerCase() === 'button' ||
@@ -137,39 +137,22 @@ const CustomCursor = () => {
         window.getComputedStyle(el).cursor === 'pointer';
 
       if (isInteractive) {
-        setIsHovering(true);
-        // GPU Transform Scale instead of Width/Height
-        gsap.to(jellyRef.current, {
-          scale: 2.5, // Scale up
+        setIsHoveringLocal(true);
+        gsap.to(arrowRef.current, {
+          scale: 1.2,
           duration: 0.3,
-          ease: "back.out(1.7)", // Nice pop effect
-          backgroundColor: "white",
-          overwrite: "auto" // Ensure we override any existing tweens
+          ease: "back.out(1.7)",
         });
       }
     };
 
     const onMouseOut = (e) => {
-      const el = e.target;
-      const isInteractive =
-        el.tagName.toLowerCase() === 'a' ||
-        el.tagName.toLowerCase() === 'button' ||
-        el.closest('a') ||
-        el.closest('button') ||
-        el.classList.contains('cursor-pointer') ||
-        window.getComputedStyle(el).cursor === 'pointer';
-
-      if (isInteractive) {
-        setIsHovering(false);
-        // Return to normal scale
-        gsap.to(jellyRef.current, {
-          scale: 1,
-          duration: 0.3,
-          ease: "power2.out",
-          backgroundColor: "white",
-          overwrite: "auto"
-        });
-      }
+      setIsHoveringLocal(false);
+      gsap.to(arrowRef.current, {
+        scale: 1,
+        duration: 0.3,
+        ease: "power2.out",
+      });
     };
 
     window.addEventListener("mousemove", onMouseMove);
@@ -187,23 +170,54 @@ const CustomCursor = () => {
   if (isMobile) return null;
 
   return (
-    <div
-      ref={jellyRef}
-      className={cn(
-        "fixed left-0 top-0 rounded-full z-[9999] pointer-events-none will-change-transform flex items-center justify-center",
-        "translate-x-[-50%] translate-y-[-50%]"
-      )}
-      style={{
-        width: CURSOR_DIAMETER,
-        height: CURSOR_DIAMETER,
-        backgroundColor: "white",
-        mixBlendMode: "difference",
-      }}
-    >
-      {/* Explicitly hiding the inner dot on hover using opacity for performance */}
-      <div className={`relative w-[30%] h-[15%] bg-black rounded-t-full rotate-180 transition-opacity duration-200 ${isHovering ? 'opacity-0' : 'opacity-100'}`}></div>
-    </div>
+    <>
+      {/* Techy Trail - Squares for "digital" feel */}
+      {trail.map((point, i) => (
+        <div
+          key={i}
+          className="fixed left-0 top-0 z-[9998] pointer-events-none bg-hive-cyan"
+          style={{
+            left: point.x,
+            top: point.y,
+            width: 10 - i, // Tapering size
+            height: 10 - i,
+            transform: 'translate(-50%, -50%)', // Center
+            opacity: (0.5 - (i * 0.05)), // Fading opacity
+            transition: 'none', // Direct mapping
+            borderRadius: '2px', // Square-ish
+            boxShadow: `0 0 ${10 - i}px rgba(0, 229, 255, 0.5)` // Glow
+          }}
+        />
+      ))}
+
+      {/* Main Arrow Cursor */}
+      <div
+        ref={arrowRef}
+        className={cn(
+          "fixed left-0 top-0 z-[9999] pointer-events-none will-change-transform flex items-center justify-center",
+          "translate-x-[-50%] translate-y-[-50%]"
+        )}
+        style={{
+          width: 32,
+          height: 32,
+        }}
+      >
+        {/* Arrow Pointing RIGHT (0 degrees) for easier rotation math */}
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full h-full filter drop-shadow-[0_0_12px_rgba(0,229,255,1)]"
+          style={{ transform: 'rotate(-45deg)' }} // Visual adjustment if needed, but logic uses 0=Right. Actually wait.
+        // If I simply draw an arrow pointing right:
+        // M2 12 L22 12 (Line) - No, real arrow shape.
+        // <path d="M5 12H19M19 12L12 5M19 12L12 19" ... > // Simple arrow
+        // Let's use a "Space Fighter" triangle pointing RIGHT.
+        >
+          <path d="M22 12L2 2L5 12L2 22L22 12Z" fill="#00E5FF" stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
+        </svg>
+      </div>
+    </>
   );
 }
 
-export default CustomCursor;
