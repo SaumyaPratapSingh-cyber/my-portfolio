@@ -16,7 +16,7 @@ const Skills = () => {
   const row2 = allSkills.slice(half);
 
   return (
-    <section className="py-20 relative overflow-hidden min-h-screen flex flex-col items-center justify-center bg-hive-black z-20 text-white" id="skills">
+    <section className="py-20 relative overflow-hidden min-h-screen flex flex-col items-center justify-center z-20 text-white" id="skills">
 
       {/* 1. TITLE SECTION */}
       <div className="relative z-50 flex flex-col items-center justify-center mb-8">

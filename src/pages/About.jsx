@@ -16,19 +16,9 @@ const About = () => {
   };
 
   return (
-    <section className="py-24 px-6 lg:px-32 relative overflow-hidden bg-hive-black text-white" id="about">
-      {/* Background Decorative Blobs - Updated for Neural Theme */}
+    <section className="py-24 px-6 lg:px-32 relative overflow-hidden text-white" id="about">
+      {/* Background Decorative Blobs - Removed to show Global Aurora */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-        <motion.div
-          animate={{ x: [0, 50, 0], y: [0, -50, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          className="absolute top-10 left-10 w-72 h-72 bg-hive-blue/20 rounded-full blur-[100px]"
-        />
-        <motion.div
-          animate={{ x: [0, -30, 0], y: [0, 30, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-20 right-20 w-96 h-96 bg-hive-cyan/20 rounded-full blur-[100px]"
-        />
       </div>
 
       <div className="container mx-auto flex flex-col lg:flex-row items-center gap-20">

@@ -14,7 +14,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-hive-black min-h-screen pt-32 px-4 flex items-center justify-center" id="contact">
+    <div className="min-h-screen pt-32 px-4 flex items-center justify-center" id="contact">
       <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
         {/* Text Content */}

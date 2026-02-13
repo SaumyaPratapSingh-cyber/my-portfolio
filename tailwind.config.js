@@ -21,6 +21,39 @@ export default {
             backgroundImage: {
                 'grid-network': "radial-gradient(circle, #007BFF 1px, transparent 1px)",
             },
+            animation: {
+                aurora: "aurora 25s linear infinite",
+                blob: "blob 7s infinite",
+                breathe: "breathe 10s ease-in-out infinite",
+            },
+            keyframes: {
+                aurora: {
+                    from: {
+                        backgroundPosition: "50% 50%, 50% 50%",
+                    },
+                    to: {
+                        backgroundPosition: "350% 50%, 350% 50%",
+                    },
+                },
+                blob: {
+                    "0%": {
+                        transform: "translate(0px, 0px) scale(1)",
+                    },
+                    "33%": {
+                        transform: "translate(30px, -50px) scale(1.1)",
+                    },
+                    "66%": {
+                        transform: "translate(-20px, 20px) scale(0.9)",
+                    },
+                    "100%": {
+                        transform: "translate(0px, 0px) scale(1)",
+                    },
+                },
+                breathe: {
+                    "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
+                    "50%": { opacity: "1", transform: "scale(1.1)" },
+                },
+            },
         },
     },
     plugins: [],

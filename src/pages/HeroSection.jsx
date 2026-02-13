@@ -8,7 +8,7 @@ import Keyboard from "../components/Hero/Keyboard";
 
 export default function HeroSection() {
     return (
-        <div className="container mx-auto px-5 lg:px-28 min-h-[90vh] flex items-center relative overflow-hidden bg-hive-black text-hive-white" id="home">
+        <div className="container mx-auto px-5 lg:px-28 min-h-[90vh] flex items-center relative overflow-hidden text-hive-white" id="home">
             {/* Background Overlay */}
             <div className="absolute inset-0 bg-grid-network opacity-20 pointer-events-none"></div>
 

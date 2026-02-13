@@ -7,6 +7,7 @@ import Navbar from './components/ui/Navbar';
 import Footer from './components/ui/Footer';
 import CustomCursor from './components/CustomCursor/CustomCursor';
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
+import { AuroraBackground } from './components/ui/AuroraBackground';
 
 // Pages
 import HeroSection from './pages/HeroSection';
@@ -19,6 +20,10 @@ import Contact from './pages/Contact';
 function App() {
   const [loading, setLoading] = useState(true);
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <ReactLenis root>
       <div className="bg-hive-black min-h-screen text-white font-mono selection:bg-hive-blue selection:text-white relative">
@@ -28,10 +33,10 @@ function App() {
           {loading ? (
             <WelcomeScreen key="welcome" onComplete={() => setLoading(false)} />
           ) : (
-            <>
+            <AuroraBackground>
               <Navbar />
 
-              <main className="relative z-10">
+              <main className="relative z-10 w-full">
                 <HeroSection />
                 <About />
                 <Experience />
@@ -41,7 +46,7 @@ function App() {
               </main>
 
               <Footer />
-            </>
+            </AuroraBackground>
           )}
         </AnimatePresence>
       </div>

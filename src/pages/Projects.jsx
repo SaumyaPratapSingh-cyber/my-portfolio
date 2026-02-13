@@ -19,7 +19,7 @@ const Projects = () => {
   }
 
   return (
-    <section className="py-20 relative overflow-hidden bg-hive-black text-white" id="projects">
+    <section className="py-20 relative overflow-hidden text-white" id="projects">
       {/* Explicit Black Background for this section */}
 
       <div className="container mx-auto px-5 lg:px-28 mb-12">

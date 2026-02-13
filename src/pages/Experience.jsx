@@ -6,7 +6,7 @@ import "./pages.scss";
 
 const Experience = () => {
   return (
-    <section className="relative w-full min-h-screen overflow-hidden py-20 bg-hive-black text-white" id="experience">
+    <section className="relative w-full min-h-screen overflow-hidden py-20 text-white" id="experience">
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
 
