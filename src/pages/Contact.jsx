@@ -31,6 +31,8 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-24 bg-black min-h-screen flex items-center relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-900/20 via-black to-black pointer-events-none"></div>
+      
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           
@@ -42,40 +44,42 @@ const Contact = () => {
             viewport={{ once: true, margin: "-100px" }}
             className="flex flex-col justify-center"
           >
-            <h2 className="text-5xl md:text-6xl font-space font-bold text-white mb-6">
-              Let's <span className="text-[#00E5FF]">Talk</span>
+            <h2 className="text-5xl md:text-7xl font-space font-bold text-white mb-6 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]">
+              Let's <span className="text-[#00E5FF] drop-shadow-[0_0_20px_#00E5FF]">Talk</span>
             </h2>
-            <p className="text-gray-400 font-mono text-lg mb-10 max-w-md leading-relaxed">
+            <p className="text-zinc-300 font-mono text-lg mb-12 max-w-md leading-relaxed">
               Have a project in mind or just want to say hi? I'd love to hear from you. Drop me a message and I'll get back to you as soon as possible.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               <a href="mailto:contact@example.com" className="block">
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="bg-black border border-white/10 rounded-xl p-6 flex items-center gap-6 group hover:border-[#00E5FF] hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] transition-all duration-300"
+                  whileHover={{ scale: 1.05, x: 10 }}
+                  className="bg-[#050505] border border-zinc-800 rounded-xl p-6 flex items-center gap-6 group hover:border-[#00E5FF] hover:shadow-[0_0_30px_rgba(0,229,255,0.4),inset_0_0_15px_rgba(0,229,255,0.1)] transition-all duration-300 relative overflow-hidden"
                 >
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#00E5FF]/10 transition-colors">
-                    <Mail className="w-6 h-6 text-[#00E5FF]" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="w-14 h-14 rounded-full bg-black border border-zinc-800 flex items-center justify-center group-hover:border-[#00E5FF] group-hover:shadow-[0_0_15px_#00E5FF] transition-all z-10">
+                    <Mail className="w-7 h-7 text-zinc-400 group-hover:text-[#00E5FF] transition-colors" />
                   </div>
-                  <div>
-                    <p className="text-gray-400 font-mono text-sm uppercase tracking-wider mb-1">Email</p>
-                    <p className="text-white font-space font-bold text-lg group-hover:text-[#00E5FF] transition-colors">contact@example.com</p>
+                  <div className="z-10">
+                    <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest mb-1 group-hover:text-zinc-300 transition-colors">Email</p>
+                    <p className="text-white font-space font-bold text-xl group-hover:text-[#00E5FF] group-hover:drop-shadow-[0_0_8px_#00E5FF] transition-all">contact@example.com</p>
                   </div>
                 </motion.div>
               </a>
 
               <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="block">
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="bg-black border border-white/10 rounded-xl p-6 flex items-center gap-6 group hover:border-[#00E5FF] hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] transition-all duration-300"
+                  whileHover={{ scale: 1.05, x: 10 }}
+                  className="bg-[#050505] border border-zinc-800 rounded-xl p-6 flex items-center gap-6 group hover:border-[#00E5FF] hover:shadow-[0_0_30px_rgba(0,229,255,0.4),inset_0_0_15px_rgba(0,229,255,0.1)] transition-all duration-300 relative overflow-hidden"
                 >
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#00E5FF]/10 transition-colors">
-                    <Linkedin className="w-6 h-6 text-[#00E5FF]" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00E5FF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="w-14 h-14 rounded-full bg-black border border-zinc-800 flex items-center justify-center group-hover:border-[#00E5FF] group-hover:shadow-[0_0_15px_#00E5FF] transition-all z-10">
+                    <Linkedin className="w-7 h-7 text-zinc-400 group-hover:text-[#00E5FF] transition-colors" />
                   </div>
-                  <div>
-                    <p className="text-gray-400 font-mono text-sm uppercase tracking-wider mb-1">LinkedIn</p>
-                    <p className="text-white font-space font-bold text-lg group-hover:text-[#00E5FF] transition-colors">Connect with me</p>
+                  <div className="z-10">
+                    <p className="text-zinc-500 font-mono text-sm uppercase tracking-widest mb-1 group-hover:text-zinc-300 transition-colors">LinkedIn</p>
+                    <p className="text-white font-space font-bold text-xl group-hover:text-[#00E5FF] group-hover:drop-shadow-[0_0_8px_#00E5FF] transition-all">Connect with me</p>
                   </div>
                 </motion.div>
               </a>
@@ -89,10 +93,12 @@ const Contact = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <div className="bg-black border border-white/10 p-8 md:p-10 rounded-2xl relative shadow-2xl">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="bg-[#030303] border border-zinc-800 p-8 md:p-10 rounded-2xl relative shadow-[0_0_40px_rgba(0,0,0,1)] hover:border-zinc-700 transition-colors duration-500 group">
+              <div className="absolute -inset-[1px] bg-gradient-to-b from-[#00E5FF]/20 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-500 pointer-events-none -z-10 blur-sm"></div>
+              
+              <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
                 <div>
-                  <label htmlFor="name" className="block text-gray-400 font-mono text-sm uppercase tracking-wider mb-2">Name</label>
+                  <label htmlFor="name" className="block text-zinc-400 font-mono text-sm uppercase tracking-widest mb-2 font-semibold">Name</label>
                   <input
                     type="text"
                     id="name"
@@ -101,11 +107,11 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="John Doe"
                     required
-                    className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_10px_rgba(0,229,255,0.2)] transition-all font-mono"
+                    className="w-full bg-black border border-zinc-800 rounded-lg px-5 py-4 text-white placeholder-zinc-700 focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_20px_rgba(0,229,255,0.4),inset_0_0_10px_rgba(0,229,255,0.1)] transition-all duration-300 font-mono text-lg"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-gray-400 font-mono text-sm uppercase tracking-wider mb-2">Email</label>
+                  <label htmlFor="email" className="block text-zinc-400 font-mono text-sm uppercase tracking-widest mb-2 font-semibold">Email</label>
                   <input
                     type="email"
                     id="email"
@@ -114,11 +120,11 @@ const Contact = () => {
                     onChange={handleChange}
                     placeholder="john@example.com"
                     required
-                    className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_10px_rgba(0,229,255,0.2)] transition-all font-mono"
+                    className="w-full bg-black border border-zinc-800 rounded-lg px-5 py-4 text-white placeholder-zinc-700 focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_20px_rgba(0,229,255,0.4),inset_0_0_10px_rgba(0,229,255,0.1)] transition-all duration-300 font-mono text-lg"
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-gray-400 font-mono text-sm uppercase tracking-wider mb-2">Message</label>
+                  <label htmlFor="message" className="block text-zinc-400 font-mono text-sm uppercase tracking-widest mb-2 font-semibold">Message</label>
                   <textarea
                     id="message"
                     name="message"
@@ -127,16 +133,16 @@ const Contact = () => {
                     placeholder="Your message here..."
                     required
                     rows={5}
-                    className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_10px_rgba(0,229,255,0.2)] transition-all font-mono resize-none"
+                    className="w-full bg-black border border-zinc-800 rounded-lg px-5 py-4 text-white placeholder-zinc-700 focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_20px_rgba(0,229,255,0.4),inset_0_0_10px_rgba(0,229,255,0.1)] transition-all duration-300 font-mono text-lg resize-none"
                   ></textarea>
                 </div>
                 <motion.button
-                  whileHover={{ scale: 1.03 }}
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-[#00E5FF] text-black font-space font-bold py-4 rounded-lg flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.5)] hover:bg-[#33ebff] transition-all"
+                  className="w-full bg-[#00E5FF] text-black font-space font-extrabold text-lg tracking-wider py-4 rounded-lg flex items-center justify-center gap-3 hover:shadow-[0_0_30px_rgba(0,229,255,0.8)] hover:bg-white transition-all duration-300"
                 >
-                  <Send className="w-5 h-5" />
+                  <Send className="w-6 h-6" />
                   SEND MESSAGE
                 </motion.button>
               </form>
