@@ -34,7 +34,8 @@
     "sass": "^1.97.1",
     "tailwind-merge": "^3.4.0",
     "three": "0.160.0",
-    "tsparticles": "^3.9.1"
+    "tsparticles": "^3.9.1",
+    "webgl-fluid-enhanced": "^0.8.0"
   },
   "devDependencies": {
     "@react-three/gltfjsx": "^4.3.4",

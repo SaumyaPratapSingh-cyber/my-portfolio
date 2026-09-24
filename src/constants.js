@@ -172,3 +172,46 @@ export const skills = [
     ],
   },
 ];
+
+export const certifications = [
+  {
+    title: "AI for Beginners",
+    issuer: "Simplilearn",
+    img: "/certificate/Ai for Beginners.jpeg",
+  },
+  {
+    title: "Cisco Modern AI Certificate",
+    issuer: "Cisco",
+    img: "/certificate/Cisco Mordern AI Certificate.jpeg",
+  },
+  {
+    title: "Google Prompting Essentials",
+    issuer: "Google",
+    img: "/certificate/Google Prompting Essentials.jpeg",
+  },
+  {
+    title: "IBM Virtual Mobile Web Dev",
+    issuer: "IBM",
+    img: "/certificate/IBM Virtual Mobile Web Dev.jpeg",
+  },
+  {
+    title: "GitHub Foundations",
+    issuer: "GitHub",
+    img: "/certificate/github Foundations.jpeg",
+  },
+  {
+    title: "Google Analytics Certification",
+    issuer: "Google",
+    img: "/certificate/google Analytics Certification.jpeg",
+  },
+  {
+    title: "Oracle Certified Foundation Associate",
+    issuer: "Oracle",
+    img: "/certificate/oracle Certified Foundation Associate.jpeg",
+  },
+  {
+    title: "Postman API Student Fundamentals",
+    issuer: "Postman",
+    img: "/certificate/postman API student Fundamentals.jpeg",
+  }
+];

@@ -15,6 +15,7 @@ import About from './pages/About';
 import Experience from './pages/Experience';
 import Skills from './pages/Skills';
 import Projects from './pages/Projects';
+import Certifications from './pages/Certifications';
 import Contact from './pages/Contact';
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
                 <Experience />
                 <Skills />
                 <Projects />
+                <Certifications />
                 <Contact />
               </main>
 
