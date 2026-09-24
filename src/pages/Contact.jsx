@@ -1,186 +1,150 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Zap, Mail, MapPin, Github, Linkedin, Twitter } from 'lucide-react';
+import { Send, Mail, Linkedin } from 'lucide-react';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    // Simulate submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 1500);
+    // Handle form submission
+    console.log(formData);
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+  const leftVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  const rightVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.2 } }
   };
 
   return (
-    <section id="contact" className="relative py-24 min-h-screen flex items-center justify-center overflow-hidden bg-hive-black text-white">
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-hive-blue/20 rounded-full blur-[120px] mix-blend-screen"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-hive-cyan/20 rounded-full blur-[120px] mix-blend-screen"></div>
-      </div>
-
-      <motion.div 
-        className="container mx-auto px-6 relative z-10 max-w-6xl"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        <div className="text-center mb-16">
-          <motion.h2 
-            variants={itemVariants}
-            className="text-5xl md:text-7xl font-space font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-hive-cyan via-white to-hive-blue"
+    <section id="contact" className="py-24 bg-black min-h-screen flex items-center relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          
+          {/* Left Side: Info */}
+          <motion.div
+            variants={leftVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col justify-center"
           >
-            Let's Talk
-          </motion.h2>
-          <motion.p 
-            variants={itemVariants}
-            className="text-gray-400 font-mono text-lg max-w-2xl mx-auto"
-          >
-            Have a project in mind or just want to say hi? Feel free to reach out. I'm always open to discussing new opportunities.
-          </motion.p>
-        </div>
+            <h2 className="text-5xl md:text-6xl font-space font-bold text-white mb-6">
+              Let's <span className="text-[#00E5FF]">Talk</span>
+            </h2>
+            <p className="text-gray-400 font-mono text-lg mb-10 max-w-md leading-relaxed">
+              Have a project in mind or just want to say hi? I'd love to hear from you. Drop me a message and I'll get back to you as soon as possible.
+            </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Left Side: Contact Info */}
-          <motion.div variants={itemVariants} className="flex flex-col gap-6">
-            <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="group p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-hive-cyan/50 transition-all duration-300 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-hive-cyan/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative z-10 flex items-center gap-6">
-                <div className="w-14 h-14 rounded-full bg-hive-blue/20 flex items-center justify-center border border-hive-blue/30 group-hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all">
-                  <Mail className="w-6 h-6 text-hive-cyan" />
-                </div>
-                <div>
-                  <h3 className="font-space text-xl font-bold mb-1">Email</h3>
-                  <p className="font-mono text-gray-400 group-hover:text-hive-cyan transition-colors">hello@example.com</p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div 
-              whileHover={{ scale: 1.02 }}
-              className="group p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 hover:border-hive-blue/50 transition-all duration-300 relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-hive-blue/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="relative z-10 flex items-center gap-6">
-                <div className="w-14 h-14 rounded-full bg-hive-cyan/20 flex items-center justify-center border border-hive-cyan/30 group-hover:shadow-[0_0_20px_rgba(0,123,255,0.4)] transition-all">
-                  <MapPin className="w-6 h-6 text-hive-blue" />
-                </div>
-                <div>
-                  <h3 className="font-space text-xl font-bold mb-1">Location</h3>
-                  <p className="font-mono text-gray-400 group-hover:text-hive-blue transition-colors">Remote / Worldwide</p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Social Links Container */}
-            <div className="flex gap-4 mt-4">
-              {[
-                { icon: Github, label: "GitHub", color: "hover:text-white hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.5)]" },
-                { icon: Linkedin, label: "LinkedIn", color: "hover:text-blue-400 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(96,165,250,0.5)]" },
-                { icon: Twitter, label: "Twitter", color: "hover:text-sky-400 hover:border-sky-400 hover:shadow-[0_0_15px_rgba(56,189,248,0.5)]" }
-              ].map((social, idx) => (
-                <motion.a
-                  key={idx}
-                  href="#"
-                  aria-label={social.label}
-                  whileHover={{ y: -5 }}
-                  className={`w-12 h-12 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center text-gray-400 transition-all duration-300 ${social.color}`}
+            <div className="space-y-4">
+              <a href="mailto:contact@example.com" className="block">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-black border border-white/10 rounded-xl p-6 flex items-center gap-6 group hover:border-[#00E5FF] hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] transition-all duration-300"
                 >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
+                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#00E5FF]/10 transition-colors">
+                    <Mail className="w-6 h-6 text-[#00E5FF]" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 font-mono text-sm uppercase tracking-wider mb-1">Email</p>
+                    <p className="text-white font-space font-bold text-lg group-hover:text-[#00E5FF] transition-colors">contact@example.com</p>
+                  </div>
+                </motion.div>
+              </a>
+
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="block">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-black border border-white/10 rounded-xl p-6 flex items-center gap-6 group hover:border-[#00E5FF] hover:shadow-[0_0_15px_rgba(0,229,255,0.2)] transition-all duration-300"
+                >
+                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#00E5FF]/10 transition-colors">
+                    <Linkedin className="w-6 h-6 text-[#00E5FF]" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 font-mono text-sm uppercase tracking-wider mb-1">LinkedIn</p>
+                    <p className="text-white font-space font-bold text-lg group-hover:text-[#00E5FF] transition-colors">Connect with me</p>
+                  </div>
+                </motion.div>
+              </a>
             </div>
           </motion.div>
 
           {/* Right Side: Form */}
-          <motion.div variants={itemVariants} className="relative group">
-            {/* Animated Gradient Border wrapper */}
-            <div className="absolute -inset-[1px] bg-gradient-to-r from-hive-cyan via-purple-500 to-hive-blue rounded-2xl opacity-30 blur-sm group-hover:opacity-75 transition-opacity duration-500"></div>
-            
-            <div className="relative bg-black/60 backdrop-blur-2xl p-8 rounded-2xl border border-white/10 shadow-2xl">
+          <motion.div
+            variants={rightVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <div className="bg-black border border-white/10 p-8 md:p-10 rounded-2xl relative shadow-2xl">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="relative">
+                <div>
+                  <label htmlFor="name" className="block text-gray-400 font-mono text-sm uppercase tracking-wider mb-2">Name</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
+                    placeholder="John Doe"
                     required
-                    className="block w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white font-mono focus:outline-none focus:border-hive-cyan focus:shadow-[0_0_10px_rgba(0,229,255,0.5)] transition-all peer placeholder-transparent"
-                    placeholder="Name"
+                    className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_10px_rgba(0,229,255,0.2)] transition-all font-mono"
                   />
-                  <label htmlFor="name" className="absolute left-4 top-4 text-gray-500 font-mono transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-3 peer-focus:text-xs peer-focus:text-hive-cyan bg-hive-black/80 px-1 rounded backdrop-blur-md">Name</label>
                 </div>
-
-                <div className="relative">
+                <div>
+                  <label htmlFor="email" className="block text-gray-400 font-mono text-sm uppercase tracking-wider mb-2">Email</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    placeholder="john@example.com"
                     required
-                    className="block w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white font-mono focus:outline-none focus:border-hive-blue focus:shadow-[0_0_10px_rgba(0,123,255,0.5)] transition-all peer placeholder-transparent"
-                    placeholder="Email"
+                    className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_10px_rgba(0,229,255,0.2)] transition-all font-mono"
                   />
-                  <label htmlFor="email" className="absolute left-4 top-4 text-gray-500 font-mono transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-3 peer-focus:text-xs peer-focus:text-hive-blue bg-hive-black/80 px-1 rounded backdrop-blur-md">Email</label>
                 </div>
-
-                <div className="relative">
+                <div>
+                  <label htmlFor="message" className="block text-gray-400 font-mono text-sm uppercase tracking-wider mb-2">Message</label>
                   <textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    placeholder="Your message here..."
                     required
-                    rows="4"
-                    className="block w-full px-4 py-4 bg-white/5 border border-white/10 rounded-xl text-white font-mono focus:outline-none focus:border-hive-cyan focus:shadow-[0_0_10px_rgba(0,229,255,0.5)] transition-all peer placeholder-transparent resize-none"
-                    placeholder="Message"
+                    rows={5}
+                    className="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#00E5FF] focus:shadow-[0_0_10px_rgba(0,229,255,0.2)] transition-all font-mono resize-none"
                   ></textarea>
-                  <label htmlFor="message" className="absolute left-4 top-4 text-gray-500 font-mono transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:-top-3 peer-focus:text-xs peer-focus:text-hive-cyan bg-hive-black/80 px-1 rounded backdrop-blur-md">Message</label>
                 </div>
-
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full relative overflow-hidden group/btn bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl py-4 font-space font-bold text-white transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full bg-[#00E5FF] text-black font-space font-bold py-4 rounded-lg flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(0,229,255,0.5)] hover:bg-[#33ebff] transition-all"
                 >
-                  <span className="relative z-10 flex items-center gap-2">
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                    {!isSubmitting && <Send className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />}
-                  </span>
-                  {/* Hover gradient sweep */}
-                  <div className="absolute inset-0 h-full w-full bg-gradient-to-r from-hive-cyan to-hive-blue opacity-0 group-hover/btn:opacity-50 transition-opacity duration-300"></div>
+                  <Send className="w-5 h-5" />
+                  SEND MESSAGE
                 </motion.button>
               </form>
             </div>
           </motion.div>
+          
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };

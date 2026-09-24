@@ -1,253 +1,146 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { IoLogoLinkedin, IoLogoTwitter } from "react-icons/io5";
-import { BiLogoGmail } from "react-icons/bi";
-import { BsGithub } from "react-icons/bs";
-import { TypeAnimation } from "react-type-animation";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { TypeAnimation } from 'react-type-animation';
+import { IoLogoLinkedin } from 'react-icons/io5';
+import { BiLogoGmail } from 'react-icons/bi';
+import { BsGithub } from 'react-icons/bs';
 
-export default function HeroSection() {
-    return (
-        <div className="container mx-auto px-5 lg:px-28 min-h-[90vh] flex items-center relative overflow-hidden text-hive-white" id="home">
-            {/* Background Overlay */}
-            <div className="absolute inset-0 bg-grid-network opacity-20 pointer-events-none"></div>
+const HeroSection = () => {
+  return (
+    <section id="home" className="relative w-full min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-black z-10">
+      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-20">
+        {/* Left Side: Content */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex flex-col items-start space-y-6"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-[#00E5FF] bg-black"
+          >
+            <span className="w-2 h-2 rounded-full bg-[#00E5FF] animate-pulse"></span>
+            <span className="text-xs font-mono text-[#00E5FF] uppercase tracking-wider">Based in India</span>
+          </motion.div>
 
-            {/* Glowing Orbs for background */}
-            <motion.div 
-                className="absolute top-1/4 left-1/4 w-96 h-96 bg-hive-cyan/20 rounded-full blur-[100px] -z-10"
-                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          <h1 className="font-space text-5xl md:text-7xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+            Saumya Pratap Singh
+          </h1>
+
+          <div className="h-12 md:h-16 flex items-center">
+            <TypeAnimation
+              sequence={[
+                'Full Stack Developer',
+                2000,
+                'React Enthusiast',
+                2000,
+                'UI/UX Developer',
+                2000,
+              ]}
+              wrapper="h2"
+              speed={50}
+              repeat={Infinity}
+              className="font-mono text-2xl md:text-4xl font-semibold text-gradient"
             />
-            <motion.div 
-                className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-hive-blue/20 rounded-full blur-[100px] -z-10"
-                animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            />
+          </div>
 
-            <div className="flex justify-between items-center flex-col-reverse lg:flex-row w-full gap-12 relative z-10">
+          <p className="font-mono text-gray-300 max-w-xl text-sm md:text-base leading-relaxed">
+            I craft scalable web applications with modern technologies. Passionate about beautiful interfaces and optimal user experiences.
+          </p>
 
-                <motion.div
-                    className="lg:w-[50%]"
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                >
-                    <div className="text-3xl lg:text-6xl flex flex-col gap-3 font-extrabold text-white leading-tight">
-                        <motion.span
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.1 }}
-                            className="text-lg lg:text-2xl font-mono font-semibold text-hive-cyan mb-2"
-                        >
-                            Hello, I am
-                        </motion.span>
-
-                        {/* 1. Name */}
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ type: "spring", stiffness: 100, delay: 0.2 }}
-                            className="text-4xl lg:text-7xl font-space font-bold text-white mt-2 mb-4 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400"
-                        >
-                            Saumya Pratap Singh
-                        </motion.h1>
-
-                        {/* 2. Rotating Roles */}
-                        <div className="text-2xl lg:text-4xl font-space font-semibold text-transparent bg-clip-text bg-gradient-to-r from-hive-blue to-hive-cyan h-[50px] lg:h-[60px] flex items-center">
-                            <TypeAnimation
-                                sequence={[
-                                    'Full Stack Developer',
-                                    1000,
-                                    'UI/UX Designer',
-                                    1000,
-                                    'Aspiring Software Engineer',
-                                    1000,
-                                    'Flutter Developer',
-                                    1000,
-                                    'Agentic AI Developer',
-                                    1000,
-                                    'End-to-End Solutions (BaaS)',
-                                    1000,
-                                ]}
-                                wrapper="span"
-                                speed={50}
-                                style={{ display: 'inline-block' }}
-                                repeat={Infinity}
-                            />
-                        </div>
-
-                        {/* 3. Based In */}
-                        <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
-                            className="text-xl lg:text-3xl mt-4 font-mono font-medium text-gray-400"
-                        >
-                            Based In <span className="text-hive-cyan font-bold drop-shadow-[0_0_10px_rgba(0,229,255,0.8)]">India.</span>
-                        </motion.h2>
-                    </div>
-
-                    <motion.p
-                        className="text-gray-400 text-sm lg:text-lg mt-8 leading-relaxed max-w-xl font-mono"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5, duration: 0.8 }}
-                    >
-                        Aspiring Software Engineer with a background in creating end-to-end applications. Adept at leveraging <span className="text-white font-bold drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">C++</span>, <span className="text-white font-bold drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">Python</span>, and <span className="text-white font-bold drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]">cloud-native architectures (BaaS)</span> to build scalable and efficient systems.
-                    </motion.p>
-
-                    <motion.div
-                        className="flex flex-col lg:flex-row items-center gap-6 mt-10"
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ type: "spring", stiffness: 150, delay: 0.8 }}
-                    >
-                        <div className="flex items-center gap-x-6">
-                            <SocialBtn href="mailto:saumyrajpoot666@gmail.com" icon={BiLogoGmail} />
-                            <SocialBtn href="https://www.linkedin.com/in/saumya-pratap-singh-a27890287" icon={IoLogoLinkedin} />
-                            <SocialBtn href="https://github.com/SaumyaPratapSingh-cyber" icon={BsGithub} />
-                        </div>
-
-                        <a
-                            href="/SaumyaPratapSinghResume.pdf"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-8 py-3 bg-hive-cyan/90 backdrop-blur-md text-black font-space font-bold uppercase tracking-wider hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 rounded-lg shadow-[0_0_20px_rgba(0,229,255,0.5)] hover:shadow-[0_0_40px_rgba(255,255,255,0.8)] border border-hive-cyan/50"
-                        >
-                            Resume
-                        </a>
-                    </motion.div>
-                </motion.div>
-
-                {/* Animated Code Mockup / Visualizer */}
-                <motion.div
-                    className="lg:w-[50%] w-full h-[400px] lg:h-[500px] flex justify-center items-center relative perspective-[1000px]"
-                    initial={{ opacity: 0, x: 50, rotateY: -20, scale: 0.8 }}
-                    whileInView={{ opacity: 1, x: 0, rotateY: 0, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-                >
-                    <motion.div 
-                        className="w-full max-w-lg h-full max-h-[400px] bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_0_40px_rgba(0,123,255,0.15)] flex flex-col overflow-hidden relative z-10"
-                        animate={{ y: [0, -10, 0] }}
-                        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                    >
-                        {/* Terminal Header */}
-                        <div className="h-10 bg-white/5 border-b border-white/10 flex items-center px-4 gap-2">
-                            <div className="w-3 h-3 rounded-full bg-red-500/80 shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
-                            <div className="w-3 h-3 rounded-full bg-yellow-500/80 shadow-[0_0_8px_rgba(234,179,8,0.6)]"></div>
-                            <div className="w-3 h-3 rounded-full bg-green-500/80 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                            <div className="ml-auto text-xs font-mono text-gray-400">dev.jsx</div>
-                        </div>
-                        
-                        {/* Terminal Content */}
-                        <div className="p-5 font-mono text-sm lg:text-base flex flex-col gap-3 relative h-full">
-                            {/* Animated Code Lines */}
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 1, duration: 0.5 }}
-                                className="flex gap-2 text-hive-cyan"
-                            >
-                                <span className="text-hive-blue">const</span> 
-                                <span className="text-white">developer</span> 
-                                <span className="text-hive-blue">=</span> 
-                                <span className="text-yellow-400">{"{"}</span>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 1.2, duration: 0.5 }}
-                                className="pl-6 flex gap-2 flex-wrap"
-                            >
-                                <span className="text-hive-cyan">name:</span> 
-                                <span className="text-green-400">"Saumya Pratap Singh"</span><span className="text-white">,</span>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 1.4, duration: 0.5 }}
-                                className="pl-6 flex gap-2 flex-wrap"
-                            >
-                                <span className="text-hive-cyan">skills:</span> 
-                                <span className="text-purple-400">["React", "Node.js", "C++", "Python"]</span><span className="text-white">,</span>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 1.6, duration: 0.5 }}
-                                className="pl-6 flex gap-2"
-                            >
-                                <span className="text-hive-cyan">passionate:</span> 
-                                <span className="text-orange-400">true</span><span className="text-white">,</span>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 1.8, duration: 0.5 }}
-                                className="flex gap-2"
-                            >
-                                <span className="text-yellow-400">{"}"}</span><span className="text-white">;</span>
-                            </motion.div>
-
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 2.2, duration: 0.5 }}
-                                className="mt-4 flex gap-2"
-                            >
-                                <span className="text-gray-500">{">"}</span>
-                                <motion.span 
-                                    className="text-white"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: [0, 1, 0] }}
-                                    transition={{ repeat: Infinity, duration: 1 }}
-                                >_</motion.span>
-                            </motion.div>
-
-                            {/* Floating decorative elements */}
-                            <motion.div 
-                                className="absolute -right-4 bottom-10 w-20 h-20 bg-hive-cyan/20 rounded-full blur-xl"
-                                animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0.8, 0.5] }}
-                                transition={{ duration: 3, repeat: Infinity }}
-                            />
-                            <motion.div 
-                                className="absolute -left-4 top-10 w-24 h-24 bg-hive-blue/20 rounded-full blur-xl"
-                                animate={{ scale: [1.5, 1, 1.5], opacity: [0.8, 0.5, 0.8] }}
-                                transition={{ duration: 4, repeat: Infinity }}
-                            />
-                        </div>
-                    </motion.div>
-                </motion.div>
+          <div className="flex items-center space-x-6 pt-4">
+            <motion.a
+              href="#resume"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-[#00E5FF] text-black font-space font-bold rounded-lg glow-cyan transition-shadow hover:shadow-[0_0_25px_rgba(0,229,255,0.6)]"
+            >
+              Resume
+            </motion.a>
+            <div className="flex space-x-4">
+              <motion.a
+                href="https://github.com"
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.1, y: -2 }}
+                className="w-12 h-12 rounded-full border-2 border-[#00E5FF] flex items-center justify-center text-[#00E5FF] hover:bg-[#00E5FF] hover:text-black transition-colors"
+              >
+                <BsGithub size={20} />
+              </motion.a>
+              <motion.a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.1, y: -2 }}
+                className="w-12 h-12 rounded-full border-2 border-[#00E5FF] flex items-center justify-center text-[#00E5FF] hover:bg-[#00E5FF] hover:text-black transition-colors"
+              >
+                <IoLogoLinkedin size={22} />
+              </motion.a>
+              <motion.a
+                href="mailto:example@gmail.com"
+                whileHover={{ scale: 1.1, y: -2 }}
+                className="w-12 h-12 rounded-full border-2 border-[#00E5FF] flex items-center justify-center text-[#00E5FF] hover:bg-[#00E5FF] hover:text-black transition-colors"
+              >
+                <BiLogoGmail size={22} />
+              </motion.a>
             </div>
-        </div>
-    );
-}
+          </div>
+        </motion.div>
 
-const SocialBtn = ({ href, icon: Icon }) => (
-    <motion.a
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        className="relative group bg-black/40 backdrop-blur-sm p-3 rounded-xl border border-white/10 text-hive-white text-xl lg:text-2xl hover:bg-hive-cyan hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_25px_rgba(0,229,255,0.6)] hover:-translate-y-1"
-        whileTap={{ scale: 0.95 }}
-    >
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-hive-cyan/20 to-hive-blue/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        <Icon className="relative z-10" />
-    </motion.a>
-)
+        {/* Right Side: Profile Image with Floating Elements */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+          className="relative flex items-center justify-center"
+        >
+          {/* Animated Border Ring */}
+          <div className="relative w-72 h-72 md:w-96 md:h-96">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-0 rounded-full border-2 border-dashed border-[#00E5FF] opacity-50"
+            />
+            <motion.div
+              animate={{ rotate: -360 }}
+              transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+              className="absolute inset-4 rounded-full border border-[#007BFF] opacity-30"
+            />
+            
+            {/* Profile Image */}
+            <div className="absolute inset-8 rounded-full overflow-hidden bg-black border border-gray-800 glow-cyan">
+              <img 
+                src="/profile.png" 
+                alt="Saumya Pratap Singh" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              />
+            </div>
+
+            {/* Floating Shapes */}
+            <motion.div
+              animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-10 right-10 w-8 h-8 rounded-lg bg-[#00E5FF]/20 border border-[#00E5FF] backdrop-blur-sm"
+            />
+            <motion.div
+              animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute bottom-10 left-10 w-10 h-10 rounded-full bg-[#007BFF]/20 border border-[#007BFF] backdrop-blur-sm"
+            />
+            <motion.div
+              animate={{ rotate: [0, 180, 360], scale: [1, 1.2, 1] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+              className="absolute top-1/2 -right-4 w-6 h-6 border-2 border-[#00E5FF]"
+              style={{ clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)' }}
+            />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default HeroSection;
