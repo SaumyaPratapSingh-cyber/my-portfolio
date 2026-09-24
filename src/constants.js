@@ -1,10 +1,26 @@
-// src/constants.js
-
-import { img } from "framer-motion/client";
-
 export const projects = [
   {
-    id: 6,
+    id: 1,
+    title: "Kumbh-Rakshak",
+    img: "/projectbg.png",
+    desc: "A comprehensive management and security system designed for large scale gatherings like Kumbh Mela, featuring crowd monitoring and emergency response coordination.",
+    impact: "Enhances public safety and streamlines administrative operations through real-time data analytics and automated alert systems.",
+    tech: "Next.js, Tailwind CSS, Python, OpenCV, Socket.io, Express.js",
+    link: "#",
+    prototypeLink: "#",
+  },
+  {
+    id: 2,
+    title: "PrepXtra",
+    img: "/projectbg.png",
+    desc: "An intelligent interview preparation platform leveraging AI to conduct mock interviews, evaluate responses, and provide actionable feedback.",
+    impact: "Empowers job seekers to improve their interview skills through personalized AI-driven coaching and performance metrics.",
+    tech: "React, Node.js, OpenAI API, Framer Motion, MongoDB",
+    link: "#",
+    prototypeLink: "#",
+  },
+  {
+    id: 3,
     title: "OpenBank Pro",
     img: "/open-bank-pro.png",
     desc: "A cutting-edge, full-stack banking simulation featuring a hyper-modern 'Cosmic Glassmorphism' UI, secure role-based access, and comprehensive financial tools.",
@@ -14,75 +30,29 @@ export const projects = [
     prototypeLink: "https://open-bank-pro.vercel.app/",
   },
   {
-    id: 7,
-    title: "Gymnite - Elite Performance Ecosystem",
-    img: "/gymnite.png",
-    desc: "A hyper-modern gym management platform offering a frictionless experience for members to join, book zones, and shop, while providing admins a command center for operations.",
-    impact: "Revolutionizes gym operations with a cinematic, Bento-grid design, seamless digital access cards, and an integrated e-commerce & loyalty system for improved member engagement.",
-    tech: "Next.js 16, TypeScript, Tailwind CSS, Framer Motion, Supabase",
-    link: "https://github.com/SaumyaPratapSingh-cyber/Gymnite",
-    prototypeLink: "https://gymnite.vercel.app/",
-  },
-  {
-    id: 1,
+    id: 4,
     title: "Clean-Sweep AI",
     img: "/project-cleansweep.png",
     desc: "A web platform combining AI-verified reporting, live heatmaps, an e-Kabadiwala marketplace, and IoT smart bins to create a unified urban waste management system.",
     impact: "This project aims to revolutionize urban waste management in India by creating a transparent, tech-driven ecosystem that connects citizens with municipal authorities and recyclers.",
     tech: "HTML, CSS, JavaScript, Supabase, Google Gemini API, Leaflet, Arduino, IoT",
     link: "https://github.com/SaumyaPratapSingh-cyber/CLEAN-SWEEP-AI",
-    prototypeLink: "#", // Add link to prototype if available
-  },
-  {
-    id: 2,
-    title: "Krishi-Seva App",
-    img: "/project-krishi.png",
-    desc: "Empowering Indian Farmers with AI-powered disease detection, easy access to government schemes, smart crop recommendations, and comprehensive farming knowledge—all in one mobile app.",
-    impact: "Krishi Seva provides critical, accessible information directly to farmers, helping to increase crop yield, reduce losses, and improve their livelihood through technology.",
-    tech: "Flutter, Firebase, GCP, Gemini, AI, Firestore Database",
-    link: "https://github.com/SaumyaPratapSingh-cyber/Krishi-Seva-App-for-to-farmers-",
     prototypeLink: "#",
-  },
-  {
-    id: 3,
-    title: "Tech Bazaar Ecommerce",
-    img: "/project-ecommerce.png",
-    desc: "A MERN-stack e-commerce app for selling tech products, with features for browsing, shopping, order management, and a secure admin panel.",
-    impact: "This project demonstrates full-stack development capabilities, including secure authentication, state management, and RESTful API design for a complete e-commerce experience.",
-    tech: "MERN Stack, Postman API, Vercel",
-    link: "https://github.com/SaumyaPratapSingh-cyber/TechBazar---A-MERN-Stack-E-commerce-Application",
-    prototypeLink: "#",
-  },
-  {
-    id: 4,
-    title: "AKTU-FIRM",
-    img: "/project-aktu.png", // Add your image to /public
-    desc: "A Flutter-based mobile app for B.Tech CSE students, providing access to notes, PYQs, and quantums. Features an in-built AI for generating concise solutions.",
-    impact: "This app serves as a valuable educational tool, demonstrating skills in mobile development and AI integration to support student learning and exam preparation.",
-    tech: "Flutter, Firebase, GCP",
-    link: "https://github.com/SaumyaPratapSingh-cyber/AKTU-FIRM",
-    prototypeLink: "#",
-  },
-  {
-    id: 5,
-    title: "Multi-Functional GUI",
-    img: "Multi-Functional GUI.png", // Add your image to /public
-    desc: "A versatile Python-based desktop application using Tkinter, bundling multiple tools like a digital clock, calculator, notepad, and web search.",
-    impact: "This project showcases core Python scripting skills, GUI development with Tkinter, and the integration of various libraries to create a practical, everyday utility.",
-    tech: "Python, Modern TKinter",
-    link: "https://github.com/SaumyaPratapSingh-cyber/Multi-Functional-GUI",
-    prototypeLink: "#",
-  },
+  }
 ];
-
-// src/constants.js
-
-// ... (projects array is above this) ...
 
 export const experience = [
   {
-    role: "Rapid Prototyping and Design Thinking Intern",
-    company: "Centre for Advanced Studies-Kalam Pragati",
+    role: "Designovation Intern",
+    company: "IIT Jammu",
+    duration: "June 2026 - July 2026",
+    desc: "Contributed to design innovation projects, focusing on human-centered design and rapid prototyping methodologies.",
+    certificateLink: "#",
+    img: "/imgbg.png",
+  },
+  {
+    role: "Intern",
+    company: "Centre for Advanced Studies AKTU",
     duration: "August 2025 - September 2025",
     desc: "Spearheaded CleanSweep AI, a data-driven platform linking citizens, authorities, and recyclers for smarter cleanup.",
     certificateLink: "https://lnkd.in/p/gwd9DCqn",
@@ -91,7 +61,7 @@ export const experience = [
   {
     role: "Web Development Internship Trainee",
     company: "IBM",
-    duration: "July 2025",
+    duration: "September 2025 - November 2025",
     desc: "Developed and deployed a full-stack e-commerce platform, \"Tech Bazaar,\" using the MERN stack (MongoDB, Express.js, React, Node.js), along with secure RESTful API with Postman for product management, authentication.",
     certificateLink: "https://courses.ibmmooc.skillsnetwork.site/certificates/5ec25edf9b204a81a425c9fd3861ea98",
     img: "/imgbg.png",
@@ -100,31 +70,12 @@ export const experience = [
     role: "Internship Trainee",
     company: "1M1B (1 Million for 1 Billion)",
     duration: "June 2025 - July 2025",
-    desc: "As an intern at 1M1B Green, I contribute to environmental projects using Tableau and other tools to analyze data.",
+    desc: "Contributed to environmental projects using data analysis tools and presented actionable insights to stakeholders.",
     certificateLink: "https://drive.google.com/file/d/1S-I0fopKgTsX5yvzVDGLK9AhQuS9jnxJ/view?usp=sharing",
-    img: "/imgbg.png",
-  },
-  {
-    role: "Core Member",
-    company: "GDG Prayagraj",
-    duration: "April 2025 - September 2025",
-    desc: "Actively drove diverse chapter operations encompassing development, design, and event management to foster community growth.",
-    certificateLink: "https://drive.google.com/file/d/19X8nF0b9DmdozUjWztaHH0XjwG_6p8MM/view?usp=sharing",
-    img: "/imgbg.png",
-  },
-  {
-    role: "Graphic Design and Development Internship",
-    company: "Padhle Akshay (Edtech Domain)",
-    duration: "March 2025 - April 2025",
-    desc: "Designed 50+ digital graphics and promotional materials using Figma, resulting in a 15% increase in social domain.",
-    certificateLink: "https://drive.google.com/file/d/1S_sNQ8UhRy7FteiWJNUtYLoGi6NtcyHF/view?usp=sharing",
     img: "/imgbg.png",
   }
 ];
 
-// ... (education, summary, and skills arrays are below this) ...
-
-// This line must start with "export const"
 export const education = [
   {
     degree: "B.Tech, Computer Science",
@@ -144,66 +95,41 @@ export const skills = [
       { name: "C++", logo: "/c++.png", proficiency: 80 },
       { name: "JavaScript", logo: "/js.png", proficiency: 90 },
       { name: "HTML", logo: "/html.png", proficiency: 98 },
-      { name: "CSS/Sass", logo: "/css.png", proficiency: 90 },
+      { name: "CSS", logo: "/css.png", proficiency: 90 },
     ],
   },
   {
-    title: "Frameworks & Libraries",
+    title: "Frameworks",
     items: [
       { name: "React.js", logo: "/react.png", proficiency: 95 },
       { name: "Node.js", logo: "/node.js.png", proficiency: 90 },
       { name: "Express.js", logo: "/express.png", proficiency: 85 },
-      { name: "Flutter", logo: "/flutter.png", proficiency: 75 },
+      { name: "Next.js", logo: "/nextjs.png", proficiency: 80 },
+      { name: "Tailwind CSS", logo: "/tailwind.png", proficiency: 95 },
     ],
   },
   {
-    title: "Databases & BaaS",
+    title: "AI/ML",
+    items: [
+      { name: "TensorFlow", logo: "/tensorflow.png", proficiency: 75 },
+      { name: "PyTorch", logo: "/pytorch.png", proficiency: 70 },
+      { name: "Scikit-learn", logo: "/scikit.png", proficiency: 80 },
+      { name: "OpenCV", logo: "/opencv.png", proficiency: 85 },
+    ],
+  },
+  {
+    title: "Cloud & Tools",
     items: [
       { name: "MongoDB", logo: "/MongoDB.png", proficiency: 80 },
       { name: "Firebase", logo: "/firebase.png", proficiency: 85 },
       { name: "Supabase", logo: "/supabase.png", proficiency: 75 },
-    ],
-  },
-  {
-    title: "Design & Tools",
-    items: [
-      { name: "Figma", logo: "/figma.png", proficiency: 80 },
       { name: "Git & GitHub", logo: "/git.png", proficiency: 90 },
+      { name: "Figma", logo: "/figma.png", proficiency: 80 },
     ],
   },
 ];
 
 export const certifications = [
-  {
-    title: "AI for Beginners",
-    issuer: "Simplilearn",
-    img: "/certificate/Ai for Beginners.jpeg",
-  },
-  {
-    title: "Cisco Modern AI Certificate",
-    issuer: "Cisco",
-    img: "/certificate/Cisco Mordern AI Certificate.jpeg",
-  },
-  {
-    title: "Google Prompting Essentials",
-    issuer: "Google",
-    img: "/certificate/Google Prompting Essentials.jpeg",
-  },
-  {
-    title: "IBM Virtual Mobile Web Dev",
-    issuer: "IBM",
-    img: "/certificate/IBM Virtual Mobile Web Dev.jpeg",
-  },
-  {
-    title: "GitHub Foundations",
-    issuer: "GitHub",
-    img: "/certificate/github Foundations.jpeg",
-  },
-  {
-    title: "Google Analytics Certification",
-    issuer: "Google",
-    img: "/certificate/google Analytics Certification.jpeg",
-  },
   {
     title: "Oracle Certified Foundation Associate",
     issuer: "Oracle",
@@ -213,5 +139,63 @@ export const certifications = [
     title: "Postman API Student Fundamentals",
     issuer: "Postman",
     img: "/certificate/postman API student Fundamentals.jpeg",
+  },
+  {
+    title: "Google Prompting Essentials",
+    issuer: "Google",
+    img: "/certificate/Google Prompting Essentials.jpeg",
+  },
+  {
+    title: "Google Analytics Certification",
+    issuer: "Google",
+    img: "/certificate/google Analytics Certification.jpeg",
+  },
+  {
+    title: "IBM Virtual Mobile Web Dev",
+    issuer: "IBM",
+    img: "/certificate/IBM Virtual Mobile Web Dev.jpeg",
+  },
+  {
+    title: "Cyber Security",
+    issuer: "Cisco",
+    img: "/certificate/Cyber Security.jpeg",
+  },
+  {
+    title: "AI for Beginners",
+    issuer: "Simplilearn",
+    img: "/certificate/Ai for Beginners.jpeg",
   }
-];
+];
+
+export const achievements = [
+  {
+    title: "TCS Placement",
+    desc: "Secured placement at TCS with exceptional performance.",
+    year: "2026"
+  },
+  {
+    title: "Hackathon Winner",
+    desc: "First place in a national level hackathon for developing an innovative AI solution.",
+    year: "2025"
+  },
+  {
+    title: "Kaggle Winner",
+    desc: "Achieved top ranks in multiple Kaggle data science competitions.",
+    year: "2025"
+  },
+  {
+    title: "GFG Top 3",
+    desc: "Ranked among the top 3 coders on GeeksforGeeks monthly coding contest.",
+    year: "2024"
+  },
+  {
+    title: "Hackathon Finalist",
+    desc: "Finalist in Smart India Hackathon for addressing urban challenges.",
+    year: "2024"
+  },
+  {
+    title: "Leadership",
+    desc: "Lead the developer student club and organized multiple technical events.",
+    year: "2024-2025"
+  }
+];

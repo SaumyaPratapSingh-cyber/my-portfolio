@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { Home, User, Briefcase, Mail, Cpu, Layers, Code, Award } from 'lucide-react';
+import { Home, User, Briefcase, Mail, Cpu, Layers, Code, Award, Trophy } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Link } from 'react-scroll';
 
@@ -48,6 +48,7 @@ const Navbar = () => {
         { name: 'Skills', icon: <Cpu size={20} />, to: 'skills' },
         { name: 'Projects', icon: <Code size={20} />, to: 'projects' },
         { name: 'Certifications', icon: <Award size={20} />, to: 'certifications' },
+        { name: 'Achievements', icon: <Trophy size={20} />, to: 'achievements' },
         { name: 'Contact', icon: <Mail size={20} />, to: 'contact' }, // Note: Contact page doesn't have an ID yet in my previous step, but I'll add it.
     ];
 

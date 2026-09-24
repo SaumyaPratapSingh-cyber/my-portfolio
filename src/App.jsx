@@ -16,6 +16,7 @@ const Experience = React.lazy(() => import('./pages/Experience'));
 const Skills = React.lazy(() => import('./pages/Skills'));
 const Projects = React.lazy(() => import('./pages/Projects'));
 const Certifications = React.lazy(() => import('./pages/Certifications'));
+const Achievements = React.lazy(() => import('./pages/Achievements'));
 const Contact = React.lazy(() => import('./pages/Contact'));
 
 // Loading Fallback
@@ -53,6 +54,7 @@ function App() {
                   <Skills />
                   <Projects />
                   <Certifications />
+                  <Achievements />
                   <Contact />
                 </Suspense>
               </main>
