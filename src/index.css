@@ -24,16 +24,80 @@
   }
 
   .glow-cyan {
-    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4), 0 0 30px rgba(0, 229, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.6), 0 0 30px rgba(0, 229, 255, 0.4);
   }
 
   .glow-blue {
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4), 0 0 30px rgba(0, 123, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.6), 0 0 30px rgba(0, 123, 255, 0.4);
+  }
+  
+  .glow-yellow {
+    box-shadow: 0 0 15px rgba(244, 240, 0, 0.6), 0 0 30px rgba(244, 240, 0, 0.4);
+  }
+
+  .glow-pink {
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.6), 0 0 30px rgba(255, 0, 127, 0.4);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.6), 0 0 30px rgba(0, 255, 0, 0.4);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 15px rgba(168, 0, 255, 0.6), 0 0 30px rgba(168, 0, 255, 0.4);
+  }
+
+  .glow-orange {
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.6), 0 0 30px rgba(255, 102, 0, 0.4);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.8), 0 0 16px rgba(0, 229, 255, 0.5);
+  }
+
+  .text-glow-blue {
+    text-shadow: 0 0 8px rgba(0, 123, 255, 0.8), 0 0 16px rgba(0, 123, 255, 0.5);
+  }
+  
+  .text-glow-yellow {
+    text-shadow: 0 0 8px rgba(244, 240, 0, 0.8), 0 0 16px rgba(244, 240, 0, 0.5);
+  }
+  
+  .text-glow-pink {
+    text-shadow: 0 0 8px rgba(255, 0, 127, 0.8), 0 0 16px rgba(255, 0, 127, 0.5);
+  }
+  
+  .text-glow-green {
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.8), 0 0 16px rgba(0, 255, 0, 0.5);
+  }
+  
+  .text-glow-purple {
+    text-shadow: 0 0 8px rgba(168, 0, 255, 0.8), 0 0 16px rgba(168, 0, 255, 0.5);
+  }
+  
+  .text-glow-orange {
+    text-shadow: 0 0 8px rgba(255, 102, 0, 0.8), 0 0 16px rgba(255, 102, 0, 0.5);
   }
 
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00E5FF] to-[#007BFF];
   }
+}
+
+/* Fluid Hover Effect */
+.fluid-hover {
+  transition: all 0.5s ease;
+}
+.fluid-hover:hover {
+  animation: fluid-ripple 3s infinite ease-in-out alternate;
+  filter: contrast(120%) brightness(110%) saturate(150%);
+}
+
+@keyframes fluid-ripple {
+  0% { border-radius: 10px; transform: scale(1); }
+  33% { border-radius: 20px 10px 30px 15px; transform: scale(1.02); }
+  66% { border-radius: 10px 25px 15px 30px; transform: scale(1.04); }
+  100% { border-radius: 30px 15px 25px 10px; transform: scale(1.05); }
 }
 
 /* Custom Scrollbar */

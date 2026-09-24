@@ -9,9 +9,14 @@ export default {
             colors: {
                 "hive-black": "#0a0a0a",
                 "hive-white": "#ffffff",
-                "hive-grey": "#e5e5e5",
+                "hive-grey": "#ffffff", /* avoided dim gray */
                 "hive-blue": "#007BFF",
                 "hive-cyan": "#00E5FF",
+                "neon-yellow": "#f4f000",
+                "neon-pink": "#ff007f",
+                "neon-green": "#00ff00",
+                "neon-purple": "#a800ff",
+                "neon-orange": "#ff6600",
             },
             fontFamily: {
                 sora: ['Sora', 'sans-serif'],

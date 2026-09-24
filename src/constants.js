@@ -38,6 +38,56 @@ export const projects = [
     tech: "HTML, CSS, JavaScript, Supabase, Google Gemini API, Leaflet, Arduino, IoT",
     link: "https://github.com/SaumyaPratapSingh-cyber/CLEAN-SWEEP-AI",
     prototypeLink: "#",
+  },
+  {
+    id: 5,
+    title: "Gymnite - Elite Performance Ecosystem",
+    img: "/gymnite.png",
+    desc: "A comprehensive fitness tracking and gym management ecosystem offering personalized workout plans, nutrition tracking, and elite performance analytics.",
+    impact: "Empowers individuals and trainers with data-driven insights to optimize fitness routines and achieve health goals efficiently.",
+    tech: "React, Node.js, MongoDB, Express, Framer Motion",
+    link: "#",
+    prototypeLink: "#",
+  },
+  {
+    id: 6,
+    title: "Krishi-Seva App",
+    img: "/project-krishi.png",
+    desc: "An agricultural support application designed to provide farmers with real-time weather updates, crop management tips, and direct market access.",
+    impact: "Bridges the technology gap for farmers, enhancing crop yield and profitability through actionable intelligence.",
+    tech: "React Native, Firebase, Node.js",
+    link: "#",
+    prototypeLink: "#",
+  },
+  {
+    id: 7,
+    title: "Tech Bazaar Ecommerce",
+    img: "/project-ecommerce.png",
+    desc: "A full-stack e-commerce platform featuring secure user authentication, seamless product management, and a streamlined checkout experience.",
+    impact: "Provides a robust, scalable digital storefront solution for modern retail businesses.",
+    tech: "MERN Stack (MongoDB, Express, React, Node.js), Postman API",
+    link: "#",
+    prototypeLink: "#",
+  },
+  {
+    id: 8,
+    title: "AKTU-FIRM",
+    img: "/project-aktu.png",
+    desc: "A centralized platform for university students and faculty to manage academic records, administrative tasks, and inter-departmental communications.",
+    impact: "Streamlines university administration operations and improves access to critical academic information.",
+    tech: "React, Node.js, Express, MongoDB",
+    link: "#",
+    prototypeLink: "#",
+  },
+  {
+    id: 9,
+    title: "Multi-Functional GUI",
+    img: "/Multi-Functional GUI.png",
+    desc: "A versatile graphical user interface application integrating multiple utility tools and features into a single, cohesive desktop experience.",
+    impact: "Boosts user productivity by consolidating essential tools into an accessible, user-friendly desktop application.",
+    tech: "Python, Tkinter, SQLite",
+    link: "#",
+    prototypeLink: "#",
   }
 ];
 
@@ -164,6 +214,16 @@ export const certifications = [
     title: "AI for Beginners",
     issuer: "Simplilearn",
     img: "/certificate/Ai for Beginners.jpeg",
+  },
+  {
+    title: "Cisco Modern AI",
+    issuer: "Cisco",
+    img: "/certificate/Cisco Mordern AI Certificate.jpeg",
+  },
+  {
+    title: "GitHub Foundations",
+    issuer: "GitHub",
+    img: "/certificate/github Foundations.jpeg",
   }
 ];
 
